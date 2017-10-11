@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView28"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/login_bg" />
+
+    <TextView
+        android:id="@+id/textView137"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:text="身体是否有以下情况发生？（可多选）"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_body_status_1"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="50dp"
+        android:drawableLeft="@drawable/health_no_n"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="无"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/view51"
+        app:layout_constraintRight_toRightOf="@+id/view51"
+        app:layout_constraintTop_toBottomOf="@+id/textView137" />
+
+    <View
+        android:id="@+id/view51"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/account_hint_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_body_status_1" />
+
+    <TextView
+        android:id="@+id/tv_body_status_2"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/health_blood_n"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="高血压"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/view52"
+        app:layout_constraintTop_toBottomOf="@+id/view51"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/view52"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <View
+        android:id="@+id/view52"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/account_hint_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_body_status_2" />
+
+    <View
+        android:id="@+id/view53"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/account_hint_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_body_status_3" />
+
+    <View
+        android:id="@+id/view54"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/account_hint_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_body_status_4" />
+
+    <View
+        android:id="@+id/view55"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/account_hint_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_body_status_5" />
+
+    <View
+        android:id="@+id/view56"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/account_hint_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_body_status_6" />
+
+
+    <TextView
+        android:id="@+id/tv_body_status_4"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/health_meniscus_n"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="半月板损伤"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/view54"
+        app:layout_constraintRight_toRightOf="@+id/view54"
+        app:layout_constraintTop_toBottomOf="@+id/view53" />
+
+    <TextView
+        android:id="@+id/tv_body_status_3"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/health_heart_n"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="心脏病"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/view53"
+        app:layout_constraintRight_toRightOf="@+id/view53"
+        app:layout_constraintTop_toBottomOf="@+id/view52" />
+
+    <TextView
+        android:id="@+id/tv_body_status_5"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/health_waist_n"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="腰椎间盘突出"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/view55"
+        app:layout_constraintRight_toRightOf="@+id/view55"
+        app:layout_constraintTop_toBottomOf="@+id/view54" />
+
+    <TextView
+        android:id="@+id/tv_body_status_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:drawableLeft="@drawable/health_other_n"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="其他身体不适"
+        android:textColor="@color/account_hint_text"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="@+id/view56"
+        app:layout_constraintTop_toBottomOf="@+id/view55" />
+
+    <EditText
+        android:visibility="visible"
+        android:id="@+id/et_body_content"
+        android:layout_width="0dp"
+        android:layout_height="110dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/bg_white"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="请简要描述身体不适情况"
+        android:inputType="text|textPersonName"
+        android:padding="10dp"
+        android:textSize="15dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view56"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp" />
+
+</android.support.constraint.ConstraintLayout>

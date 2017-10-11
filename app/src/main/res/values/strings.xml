@@ -1,0 +1,98 @@
+<resources>
+    <string name="app_name">也跑</string>
+    <string name="tab_lesson">课程</string>
+    <string name="tab_shopping">购课</string>
+    <string name="tab_circle">发现</string>
+    <string name="tab_myself">我的</string>
+    <string name="tab_video">视频</string>
+
+    <string name="exit_again">再按一次退出程序</string>
+
+    <string name="lesson_find_hint">搜索场馆名称／地址／运动项目</string>
+    <string name="lesson_hint">此课程仅限本人使用\n课前1小时停止预约\n取消预约请于课前2小时提出申请</string>
+    <string name="pain_hint">填写疼痛感受时，1为不疼，10为重度疼痛，填写时只需要填写3个疼痛最为明显的部位，以便教练帮您进行拉伸处理</string>
+    
+    <string name="RMB">￥</string>
+    
+    <string name="certification">认证</string>
+    <string name="refunds_doc">退款说明</string>
+    <string name="deposit_status">押金已支付</string>
+    <string name="deposit_status2">已支付</string>
+    <string name="deposit_status3">我要退押金</string>
+    <string name="dialog_refunds">退押金提示</string>
+    <string name="dialog_refund1">退完押金就不能再使用健身舱喽～</string>
+    <string name="dialog_refund_bottom">我再想想</string>
+    <string name="dialog_refund_bottom2">坚持退款</string>
+    <string name="refund_success">退款成功</string>
+    <string name="deposit_hint">为确保您合法合规使用也跑健身舱，需缴纳押金99元，可随时退还到账户</string>
+    
+    <!--预约舱-->
+    <string name="reservation_cang">预约时间</string>
+    <string name="reservation_cang_1">也跑健身舱ID</string>
+    <string name="reservation_cang_2">状态</string>
+    <string name="reservation_cang_status">空闲</string>
+    <string name="reservation_cang_status1">使用中</string>
+    <string name="reservation_cang_status2">报修</string>
+    <string name="reservation_cang_status3">禁用</string>
+    <string name="reservation_cang_price">预约费用</string>
+    <string name="reservation_cang_price_1">1元/5分钟</string>
+    <string name="reservation_cang_sure">确认预约</string>
+    <string name="reservation_cang_time">请选择预约时间</string>
+
+    <!--预约支付-->
+    <string name="cang_reservation_pay">预约费用:</string>
+    <string name="cang_reservation_pay1">预约时长</string>
+    <string name="cang_reservation_pay2">订单编号</string>
+    <string name="cang_reservation_pay3">健身舱编号</string>
+
+    <string name="cang_message_hint_1">消息提示</string>
+    <string name="cang_message_hint_2">您已经有预约的健身舱了，不要重复预约哦～</string>
+    <string name="cang_message_hint_3">我知道了</string>
+
+    <string name="cang_message_down_1">您关注的健身舱现在已经可预约啦，不要错过哦～</string>
+    <string name="cang_input_code">输入建生舱ID，也可以运动哦～</string>
+    <string name="cang_input_id">请输入ID</string>
+    <string name="cang_input_button">立即运动</string>
+    <string name="cang_run_people">加油哦，很快就能瘦如闪电啦～</string>
+
+    <string name="cang_pay1">使用时长</string>
+    <string name="cang_pay2">订单编号</string>
+    <string name="cang_pay3">健身舱编号</string>
+
+    <string name="account_cang_status">您有正在进行的运动，点击查看</string>
+    <string name="account_cang_status2">您有未支付的运动订单，点击支付</string>
+
+    <!--舱支付成功  运动时间小于25为较短
+大于等于25小于等于35为合适
+大于35为较长-->
+    <string name="pay_success_1">支付成功</string>
+    <string name="pay_success_2">本次运动分析和建议</string>
+    <string name="pay_success_3">热量消耗</string>
+    <string name="pay_success_4">运动时长</string>
+    <string name="pay_success_5">运动目的</string>
+    <string name="pay_success_6">时间评估</string>
+    <string name="pay_success_7">Tips:如果你想要吃饭或者洗澡的话请在运动结束半小时以后再进行哦，对了，洗澡一定要温水温水温水，重要的提醒说三遍。</string>
+
+    <string name="food_man_1">可乐</string>
+    <string name="food_man_2">汉堡包</string>
+    <string name="food_man_3">炸猪排</string>
+    <string name="food_man_4">炸春卷</string>
+    <string name="food_man_5">大薯条</string>
+
+    <string name="food_women_1">雪碧</string>
+    <string name="food_women_2">奶油泡芙</string>
+    <string name="food_women_3">蛋挞</string>
+    <string name="food_women_4">朱古力蛋糕</string>
+    <string name="food_women_5">美式热狗</string>
+
+    <string name="sport_tips_1">今天的运动时间和运动量还需要跟上APP补练“享瘦”才能达标哦。运动完记得打开“肌肉RELAX”，做几组动作缓解肌肉压力。</string>
+    <string name="sport_tips_1_1">恭喜主人今天的运动时长和运动效果双双达标！回家后打开APP，跟着“肌肉RELAX”做放松，缓解肌肉压力身体会更舒服哦。</string>
+    <string name="sport_tips_2">今天的运动时间和运动量还需要跟上APP补练“力量PLUS”才能达标哦。运动完记得打开“肌肉RELAX”，做几组动作缓解肌肉压力。</string>
+    <string name="sport_tips_2_1">本次运动时长完美达标，下次请继续再接再厉！运动结束，别忘了跟着APP里“肌肉RELAX”做放松，赶走运动的酸痛感。</string>
+    <string name="sport_tips_3">今天的运动时间和运动量还要跟上APP补练“轻装上阵”才能达标。坚持10-15分钟，身体症状能缓解不少。相信自己你可以的！</string>
+    <string name="sport_tips_3_1">回家别忘了打开APP，跟着“轻装上阵”再坚持10-15分钟的推荐动作，这样缓解身体不适症状的效果才是最好，继续加油！</string>
+    <string name="sport_tips_4">今天的运动时间和运动量还需要跟上APP补练“肌肉RELAX”才能达标哦，快来做几组动作缓解肌肉压力。</string>
+    <string name="sport_tips_4_1">本次运动时长完美达标，下次请继续再接再厉！运动结束，别忘了跟着APP里“肌肉RELAX”做放松，赶走运动的酸痛感。</string>
+
+
+</resources>
