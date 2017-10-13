@@ -207,8 +207,6 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
                             circleMessageAdapter.loadNothing();
                             ToastManager.showToast(getContext(), "没有更多");
                         }
-
-
                     }
 
                 }

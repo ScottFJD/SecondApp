@@ -203,7 +203,7 @@ public class PhotoViewPagerActivity extends AppCompatActivity {
             final PhotoView photoView = new PhotoView(container.getContext());
             if (type.equals(NAME_LIST)) {
                 AsyncLoaderImage ali = new AsyncLoaderImage();
-                DialogUtils.showProgressDialog(getContext());
+                DialogUtils.showProgressDialog(getContext(),true);
                 ali.loadBitmap(images.get(position), new AsyncLoaderImage.ImageCallback() {
                     @Override
                     public void imageLoaded(final Bitmap imageBitmap, final String imageLocalPath) {

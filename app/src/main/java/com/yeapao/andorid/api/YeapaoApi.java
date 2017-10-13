@@ -35,6 +35,7 @@ import com.yeapao.andorid.model.MyAuthenticationModel;
 import com.yeapao.andorid.model.MyOrderDataModel;
 import com.yeapao.andorid.model.Myfiles;
 import com.yeapao.andorid.model.MyselfLessonModel;
+import com.yeapao.andorid.model.MyselfPostModel;
 import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.model.OrderDetailModel;
 import com.yeapao.andorid.model.PunchTheClockModel;
@@ -473,4 +474,6 @@ public interface YeapaoApi {
     Observable<NormalDataModel> requestForgotPassword(@Query("phone") String phone, @Query("password") String password,
                                                       @Query("verificationCode") String code);
 
+    @POST("community/myListCommunity")
+    Observable<MyselfPostModel> requestMyListPost(@Query("customerId") String id, @Query("page") String page);
 }
