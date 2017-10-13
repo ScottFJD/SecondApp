@@ -470,6 +470,12 @@
         <activity
             android:name=".photo.PhotoViewPagerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.map.robotchat.RobotChatActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.map.sportlist.SportListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

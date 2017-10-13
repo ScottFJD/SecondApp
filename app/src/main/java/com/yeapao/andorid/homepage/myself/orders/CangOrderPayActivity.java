@@ -152,7 +152,7 @@ public class CangOrderPayActivity extends BaseActivity {
     };
 
     private void initView() {
-        tvFitPayPrice.setText(getContext().getResources().getString(R.string.RMB)+String.valueOf(actialOrderDetailModel.getData().getPrice()));
+        tvFitPayPrice.setText(getContext().getResources().getString(R.string.RMB)+getPrice());
         tvFitTime.setText(String.valueOf(actialOrderDetailModel.getData().getDuration())+"分钟");
         tvFitOrderCode.setText(actialOrderDetailModel.getData().getActualOrdersCode());
         tvFitCangId.setText(actialOrderDetailModel.getData().getWarehouseName());
@@ -163,7 +163,7 @@ public class CangOrderPayActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_pay:
                 if (cbWechatPay.isChecked() || cbAlipay.isChecked()) {
-                    getPayment(String.valueOf(actialOrderDetailModel.getData().getPrice()), actialOrderDetailModel.getData().getActualOrdersCode(), payMentType);
+                    getPayment(getPrice(), actialOrderDetailModel.getData().getActualOrdersCode(), payMentType);
                 } else {
                     ToastManager.showToast(getContext(),"请选择支付方式");
                 }
@@ -185,8 +185,19 @@ public class CangOrderPayActivity extends BaseActivity {
     }
 
 
+    private String getPrice() {
+        String price = "";
 
+        int p1 = (int) (actialOrderDetailModel.getData().getPrice() * 10);
+        if (p1 % 10 == 0) {
+            price = String.valueOf(p1 / 10);
+        } else {
+            price = String.valueOf(actialOrderDetailModel.getData().getPrice());
+        }
 
+        return price;
+
+    }
 
 
 

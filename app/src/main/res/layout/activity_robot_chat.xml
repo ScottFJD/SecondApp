@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/repository_normal_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_edit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/bg_white"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/tv_send"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:text="发送"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/text_color"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/login_shape"/>
+
+            <EditText
+                android:id="@+id/et_chat_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/tv_send"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/circle_comment_shape"/>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_chat_list"
+            android:layout_above="@id/rl_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f2f2f2"
+            android:fadeScrollbars="true"
+            android:scrollbarFadeDuration="1"
+            android:scrollbars="vertical"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

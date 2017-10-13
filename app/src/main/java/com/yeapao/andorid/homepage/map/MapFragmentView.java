@@ -85,6 +85,8 @@ import com.yeapao.andorid.homepage.map.repository.DepositActivity;
 import com.yeapao.andorid.homepage.map.repository.RepairActivity;
 import com.yeapao.andorid.homepage.map.repository.ReservationCangActivity;
 import com.yeapao.andorid.homepage.map.repository.StartSportActivity;
+import com.yeapao.andorid.homepage.map.robotchat.RobotChatActivity;
+import com.yeapao.andorid.homepage.map.sportlist.SportListActivity;
 import com.yeapao.andorid.homepage.message.MyMessageActivity;
 import com.yeapao.andorid.homepage.myself.orders.MyselfOrdersActivity;
 import com.yeapao.andorid.model.NormalDataModel;
@@ -135,6 +137,8 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
     TextView tvCangHint;
     @BindView(R.id.tv_account_cang_status)
     TextView tvAccountCangStatus;
+    @BindView(R.id.iv_sport_list)
+    ImageView ivSportList;
 
     Unbinder unbinder;
     private MapView mMapView;
@@ -488,11 +492,11 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
 
-        if (isMessageFlag) {
-            ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_s));
-        } else {
-            ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_n));
-        }
+//        if (isMessageFlag) {
+//            ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_s));
+//        } else {
+//            ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_n));
+//        }
 
 
     }
@@ -609,13 +613,18 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
 
     }
 
-    @OnClick({R.id.iv_message, R.id.iv_location, R.id.iv_find_qr, R.id.iv_open_light})
+    @OnClick({R.id.iv_message, R.id.iv_location, R.id.iv_find_qr, R.id.iv_open_light,R.id.iv_sport_list})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_sport_list:
+                startActivity(new Intent(getContext(), SportListActivity.class));
+                break;
             case R.id.iv_message:
-                isMessageFlag = false;
-                ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_n));
-                MyMessageActivity.start(getContext());
+//                TODO 机器人
+                startActivity(new Intent(getContext(), RobotChatActivity.class));
+//                isMessageFlag = false;
+//                ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_n));
+//                MyMessageActivity.start(getContext());
                 break;
             case R.id.iv_location:
                 LogUtil.e("location", "location----------");
@@ -745,20 +754,21 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
 //                    TODO
                 } else {
                     tvAccountCangStatus.setVisibility(View.GONE);
-                }
-                if (mWareHouseList.getData().getIsUnpaid() == 1) {
-                    tvAccountCangStatus.setVisibility(View.VISIBLE);
-                    tvAccountCangStatus.setText(getContext().getResources().getString(R.string.account_cang_status2));
-                    tvAccountCangStatus.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            MyselfOrdersActivity.start(getContext());
-                        }
-                    });
+                    if (mWareHouseList.getData().getIsUnpaid() == 1) {
+                        tvAccountCangStatus.setVisibility(View.VISIBLE);
+                        tvAccountCangStatus.setText(getContext().getResources().getString(R.string.account_cang_status2));
+                        tvAccountCangStatus.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                MyselfOrdersActivity.start(getContext());
+                            }
+                        });
 
-                } else {
-                    tvAccountCangStatus.setVisibility(View.GONE);
+                    } else {
+                        tvAccountCangStatus.setVisibility(View.GONE);
+                    }
                 }
+
 
                 addMarkers();
             }
@@ -823,76 +833,108 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
                     } else {
                         timer.schedule(task, 1000, 1000);
                     }
-
                     tvCangHint.setText("健身舱：" + mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getWarehouseName());
-                } else if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getActualStatus().equals("1") ||
-                        mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getReservaStatus().equals("1")) {
+                    applyConstraintSet.clone(mConstraintLayout);
+                    applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.VISIBLE);
+                    applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.GONE);
+                    applyConstraintSet.applyTo(mConstraintLayout);
 
-                    if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsOfflineReminder().equals("1")) {
-                        tvWareHouse.setText("取消下线提醒");
-                    } else {
-                        tvWareHouse.setText("下线提醒");
+                } else if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsMyUserWarehouse().equals("1")) {
+                    StartSportActivity.start(getContext(), GlobalDataYepao.getCangDeviceData(getContext()).getId(),
+                            GlobalDataYepao.getCangDeviceData(getContext()).getStartTime());
+                    applyConstraintSet.clone(mConstraintLayout);
+                    applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.GONE);
+                    applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.GONE);
+                    applyConstraintSet.applyTo(mConstraintLayout);
+                }else{
+                    if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getActualStatus().equals("1") ||
+                            mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getReservaStatus().equals("1")) {
+
+                        if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsOfflineReminder().equals("1")) {
+                            tvWareHouse.setText("取消下线提醒");
+                        } else {
+                            tvWareHouse.setText("下线提醒");
+                        }
+                        tvWareHouse.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ToastManager.showToast(getContext(), "下线提醒");
+                                if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsOfflineReminder().equals("1")) {
+                                    getNetWorkDelOffLine(String.valueOf(mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getWarehouseId()));
+                                } else {
+                                    getNetWorkOffLine(String.valueOf(mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getWarehouseId()));
+                                }
+
+                            }
+                        });
+                        tvDistance.setVisibility(View.VISIBLE);
+                        ivLocationIcon.setVisibility(View.VISIBLE);
+                        tvReservationTime.setVisibility(View.GONE);
+                        tvCangHint.setText(mWareHouseList.getData().getReservationPrice() + "元/5分钟");
+                        applyConstraintSet.clone(mConstraintLayout);
+                        applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.VISIBLE);
+                        applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.GONE);
+                        applyConstraintSet.applyTo(mConstraintLayout);
+
+                    }  else {
+                        if (mWareHouseList.getData().getMyUserWarehouse().equals("0")) {
+                            tvWareHouse.setText("预约使用");
+                            tvWareHouse.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ToastManager.showToast(getContext(), "预约使用");
+
+
+                                    if (reservationStatus) {
+                                        DialogUtils.showMessageDialog(getContext(), getContext().getResources().getString(R.string.cang_message_hint_1),
+                                                getContext().getResources().getString(R.string.cang_message_hint_2), getContext().getResources().getString(R.string.cang_message_hint_3), new DialogCallback() {
+                                                    @Override
+                                                    public void onItemClick(int position) {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onLeftClick() {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onRightClick() {
+
+                                                    }
+                                                });
+                                    } else {
+                                        ReservationCangActivity.start(getContext(), String.valueOf(mWareHouseList.getData().getWarehouseListOut().get(currentMyItemIndex).getWarehouseId()));
+                                    }
+
+
+                                }
+                            });
+                            tvDistance.setVisibility(View.VISIBLE);
+                            ivLocationIcon.setVisibility(View.VISIBLE);
+                            tvReservationTime.setVisibility(View.GONE);
+                            tvCangHint.setText(mWareHouseList.getData().getReservationPrice() + "元/5分钟");
+                            applyConstraintSet.clone(mConstraintLayout);
+                            applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.VISIBLE);
+                            applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.GONE);
+                            applyConstraintSet.applyTo(mConstraintLayout);
+                        } else {
+                            applyConstraintSet.clone(mConstraintLayout);
+                            applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.GONE);
+                            applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.VISIBLE);
+                            applyConstraintSet.applyTo(mConstraintLayout);
+                        }
+
                     }
-                    tvWareHouse.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ToastManager.showToast(getContext(), "下线提醒");
-                            if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsOfflineReminder().equals("1")) {
-                                getNetWorkDelOffLine(String.valueOf(mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getWarehouseId()));
-                            } else {
-                                getNetWorkOffLine(String.valueOf(mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getWarehouseId()));
-                            }
 
-                        }
-                    });
-                    tvDistance.setVisibility(View.VISIBLE);
-                    ivLocationIcon.setVisibility(View.VISIBLE);
-                    tvReservationTime.setVisibility(View.GONE);
-                    tvCangHint.setText(mWareHouseList.getData().getReservationPrice() + "元/5分钟");
-
-                } else {
-                    tvWareHouse.setText("预约使用");
-                    tvWareHouse.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ToastManager.showToast(getContext(), "预约使用");
-
-
-                            if (reservationStatus) {
-                                DialogUtils.showMessageDialog(getContext(), getContext().getResources().getString(R.string.cang_message_hint_1),
-                                        getContext().getResources().getString(R.string.cang_message_hint_2), getContext().getResources().getString(R.string.cang_message_hint_3), new DialogCallback() {
-                                            @Override
-                                            public void onItemClick(int position) {
-
-                                            }
-
-                                            @Override
-                                            public void onLeftClick() {
-
-                                            }
-
-                                            @Override
-                                            public void onRightClick() {
-
-                                            }
-                                        });
-                            } else {
-                                ReservationCangActivity.start(getContext(), String.valueOf(mWareHouseList.getData().getWarehouseListOut().get(currentMyItemIndex).getWarehouseId()));
-                            }
-
-
-                        }
-                    });
-                    tvDistance.setVisibility(View.VISIBLE);
-                    ivLocationIcon.setVisibility(View.VISIBLE);
-                    tvReservationTime.setVisibility(View.GONE);
-                    tvCangHint.setText(mWareHouseList.getData().getReservationPrice() + "元/5分钟");
                 }
 
-                applyConstraintSet.clone(mConstraintLayout);
-                applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.VISIBLE);
-                applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.GONE);
-                applyConstraintSet.applyTo(mConstraintLayout);
+
+
+//                applyConstraintSet.clone(mConstraintLayout);
+//                applyConstraintSet.setVisibility(R.id.fl_reservation, ConstraintSet.VISIBLE);
+//                applyConstraintSet.setVisibility(R.id.iv_find_qr, ConstraintSet.GONE);
+//                applyConstraintSet.applyTo(mConstraintLayout);
 //                reservationFrameLayout.setVisibility(View.VISIBLE);
                 PlanNode stNode = PlanNode.withLocation(new LatLng(mCurrentLat, mCurrentLon));
                 PlanNode enNode = PlanNode.withLocation(item.getPosition());

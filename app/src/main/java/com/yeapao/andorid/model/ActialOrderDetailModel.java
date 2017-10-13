@@ -50,7 +50,7 @@ public class ActialOrderDetailModel {
          */
 
         private String actualOrderId;
-        private String price;
+        private double price;
         private String time;
         private String warehouseName;
         private String actualOrdersCode;
@@ -63,11 +63,11 @@ public class ActialOrderDetailModel {
             this.actualOrderId = actualOrderId;
         }
 
-        public String getPrice() {
+        public double getPrice() {
             return price;
         }
 
-        public void setPrice(String price) {
+        public void setPrice(double price) {
             this.price = price;
         }
 

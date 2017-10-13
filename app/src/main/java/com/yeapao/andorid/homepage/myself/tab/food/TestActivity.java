@@ -131,7 +131,7 @@ public class TestActivity extends AppCompatActivity {
                 viewHolder.itemView.setAlpha(1f);
                 myHolder.dislikeImageView.setAlpha(0f);
                 myHolder.likeImageView.setAlpha(0f);
-                Toast.makeText(TestActivity.this, direction == CardConfig.SWIPED_LEFT ? "swiped left" : "swiped right", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(TestActivity.this, direction == CardConfig.SWIPED_LEFT ? "swiped left" : "swiped right", Toast.LENGTH_SHORT).show();
                 if (direction == CardConfig.SWIPED_RIGHT) {
                     GlobalDataYepao.foodFlag = true;
                     dataBean.setMeal(meal);

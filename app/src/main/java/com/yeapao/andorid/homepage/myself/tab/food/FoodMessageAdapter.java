@@ -98,7 +98,7 @@ public class FoodMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((MenuViewHolder) holder).gvFoodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ToastManager.showToast(mContext,"OnClick");
+//                        ToastManager.showToast(mContext,"OnClick");
 //                    DialogUtils.showCardSwipe(mContext);
 //                    ChooseFoodDialogFragment dialogFragment = new ChooseFoodDialogFragment();
 //                    dialogFragment.setStyle(DialogFragment.STYLE_NO_FRAME, 0);
@@ -114,7 +114,7 @@ public class FoodMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((MenuViewHolder) holder).gvFoodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ToastManager.showToast(mContext,"OnClick");
+//                        ToastManager.showToast(mContext,"OnClick");
                         TestActivity.start(mContext,"lunch",String.valueOf(position+1));
                     }
                 });
@@ -126,7 +126,7 @@ public class FoodMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 ((MenuViewHolder) holder).gvFoodList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ToastManager.showToast(mContext,"OnClick");
+//                        ToastManager.showToast(mContext,"OnClick");
                         TestActivity.start(mContext,"dinner",String.valueOf(position+1));
                     }
                 });
