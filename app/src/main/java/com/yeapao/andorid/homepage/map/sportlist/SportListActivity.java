@@ -6,8 +6,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.scottfu.sflibrary.util.LogUtil;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.model.SportListModel;
+import com.yeapao.andorid.util.GlobalDataYepao;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 2017/10/13.
@@ -19,6 +27,8 @@ public class SportListActivity extends BaseActivity {
     private SportListMessageAdapter sportListMessageAdapter;
     private RecyclerView rvSportList;
     private LinearLayoutManager llm;
+
+    private SportListModel sportListModel = new SportListModel();
 
 
     @Override
@@ -34,12 +44,11 @@ public class SportListActivity extends BaseActivity {
         llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         rvSportList.setLayoutManager(llm);
-
-        showResult();
+        getNetWork();
     }
 
-    private void showResult() {
-        sportListMessageAdapter = new SportListMessageAdapter(getContext());
+    private void showResult(SportListModel model) {
+        sportListMessageAdapter = new SportListMessageAdapter(getContext(),model);
         rvSportList.setAdapter(sportListMessageAdapter);
     }
 
@@ -53,5 +62,38 @@ public class SportListActivity extends BaseActivity {
     protected Context getContext() {
         return this;
     }
+
+
+
+            private void getNetWork() {
+                    subscription = Network.getYeapaoApi()
+                            .requestRankingList(GlobalDataYepao.getUser(getContext()).getId())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(modelObserver );
+                }
+
+                  Observer<SportListModel> modelObserver = new Observer<SportListModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.e(TAG,e.toString());
+
+                    }
+
+                    @Override
+                    public void onNext(SportListModel model) {
+                        LogUtil.e(TAG, model.getErrmsg());
+                        if (model.getErrmsg().equals("ok")) {
+                            sportListModel = model;
+                            showResult(model);
+                        }
+                    }
+                };
+
 
 }

@@ -25,6 +25,7 @@ import com.yeapao.andorid.model.CookListDetailModel;
 import com.yeapao.andorid.model.CreateActualOrdersModel;
 import com.yeapao.andorid.model.CreateReservationTimeModel;
 import com.yeapao.andorid.model.DepositOrdersModel;
+import com.yeapao.andorid.model.DiTingDataModel;
 import com.yeapao.andorid.model.FoodInfoModel;
 import com.yeapao.andorid.model.HealthDataModel;
 import com.yeapao.andorid.model.IAmCoachListModel;
@@ -46,6 +47,7 @@ import com.yeapao.andorid.model.SaveReservation;
 import com.yeapao.andorid.model.SelectActualTimeModel;
 import com.yeapao.andorid.model.SelectReservationTimeModel;
 import com.yeapao.andorid.model.SingleCommunityModel;
+import com.yeapao.andorid.model.SportListModel;
 import com.yeapao.andorid.model.TestData;
 import com.yeapao.andorid.model.UserDetailsModel;
 import com.yeapao.andorid.model.VideoDataModel;
@@ -476,4 +478,10 @@ public interface YeapaoApi {
 
     @POST("community/myListCommunity")
     Observable<MyselfPostModel> requestMyListPost(@Query("customerId") String id, @Query("page") String page);
+
+    @POST("order/rankingList")
+    Observable<SportListModel> requestRankingList(@Query("customerId") String customerId);
+
+    @POST("diTingAi/diTing")
+    Observable<DiTingDataModel> requestDiTingAnswer(@Query("problem") String problem, @Query("customerId") String id);
 }

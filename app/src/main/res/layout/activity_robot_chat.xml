@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include layout="@layout/repository_normal_bar" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -11,45 +13,54 @@
         <RelativeLayout
             android:id="@+id/rl_edit"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:background="@color/bg_white"
-            android:layout_alignParentBottom="true">
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            >
 
             <TextView
                 android:id="@+id/tv_send"
-                android:layout_width="60dp"
+                android:layout_width="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:layout_height="30dp"
-                android:text="发送"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:textColor="@color/text_color"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/login_shape"/>
+                android:background="@drawable/login_shape"
+                android:gravity="center"
+                android:text="发送"
+                android:textColor="@color/text_color"
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/et_chat_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@id/tv_send"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:background="@drawable/circle_comment_shape"/>
+                android:background="@drawable/circle_comment_shape"
+                android:minHeight="30dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_chat_list"
-            android:layout_above="@id/rl_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@id/rl_edit"
             android:background="#f2f2f2"
             android:fadeScrollbars="true"
             android:scrollbarFadeDuration="1"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
 
     </RelativeLayout>
 

@@ -117,6 +117,7 @@ dependencies {
 // 滚轮选择
     compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
 
+    compile 'me.grantland:autofittextview:0.2.+'
 
 
 

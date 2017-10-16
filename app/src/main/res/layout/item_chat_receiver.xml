@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="15dp"
+    android:paddingRight="70dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_grey">
+
+    <com.scottfu.sflibrary.customview.CircleImageView
+        android:id="@+id/civ_xiaopao_head"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/xiaopao_head"
+        app:border_color="@color/bg_grey"
+        app:border_width="0dp"/>
+    <TextView
+        android:id="@+id/tv_receiver_content"
+        android:layout_toRightOf="@id/civ_xiaopao_head"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/white_box_left_v2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我是小跑，有什么能为您服务的呢？"
+        android:textColor="@color/text_color"
+        android:gravity="left|center_vertical"/>
+</RelativeLayout>
