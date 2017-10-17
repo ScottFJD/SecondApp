@@ -1,5 +1,6 @@
 package com.yeapao.andorid.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

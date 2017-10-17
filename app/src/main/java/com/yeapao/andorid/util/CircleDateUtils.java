@@ -74,4 +74,11 @@ public class CircleDateUtils {
         }
     }
 
+    public static String getYearString(long time) {
+        String year = "";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        year = sdf.format(time);
+        return year;
+    }
+
 }

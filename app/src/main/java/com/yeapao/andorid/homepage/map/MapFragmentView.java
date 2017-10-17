@@ -617,11 +617,23 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_sport_list:
-                startActivity(new Intent(getContext(), SportListActivity.class));
+                if (GlobalDataYepao.isLogin()) {
+                    startActivity(new Intent(getContext(), SportListActivity.class));
+                }else {
+                    ToastManager.showToast(getContext(), "请先登录");
+                    LoginActivity.start(getContext());
+                }
+
                 break;
             case R.id.iv_message:
 //                TODO 机器人
-                startActivity(new Intent(getContext(), RobotChatActivity.class));
+                if (GlobalDataYepao.isLogin()) {
+                    startActivity(new Intent(getContext(), RobotChatActivity.class));
+                }else {
+                    ToastManager.showToast(getContext(), "请先登录");
+                    LoginActivity.start(getContext());
+                }
+
 //                isMessageFlag = false;
 //                ivMessage.setImageDrawable(getContext().getResources().getDrawable(R.drawable.cang_information_n));
 //                MyMessageActivity.start(getContext());

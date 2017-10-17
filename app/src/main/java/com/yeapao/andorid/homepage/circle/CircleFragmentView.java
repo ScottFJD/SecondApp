@@ -150,13 +150,12 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
                     DialogUtils.cancelProgressDialog();
                     isPhotoPreView = true;
                 }
-
-
-
             } else {
                 currentPage = 0;
                 getNetWork(String.valueOf(currentPage));
             }
+
+
         }
 
 

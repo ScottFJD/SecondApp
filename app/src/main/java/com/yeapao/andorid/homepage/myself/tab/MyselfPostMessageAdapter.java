@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,9 @@ public class MyselfPostMessageAdapter extends RecyclerView.Adapter<RecyclerView.
         mContext = context;
         inflater = LayoutInflater.from(context);
         myselfPostModel = model;
+        if (model.getData().getCommunityList().size() < 10) {
+            footerFlag = true;
+        }
     }
 
     public void loadNothing() {
@@ -67,6 +71,11 @@ public class MyselfPostMessageAdapter extends RecyclerView.Adapter<RecyclerView.
 
         if (holder instanceof ViewHolder) {
 
+            if (position == 0) {
+                ((ViewHolder) holder).ivTop.setVisibility(View.GONE);
+            } else {
+                ((ViewHolder) holder).ivTop.setVisibility(View.VISIBLE);
+            }
             ((ViewHolder)holder).tvTine.setText(CircleDateUtils.getCircleDate(myselfPostModel.getData().getCommunityList().get(position).getCreateTime()));
 
             if (myselfPostModel.getData().getCommunityList().get(position).getContent() == null || myselfPostModel.getData().getCommunityList().get(position).getContent().equals("")) {
@@ -139,7 +148,8 @@ public class MyselfPostMessageAdapter extends RecyclerView.Adapter<RecyclerView.
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private OnRecyclerViewClickListener listener;
-
+        @BindView(R.id.iv_top)
+        ImageView ivTop;
         @BindView(R.id.tv_tine)
         TextView tvTine;
         @BindView(R.id.tv_post_content)
@@ -152,7 +162,7 @@ public class MyselfPostMessageAdapter extends RecyclerView.Adapter<RecyclerView.
             ButterKnife.bind(this, view);
             this.listener = listener;
             view.setOnClickListener(this);
-            gvPostImages.addItemDecoration(new SpaceItemDecoration(ScreenUtil.dpToPxInt(mContext,8)));
+            gvPostImages.addItemDecoration(new SpaceItemDecoration(ScreenUtil.dpToPxInt(mContext,6)));
         }
 
         @Override

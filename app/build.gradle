@@ -7,8 +7,8 @@ android {
         applicationId "com.yeapao.andorid"
         minSdkVersion 22
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.6.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -92,7 +92,7 @@ dependencies {
     compile 'com.jaeger.statusbarutil:library:1.4.0'//状态栏
 
 //    compile files('libs/alipaySdk-20170725.jar')
-
+        compile files('libs/xUtils-2.6.14.jar')
 //微信支付集成
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 

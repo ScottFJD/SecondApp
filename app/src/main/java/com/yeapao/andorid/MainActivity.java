@@ -57,6 +57,7 @@ import com.yeapao.andorid.model.LoginModel;
 import com.yeapao.andorid.model.UserData;
 import com.yeapao.andorid.model.UserDetailsModel;
 import com.yeapao.andorid.userinfo.FillUserInfoActivity;
+import com.yeapao.andorid.util.DownloadManager;
 import com.yeapao.andorid.util.GlobalDataYepao;
 import com.yeapao.andorid.yeapaojpush.ExampleUtil;
 import com.yeapao.andorid.yeapaojpush.LocalBroadcastManager;
@@ -238,6 +239,18 @@ public class MainActivity extends PermissionActivity {
 
         initEvent();
 
+        checkVersion();
+
+    }
+
+    private void checkVersion() {
+        DownloadManager dowmmanager = new DownloadManager(getContext());
+        dowmmanager.checkUpdate(false, new DownloadManager.SuccessCallback() {
+            @Override
+            public void onSuccess(String version) {
+
+            }
+        });
     }
 
 

@@ -50,6 +50,7 @@ import com.yeapao.andorid.model.SingleCommunityModel;
 import com.yeapao.andorid.model.SportListModel;
 import com.yeapao.andorid.model.TestData;
 import com.yeapao.andorid.model.UserDetailsModel;
+import com.yeapao.andorid.model.VersionDataModel;
 import com.yeapao.andorid.model.VideoDataModel;
 import com.yeapao.andorid.model.VideoTypeModel;
 import com.yeapao.andorid.model.WareHouseListModel;
@@ -484,4 +485,7 @@ public interface YeapaoApi {
 
     @POST("diTingAi/diTing")
     Observable<DiTingDataModel> requestDiTingAnswer(@Query("problem") String problem, @Query("customerId") String id);
+//版本更新
+    @GET("home/version")
+    Observable<VersionDataModel> requestVersion();
 }

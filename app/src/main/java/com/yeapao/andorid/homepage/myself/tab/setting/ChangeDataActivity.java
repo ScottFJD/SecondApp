@@ -236,7 +236,7 @@ public class ChangeDataActivity extends BaseActivity {
                         .capture(true)
                         .theme(R.style.AppTheme_Image)
                         .captureStrategy(
-                                new CaptureStrategy(true, "com.zhihu.matisse.sample.fileprovider"))
+                                new CaptureStrategy(true, "com.yeapao.andorid.fileProvider"))
                         .maxSelectable(1)
                         .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                         .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))

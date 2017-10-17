@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.LogUtil;
@@ -17,7 +18,10 @@ import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
 import com.yeapao.andorid.homepage.circle.circledetail.CircleDetailActivity;
 import com.yeapao.andorid.model.MyselfPostModel;
+import com.yeapao.andorid.util.CircleDateUtils;
 import com.yeapao.andorid.util.GlobalDataYepao;
+
+import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +38,8 @@ public class MyselfPostActivity extends BaseActivity {
     private static final String TAG = "MyselfPostActivity";
     @BindView(R.id.rv_my_post_list)
     RecyclerView rvMyPostList;
+    @BindView(R.id.fab)
+    TextView fab;
     private LinearLayoutManager llm;
     private MyselfPostMessageAdapter mPostMessageAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -80,6 +86,16 @@ public class MyselfPostActivity extends BaseActivity {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 
                 LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+
+
+                    //获取最后一个可见view的位置
+                    int lastItemPosition = manager.findLastVisibleItemPosition();
+                    //获取第一个可见view的位置
+                    int firstItemPosition = manager.findFirstVisibleItemPosition();
+//                TODO
+                LogUtil.e(TAG,CircleDateUtils.getYearString(myselfPostModel.getData().getCommunityList().get(lastItemPosition-1).getCreateTime()));
+                fab.setText(CircleDateUtils.getYearString(myselfPostModel.getData().getCommunityList().get(lastItemPosition-1).getCreateTime()));
+
 //                    判断是否滑动到底部 加载
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
@@ -87,14 +103,14 @@ public class MyselfPostActivity extends BaseActivity {
 
                     if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
                         if (currentPage < totalPage - 1) {
-                            getNetWork(GlobalDataYepao.getUser(getContext()).getId(),String.valueOf(++currentPage));
+                            getNetWork(GlobalDataYepao.getUser(getContext()).getId(), String.valueOf(++currentPage));
                         } else {
                             mPostMessageAdapter.loadNothing();
                             ToastManager.showToast(getContext(), "没有更多");
                         }
                     }
-
                 }
+
                 super.onScrollStateChanged(recyclerView, newState);
             }
 

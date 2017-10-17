@@ -64,6 +64,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.yeapao.andorid.fileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
         <service android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote">
@@ -239,15 +249,15 @@
 
 
         <!--选择图片控件-->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.zhihu.matisse.sample.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths_public"></meta-data>
-        </provider>
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="com.zhihu.matisse.sample.fileprovider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/file_paths_public"></meta-data>-->
+        <!--</provider>-->
 
         <activity
             android:name=".YeaPaoIntroActivity"
