@@ -16,7 +16,6 @@ import com.yeapao.andorid.util.SampleSlide;
 public class YeaPaoIntroActivity extends AppIntro {
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +35,7 @@ public class YeaPaoIntroActivity extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
+        startActivity(new Intent(this,MainActivity.class));
         finish();
     }
 
