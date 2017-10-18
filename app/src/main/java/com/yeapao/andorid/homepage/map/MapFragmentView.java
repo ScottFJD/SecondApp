@@ -822,6 +822,13 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
                     routeOverlay.removeFromMap();
                 }
                 currentMyItemIndex = item.getIndex();
+
+                if (!GlobalDataYepao.isLogin()) {
+                    ToastManager.showToast(getContext(), "请先登录");
+                    LoginActivity.start(getContext());
+                    return false;
+                }
+
                 if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsMyReserva().equals("1")) {
                     tvWareHouse.setText("扫码开门");
                     tvWareHouse.setOnClickListener(new View.OnClickListener() {

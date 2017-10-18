@@ -119,11 +119,15 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
             }
         });
         refreshLayout.setColorSchemeResources(R.color.colorPrimary);
-//        if (GlobalDataYepao.isLogin()) {
-//            getNetWorkWithAccount(GlobalDataYepao.getUser(getContext()).getId(), String.valueOf(currentPage));
-//        } else {
-//            getNetWork(String.valueOf(currentPage));
-//        }
+
+
+        if (GlobalDataYepao.isLogin()) {
+            getNetWorkWithAccount(GlobalDataYepao.getUser(getContext()).getId(), String.valueOf(currentPage));
+        } else {
+            getNetWork(String.valueOf(currentPage));
+        }
+
+
         initViews(view);
         return view;
     }
@@ -133,30 +137,40 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
     public void onResume() {
         super.onResume();
         LogUtil.e(TAG, "onResume");
-
-        if (MainActivity.currentTab == 2) {
-            DialogUtils.showProgressDialog(getContext(),true);
-            if (GlobalDataYepao.isLogin() ) {
                 if (isPhotoPreView) {
                     if (singleCommunityFlag) {
                         getNetWorkSingleCommunity(String.valueOf(mCircleListModel.getData().getCommunityList().get(singleCommunotyPosition).getCommunityId()),
                                 GlobalDataYepao.getUser(getContext()).getId());
                         singleCommunityFlag = false;
-                    } else {
-                        currentPage = 0;
-                        getNetWorkWithAccount(GlobalDataYepao.getUser(getContext()).getId(), String.valueOf(currentPage));
                     }
                 } else {
                     DialogUtils.cancelProgressDialog();
                     isPhotoPreView = true;
                 }
-            } else {
-                currentPage = 0;
-                getNetWork(String.valueOf(currentPage));
-            }
 
-
-        }
+//        if (MainActivity.currentTab == 2) {
+//            DialogUtils.showProgressDialog(getContext(),true);
+//            if (GlobalDataYepao.isLogin() ) {
+//                if (isPhotoPreView) {
+//                    if (singleCommunityFlag) {
+//                        getNetWorkSingleCommunity(String.valueOf(mCircleListModel.getData().getCommunityList().get(singleCommunotyPosition).getCommunityId()),
+//                                GlobalDataYepao.getUser(getContext()).getId());
+//                        singleCommunityFlag = false;
+//                    } else {
+//                        currentPage = 0;
+//                        getNetWorkWithAccount(GlobalDataYepao.getUser(getContext()).getId(), String.valueOf(currentPage));
+//                    }
+//                } else {
+//                    DialogUtils.cancelProgressDialog();
+//                    isPhotoPreView = true;
+//                }
+//            } else {
+//                currentPage = 0;
+//                getNetWork(String.valueOf(currentPage));
+//            }
+//
+//
+//        }
 
 
 

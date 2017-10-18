@@ -332,7 +332,7 @@ public class MainActivity extends PermissionActivity {
             public void onPageSelected(int position) {
                 currentTab = position;
                 if (currentTab == 2) {
-                    circleFragmentView.onResume();
+//                    circleFragmentView.onResume();
                 }
                 Log.i(TAG, "-----ViewPager-------- previous item:" + bind.bnvTab.getCurrentItem() + " current item:" + position + " ------------------");
                 bind.bnvTab.setCurrentItem(position);
