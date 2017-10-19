@@ -487,6 +487,15 @@
             android:name=".homepage.map.sportlist.SportListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+
+
+        <!--友盟-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59c6076c4544cb2e5100012b"></meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="yeapao"></meta-data>
     </application>
 
 </manifest>

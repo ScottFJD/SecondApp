@@ -37,6 +37,7 @@ import com.scottfu.sflibrary.permission.PermissionActivity;
 import com.scottfu.sflibrary.permission.PermissionListener;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
+import com.umeng.analytics.MobclickAgent;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.NetImpl;
 import com.yeapao.andorid.api.Network;
@@ -454,7 +455,7 @@ public class MainActivity extends PermissionActivity {
 
             }
             JPushInterface.setAlias(this, 22, GlobalDataYepao.getUser(getContext()).getId());
-
+            MobclickAgent.onProfileSignIn(GlobalDataYepao.getUser(getContext()).getId());
 //            getNetWork(GlobalDataYepao.getUser(getContext()).getPhone(),GlobalDataYepao.getUser(getContext()).getPassword());
 //            CloudClient.doHttpRequest(getContext(), ConstantYeaPao.LOGIN,
 //                    NetImpl.getInstance().loginRequest(GlobalDataYepao.getUser(getContext()).getPhone(),
@@ -521,6 +522,19 @@ public class MainActivity extends PermissionActivity {
             return true;
         }
         return super.dispatchKeyEvent(event);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     /**

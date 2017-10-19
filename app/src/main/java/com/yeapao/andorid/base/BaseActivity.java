@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scottfu.sflibrary.util.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.yeapao.andorid.R;
 
 import rx.Subscription;
@@ -44,6 +45,20 @@ public abstract class BaseActivity extends AppCompatActivity{
         if (subscription != null && !subscription.isUnsubscribed()) {
             subscription.unsubscribe();
         }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
