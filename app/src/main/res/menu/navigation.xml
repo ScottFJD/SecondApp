@@ -11,10 +11,16 @@
         android:icon="@drawable/cang_n"
         android:title="舱"/>
 
+
+
     <item
-        android:id="@+id/home_video"
-        android:icon="@drawable/home_vedio_n"
-        android:title="@string/tab_video" />
+        android:id="@+id/home_scheme"
+        android:icon="@drawable/home_scheme_n"
+        android:title="@string/tab_scheme" />
+    <!--<item-->
+        <!--android:id="@+id/home_video"-->
+        <!--android:icon="@drawable/home_vedio_n"-->
+        <!--android:title="@string/tab_video" />-->
 
     <item
     android:id="@+id/home_circle"

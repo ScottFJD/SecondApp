@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:orientation="vertical"
+    android:background="@color/bg_white">
+
+    <TextView
+        android:id="@+id/tv_third_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第3天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageView109"
+        app:layout_constraintRight_toLeftOf="@+id/imageView110"
+        app:layout_constraintTop_toBottomOf="@+id/iv_third_day" />
+
+    <TextView
+        android:id="@+id/tv_forth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第4天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageView110"
+        app:layout_constraintRight_toLeftOf="@+id/imageView111"
+        app:layout_constraintTop_toBottomOf="@+id/iv_forth_day" />
+
+    <TextView
+        android:id="@+id/tv_fifth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第5天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageView111"
+        app:layout_constraintRight_toLeftOf="@+id/imageView112"
+        app:layout_constraintTop_toBottomOf="@+id/iv_fifth_day" />
+
+    <TextView
+        android:id="@+id/tv_sixth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第6天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageView112"
+        app:layout_constraintRight_toLeftOf="@+id/imageView113"
+        app:layout_constraintTop_toBottomOf="@+id/iv_sixth_day" />
+
+    <ImageView
+        android:id="@+id/iv_first_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/iv_second_day"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/iv_second_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_first_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_third_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_first_day"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/iv_third_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_second_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_forth_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_second_day"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/iv_forth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_third_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_fifth_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_third_day"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/iv_fifth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_forth_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_sixth_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_forth_day"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/iv_sixth_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_fifth_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_seventh_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_fifth_day"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/iv_seventh_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_sixth_day"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_sixth_day"
+        app:srcCompat="@drawable/all_percent" />
+
+    <ImageView
+        android:id="@+id/imageView108"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_first_day"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/iv_first_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_second_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_first_day"
+        app:srcCompat="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/imageView109"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_second_day"
+        app:layout_constraintLeft_toRightOf="@+id/iv_second_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_third_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_second_day"
+        app:srcCompat="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/imageView110"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_third_day"
+        app:layout_constraintLeft_toRightOf="@+id/iv_third_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_forth_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_third_day"
+        app:srcCompat="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/imageView111"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_forth_day"
+        app:layout_constraintLeft_toRightOf="@+id/iv_forth_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_fifth_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_forth_day"
+        app:srcCompat="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/imageView112"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_fifth_day"
+        app:layout_constraintLeft_toRightOf="@+id/iv_fifth_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_sixth_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_fifth_day"
+        app:srcCompat="@color/colorPrimary" />
+
+    <ImageView
+        android:id="@+id/imageView113"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_sixth_day"
+        app:layout_constraintLeft_toRightOf="@+id/iv_sixth_day"
+        app:layout_constraintRight_toLeftOf="@+id/iv_seventh_day"
+        app:layout_constraintTop_toTopOf="@+id/iv_sixth_day"
+        app:srcCompat="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_first_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第1天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_first_day"
+        app:layout_constraintRight_toLeftOf="@+id/imageView108"
+        app:layout_constraintTop_toBottomOf="@+id/iv_first_day" />
+
+    <TextView
+        android:id="@+id/tv_seventh_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第7天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageView113"
+        app:layout_constraintRight_toRightOf="@+id/iv_seventh_day"
+        app:layout_constraintTop_toBottomOf="@+id/iv_seventh_day" />
+
+    <TextView
+        android:id="@+id/tv_second_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:text="第2天"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageView108"
+        app:layout_constraintRight_toLeftOf="@+id/imageView109"
+        app:layout_constraintTop_toBottomOf="@+id/iv_second_day" />
+</android.support.constraint.ConstraintLayout>
