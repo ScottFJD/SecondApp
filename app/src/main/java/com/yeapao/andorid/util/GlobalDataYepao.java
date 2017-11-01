@@ -83,4 +83,16 @@ public class GlobalDataYepao {
     public static void clearCangDeviceData(Context context) {
         getCache(context).remove(GlobalDataConstant.CANG_DEVICE);
     }
+
+    public static void setMyLocationData(Context context, MyLoaction loaction) {
+        getCache(context).put(GlobalDataConstant.LOACTION,loaction);
+    }
+
+    public static MyLoaction getMyLocation(Context context) {
+        return (MyLoaction) getCache(context).getAsObject(GlobalDataConstant.LOACTION);
+    }
+
+    public static void clearMyLocation(Context context) {
+        getCache(context).remove(GlobalDataConstant.LOACTION);
+    }
 }

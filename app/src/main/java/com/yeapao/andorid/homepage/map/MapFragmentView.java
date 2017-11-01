@@ -92,6 +92,7 @@ import com.yeapao.andorid.homepage.myself.orders.MyselfOrdersActivity;
 import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.model.WareHouseListModel;
 import com.yeapao.andorid.util.GlobalDataYepao;
+import com.yeapao.andorid.util.MyLoaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -698,6 +699,12 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
             if (isFirstLoc) {
                 LogUtil.e("MyLocationListener", "receiveLocationlllllll");
 
+                MyLoaction myLoaction = new MyLoaction();
+                myLoaction.setLongitude(location.getLongitude());
+                myLoaction.setLatitude(location.getLatitude());
+                GlobalDataYepao.setMyLocationData(getContext(),myLoaction);
+                LogUtil.e("lllllllllll",String.valueOf(GlobalDataYepao.getMyLocation(getContext()).getLongitude())
+                        +"   "+String.valueOf(GlobalDataYepao.getMyLocation(getContext()).getLatitude()) );
                 mCurrentLat = location.getLatitude();
                 mCurrentLon = location.getLongitude();
                 mCurrentAccracy = location.getRadius();
@@ -822,6 +829,13 @@ public class MapFragmentView extends BaseFragment implements SensorEventListener
                     routeOverlay.removeFromMap();
                 }
                 currentMyItemIndex = item.getIndex();
+
+                if (!GlobalDataYepao.isLogin()) {
+                    ToastManager.showToast(getContext(), "请先登录");
+                    LoginActivity.start(getContext());
+                    return false;
+                }
+
                 if (mWareHouseList.getData().getWarehouseListOut().get(item.getIndex()).getIsMyReserva().equals("1")) {
                     tvWareHouse.setText("扫码开门");
                     tvWareHouse.setOnClickListener(new View.OnClickListener() {

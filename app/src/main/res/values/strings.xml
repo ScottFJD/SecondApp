@@ -5,6 +5,7 @@
     <string name="tab_circle">发现</string>
     <string name="tab_myself">我的</string>
     <string name="tab_video">视频</string>
+    <string name="tab_scheme">计划</string>
 
     <string name="exit_again">再按一次退出程序</string>
 
@@ -94,5 +95,53 @@
     <string name="sport_tips_4">今天的运动时间和运动量还需要跟上APP补练“肌肉RELAX”才能达标哦，快来做几组动作缓解肌肉压力。</string>
     <string name="sport_tips_4_1">本次运动时长完美达标，下次请继续再接再厉！运动结束，别忘了跟着APP里“肌肉RELAX”做放松，赶走运动的酸痛感。</string>
 
+    
+    <string name="sport_plan">Hi～欢迎来到也跑，我是你的教练Colin，接下来我们要收集一些你的信息，来为你量身定制专属于你的运动计划，让我们来聊聊你的日常状态吧</string>
+
+
+    <string name="sport_plan_1">职业类型</string>
+    <string name="sport_plan_1_1">体力消耗小</string>
+    <string name="sport_plan_1_2">体力消耗一般</string>
+    <string name="sport_plan_1_3">体力消耗大</string>
+
+
+    <string name="sport_plan_2">职业特征</string>
+    <string name="sport_plan_2_1">绝大部分时间保持坐姿</string>
+    <string name="sport_plan_2_2">大部分时间处于站姿或走动状态</string>
+    <string name="sport_plan_2_3">部分时间处于活跃的运动状态</string>
+
+    <string name="sport_plan_3">运动情况</string>
+    <string name="sport_plan_3_1">每周低于3次</string>
+    <string name="sport_plan_3_2">每周3-4次</string>
+    <string name="sport_plan_3_3">每周大于4次</string>
+
+    <string name="account_bmi">尊敬的XX先生您好</string>
+    <string name="account_bmi_1">&#160;&#160;&#160;&#160;&#160;&#160;您的身体质量参数(BMI)为：17 属于 偏瘦型。鉴于您平时运动量较少，应该适当增加运动量建议您使用我们的增肌健身方案。</string>
+
+    <string name="sport_plan_4">运动方案</string>
+    <string name="sport_plan_4_1">&#160;&#160;运动心率&#160;&#160;</string>
+    <string name="sport_plan_4_2">运动频率</string>
+    <string name="sport_plan_4_3">运动周期</string>
+
+    <string name="heart_rate_unit">次/min</string>
+    <string name="heart_frequency_unit">3~4次/周</string>
+    <string name="heart_cycle_unit">天</string>
+
+    <string name="steps_one">步骤一</string>
+    <string name="steps_two">步骤二</string>
+    <string name="steps_three">步骤三</string>
+
+    <string name="sport_plan_tips">你的健康对我们来说至关重要！我们想邀请你一起运动，见证你的锐变并为你喝彩，答应我们吧！</string>
+
+    <string name="sport_plan_reset_title">重置方案</string>
+    <string name="sport_plan_reset_content">方案未结束，中途重置效果会大打折扣，确定重置吗？</string>
+
+    <string name="sport_plan_tips_one">鉴于您平时运动量较少，应该适当增加运动量，</string>
+    <string name="sport_plan_tips_two">鉴于您平时运动量合适，应该继续保持运动量，</string>
+    <string name="sport_plan_tips_three">鉴于您平时运动量过多，应该适当减少运动量，</string>
+
+    <string name="account_bmi_one">&#160;&#160;&#160;&#160;&#160;&#160;您的身体质量参数(BMI)为：</string>
+    <string name="account_bmi_two">建议您使用我们的</string>
+    <string name="account_bmi_three">健身方案。</string>
 
 </resources>

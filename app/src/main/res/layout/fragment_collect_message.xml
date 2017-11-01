@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/scheme_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cl_sport">
+
+
+
+    <TextView
+        android:id="@+id/tv_sport_intro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text=""
+        android:textAlignment="textStart"
+        android:textColor="#cdcdcd"
+        android:textSize="15sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="28dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_collect"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/sport_plan_content_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sport_intro"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/ci_circle_indicator"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="@+id/vp_collect"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/vp_collect"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="@+id/vp_collect" />
+
+</android.support.constraint.ConstraintLayout>
