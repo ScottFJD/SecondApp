@@ -37,6 +37,7 @@ import com.scottfu.sflibrary.permission.PermissionActivity;
 import com.scottfu.sflibrary.permission.PermissionListener;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
+import com.umeng.analytics.MobclickAgent;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.NetImpl;
 import com.yeapao.andorid.api.Network;
@@ -50,9 +51,11 @@ import com.yeapao.andorid.homepage.myself.MyselfFragmentView;
 import com.yeapao.andorid.homepage.myself.MyselfPresenter;
 import com.yeapao.andorid.homepage.shopping.ShoppingFragmentView;
 import com.yeapao.andorid.homepage.shopping.ShoppingPresenter;
+import com.yeapao.andorid.homepage.sport_plan.SportPlanFragment;
 import com.yeapao.andorid.homepage.video.VideoContract;
 import com.yeapao.andorid.homepage.video.VideoFragmentView;
 import com.yeapao.andorid.homepage.video.VideoPresenter;
+import com.yeapao.andorid.model.BodySideThirdSaveModel;
 import com.yeapao.andorid.model.LoginModel;
 import com.yeapao.andorid.model.UserData;
 import com.yeapao.andorid.model.UserDetailsModel;
@@ -89,6 +92,7 @@ public class MainActivity extends PermissionActivity {
     private MyselfFragmentView myselfFragmentView;
     private VideoFragmentView videoFragmentView;
     private MapFragmentView mapFragmentView;
+    private SportPlanFragment sportPlanFragment;
 
     private LessonPresenter lessonPresenter;
     private ShoppingPresenter shoppingPresenter;
@@ -123,6 +127,11 @@ public class MainActivity extends PermissionActivity {
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_EXTRAS = "extras";
 
+    public static MainActivity mainActivity;
+
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
 
     //   推送过来接收的广播
     public void registerMessageReceiver() {
@@ -147,7 +156,7 @@ public class MainActivity extends PermissionActivity {
                         showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
                     }
                     if (messge != null) {
-                        LogUtil.e(TAG,"message   "+messge);
+                        LogUtil.e(TAG, "message   " + messge);
                         mapFragmentView.refreshMessageIcon();
                     }
 //                    toast key
@@ -166,7 +175,7 @@ public class MainActivity extends PermissionActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_main);
-
+        mainActivity = this;
         isForeground = true;
 
 
@@ -189,11 +198,12 @@ public class MainActivity extends PermissionActivity {
 //            shoppingFragmentView = (ShoppingFragmentView) fragmentManager.getFragment(savedInstanceState, "shopping");
             circleFragmentView = (CircleFragmentView) fragmentManager.getFragment(savedInstanceState, "circle");
             myselfFragmentView = (MyselfFragmentView) fragmentManager.getFragment(savedInstanceState, "myself");
-            videoFragmentView = (VideoFragmentView) fragmentManager.getFragment(savedInstanceState, "video");
+//            videoFragmentView = (VideoFragmentView) fragmentManager.getFragment(savedInstanceState, "video");
             mapFragmentView = (MapFragmentView) fragmentManager.getFragment(savedInstanceState, "map");
+            sportPlanFragment = (SportPlanFragment) fragmentManager.getFragment(savedInstanceState, "sport");
 
             fragments.add(mapFragmentView);
-            fragments.add(videoFragmentView);
+            fragments.add(sportPlanFragment);
 //            fragments.add(lessonFragmentView);
 //            fragments.add(shoppingFragmentView);
             fragments.add(circleFragmentView);
@@ -204,11 +214,13 @@ public class MainActivity extends PermissionActivity {
 //            shoppingFragmentView = ShoppingFragmentView.newInstance();
             circleFragmentView = CircleFragmentView.newInstance();
             myselfFragmentView = MyselfFragmentView.newInstance();
-            videoFragmentView = VideoFragmentView.newInstance();
+//            videoFragmentView = VideoFragmentView.newInstance();
             mapFragmentView = MapFragmentView.newInstance();
+            sportPlanFragment = SportPlanFragment.newInstance();
 
             fragments.add(mapFragmentView);
-            fragments.add(videoFragmentView);
+            fragments.add(sportPlanFragment);
+//            fragments.add(videoFragmentView);
 //            fragments.add(lessonFragmentView);
 //            fragments.add(shoppingFragmentView);
             fragments.add(circleFragmentView);
@@ -219,7 +231,7 @@ public class MainActivity extends PermissionActivity {
 //        shoppingPresenter = new ShoppingPresenter(getContext(), shoppingFragmentView);
         circlePresenter = new CirclePresenter(getContext(), circleFragmentView);
         myselfPresenter = new MyselfPresenter(getContext(), myselfFragmentView);
-        videoPresenter = new VideoPresenter(getContext(), videoFragmentView);
+//        videoPresenter = new VideoPresenter(getContext(), videoFragmentView);
 
 //        fragments.add(lessonFragmentView);
 //        fragments.add(shoppingFragmentView);
@@ -228,18 +240,25 @@ public class MainActivity extends PermissionActivity {
 
 
         items.put(R.id.home_cang, 0);
-        items.put(R.id.home_video, 1);
+        items.put(R.id.home_scheme, 1);
         items.put(R.id.home_circle, 2);
-//        items.put(R.id.home_circle, 2);
         items.put(R.id.home_myself, 3);
 
 
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), fragments);
         bind.vp.setAdapter(mainPagerAdapter);
 
+
         initEvent();
 
         checkVersion();
+
+    }
+
+
+    public void checkItem() {
+        LogUtil.e(TAG,"checkItem");
+        bind.vp.setCurrentItem(0);
 
     }
 
@@ -331,6 +350,9 @@ public class MainActivity extends PermissionActivity {
             @Override
             public void onPageSelected(int position) {
                 currentTab = position;
+                if (currentTab != 1) {
+                    JCVideoPlayer.releaseAllVideos();
+                }
                 if (currentTab == 2) {
 //                    circleFragmentView.onResume();
                 }
@@ -447,14 +469,14 @@ public class MainActivity extends PermissionActivity {
         } else {
             UserData userData = GlobalDataYepao.getUser(getContext());
             GlobalDataYepao.setIsLogin(true);
-            LogUtil.e(TAG,String.valueOf(GlobalDataYepao.getUser(getContext()).getStatus()));
+            LogUtil.e(TAG, String.valueOf(GlobalDataYepao.getUser(getContext()).getStatus()));
             if (GlobalDataYepao.getUser(getContext()).getStatus() == 0) {
                 FillUserInfoActivity.start(getContext());
             } else {
 
             }
             JPushInterface.setAlias(this, 22, GlobalDataYepao.getUser(getContext()).getId());
-
+            MobclickAgent.onProfileSignIn(GlobalDataYepao.getUser(getContext()).getId());
 //            getNetWork(GlobalDataYepao.getUser(getContext()).getPhone(),GlobalDataYepao.getUser(getContext()).getPassword());
 //            CloudClient.doHttpRequest(getContext(), ConstantYeaPao.LOGIN,
 //                    NetImpl.getInstance().loginRequest(GlobalDataYepao.getUser(getContext()).getPhone(),
@@ -521,6 +543,19 @@ public class MainActivity extends PermissionActivity {
             return true;
         }
         return super.dispatchKeyEvent(event);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     /**

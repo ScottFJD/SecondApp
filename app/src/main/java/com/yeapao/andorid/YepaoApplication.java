@@ -10,6 +10,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.scottfu.sflibrary.cache.ACache;
 import com.scottfu.sflibrary.util.FileUtil;
 import com.scottfu.sflibrary.util.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.zxy.tiny.Tiny;
 
 import java.util.jar.JarOutputStream;
@@ -59,6 +60,14 @@ public class YepaoApplication extends MultiDexApplication {
 
         SDKInitializer.initialize(this);
         SDKInitializer.setCoordType(CoordType.BD09LL);
+
+
+
+        MobclickAgent.setDebugMode(true);
+        // SDK在统计Fragment时，需要关闭Activity自带的页面统计，
+        // 然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
 

@@ -487,6 +487,48 @@ public class DialogUtils {
         dialog.getWindow().setAttributes(params);
     }
 
+    public static void showCustomTwoButtonDialog(Context context,String title,String content,String leftButtom,String rightButtom, final DialogCallback listener) {
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.show();
+        Button cancel;
+        Button sure;
+        TextView titleTextView;
+        TextView hintTextView;
 
+        View v = LayoutInflater.from(context).inflate(R.layout.dialog_refund, null);
+
+        titleTextView = (TextView) v.findViewById(R.id.tv_order_title);
+        hintTextView = (TextView) v.findViewById(R.id.tv_dialog_hint);
+
+        titleTextView.setText(title);
+        hintTextView.setText(content);
+
+        cancel = (Button) v.findViewById(R.id.btn_cancel);
+        cancel.setText(leftButtom);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onLeftClick();
+                dialog.dismiss();
+            }
+        });
+        sure = (Button) v.findViewById(R.id.btn_sure);
+        sure.setText(rightButtom);
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onRightClick();
+                dialog.dismiss();
+            }
+        });
+
+        Window window = dialog.getWindow();
+        window.setContentView(v);
+        WindowManager m = ((Activity) context).getWindowManager();
+        Display display = m.getDefaultDisplay();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = (int) (display.getWidth() * 0.9);
+        dialog.getWindow().setAttributes(params);
+    }
 
 }

@@ -48,6 +48,7 @@ import com.yeapao.andorid.model.SelectActualTimeModel;
 import com.yeapao.andorid.model.SelectReservationTimeModel;
 import com.yeapao.andorid.model.SingleCommunityModel;
 import com.yeapao.andorid.model.SportListModel;
+import com.yeapao.andorid.model.SportPlanDetailModel;
 import com.yeapao.andorid.model.TestData;
 import com.yeapao.andorid.model.UserDetailsModel;
 import com.yeapao.andorid.model.VersionDataModel;
@@ -488,4 +489,24 @@ public interface YeapaoApi {
 //版本更新
     @GET("home/version")
     Observable<VersionDataModel> requestVersion();
+
+    @POST("video/generationScheme")
+    Observable<SportPlanDetailModel> requestSportDetail(@Query("customerId") String customerId,
+                                                        @Query("longitude") String longitude,
+                                                        @Query("latitude") String latitude,
+                                                        @Query("careerType") String careerType,
+                                                        @Query("sportsCondition") String sportsCondition,
+                                                        @Query("workForm") String workForm);
+
+    @POST("video/generationScheme")
+    Observable<SportPlanDetailModel> getSportDetail(@Query("customerId") String customerId,
+                                                        @Query("longitude") String longitude,
+                                                        @Query("latitude") String latitude
+                                                    );
+
+    @POST("video/reset")
+    Observable<NormalDataModel> requestSportPlanReset(@Query("programmeId") String programmeId);
+
+    @POST("video/clickRate")
+    Observable<NormalDataModel> requestVideoClick(@Query("videoId") String videoId, @Query("programmeId") String programmeId);
 }
