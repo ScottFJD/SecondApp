@@ -300,7 +300,7 @@ public class MyselfHealthActivity extends BaseActivity {
                 float val = Float.valueOf(healthModel.getData().getWeightListOuts().get(i).getWeight());
                 yVals.add(new Entry(i, val));
                 if (i == healthModel.getData().getWeightListOuts().size() - 1) {
-                    currentWeight = healthModel.getData().getWeightListOuts().get(i).getWeight();
+                    currentWeight = healthModel.getData().getWeightListOuts().get(0).getWeight();
                 }
             }
 
@@ -309,7 +309,7 @@ public class MyselfHealthActivity extends BaseActivity {
                 float val = Float.valueOf(healthModel.getData().getBMIListOut().get(i).getBmi());
                 yVals.add(new Entry(i, val));
                 if (i == healthModel.getData().getBMIListOut().size() - 1) {
-                    currentBMI = healthModel.getData().getBMIListOut().get(i).getBmi();
+                    currentBMI = healthModel.getData().getBMIListOut().get(0).getBmi();
                 }
             }
         }

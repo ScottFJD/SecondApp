@@ -486,8 +486,9 @@
         <activity
             android:name=".homepage.map.sportlist.SportListActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
+        <activity
+            android:name=".homepage.sport_plan.SportSafetyMattersActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--友盟-->
         <meta-data

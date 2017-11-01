@@ -82,7 +82,7 @@ public class CircleMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     public void loadMore(CircleListModel model) {
-        mCircleListModel.getData().getCommunityList().addAll(model.getData().getCommunityList());
+//        mCircleListModel.getData().getCommunityList().addAll(model.getData().getCommunityList());
         notifyDataSetChanged();
     }
 

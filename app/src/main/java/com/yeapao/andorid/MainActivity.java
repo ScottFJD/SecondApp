@@ -55,6 +55,7 @@ import com.yeapao.andorid.homepage.sport_plan.SportPlanFragment;
 import com.yeapao.andorid.homepage.video.VideoContract;
 import com.yeapao.andorid.homepage.video.VideoFragmentView;
 import com.yeapao.andorid.homepage.video.VideoPresenter;
+import com.yeapao.andorid.model.BodySideThirdSaveModel;
 import com.yeapao.andorid.model.LoginModel;
 import com.yeapao.andorid.model.UserData;
 import com.yeapao.andorid.model.UserDetailsModel;
@@ -126,6 +127,11 @@ public class MainActivity extends PermissionActivity {
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_EXTRAS = "extras";
 
+    public static MainActivity mainActivity;
+
+    public static MainActivity getMainActivity() {
+        return mainActivity;
+    }
 
     //   推送过来接收的广播
     public void registerMessageReceiver() {
@@ -150,7 +156,7 @@ public class MainActivity extends PermissionActivity {
                         showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
                     }
                     if (messge != null) {
-                        LogUtil.e(TAG,"message   "+messge);
+                        LogUtil.e(TAG, "message   " + messge);
                         mapFragmentView.refreshMessageIcon();
                     }
 //                    toast key
@@ -169,7 +175,7 @@ public class MainActivity extends PermissionActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_main);
-
+        mainActivity = this;
         isForeground = true;
 
 
@@ -242,9 +248,17 @@ public class MainActivity extends PermissionActivity {
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), fragments);
         bind.vp.setAdapter(mainPagerAdapter);
 
+
         initEvent();
 
         checkVersion();
+
+    }
+
+
+    public void checkItem() {
+        LogUtil.e(TAG,"checkItem");
+        bind.vp.setCurrentItem(0);
 
     }
 
@@ -336,6 +350,9 @@ public class MainActivity extends PermissionActivity {
             @Override
             public void onPageSelected(int position) {
                 currentTab = position;
+                if (currentTab != 1) {
+                    JCVideoPlayer.releaseAllVideos();
+                }
                 if (currentTab == 2) {
 //                    circleFragmentView.onResume();
                 }
@@ -452,7 +469,7 @@ public class MainActivity extends PermissionActivity {
         } else {
             UserData userData = GlobalDataYepao.getUser(getContext());
             GlobalDataYepao.setIsLogin(true);
-            LogUtil.e(TAG,String.valueOf(GlobalDataYepao.getUser(getContext()).getStatus()));
+            LogUtil.e(TAG, String.valueOf(GlobalDataYepao.getUser(getContext()).getStatus()));
             if (GlobalDataYepao.getUser(getContext()).getStatus() == 0) {
                 FillUserInfoActivity.start(getContext());
             } else {

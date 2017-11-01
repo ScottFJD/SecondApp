@@ -33,6 +33,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:lineSpacingExtra="3dp"
             android:id="@+id/tv_account_bmi_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
