@@ -34,14 +34,13 @@
         android:id="@+id/bnv_tab"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/bottomBackgroundColor"
+        android:background="#f1f1f1"
         android:layout_gravity="bottom"
-        app:itemIconTint="@color/selector_bottom_item_yellow"
-        app:itemTextColor="@color/selector_bottom_item_yellow"
         app:menu="@menu/navigation" />
 
 
-
+    <!--app:itemIconTint="@color/selector_bottom_item_yellow"-->
+    <!--app:itemTextColor="@color/selector_bottom_item_yellow"-->
 
 </LinearLayout>
 </layout>

@@ -143,5 +143,11 @@
     <string name="account_bmi_one">&#160;&#160;&#160;&#160;&#160;&#160;您的身体质量参数(BMI)为：</string>
     <string name="account_bmi_two">建议您使用我们的</string>
     <string name="account_bmi_three">健身方案。</string>
+    
+    
+    <!--动感课程-->
+    <string name="dynamic_lesson_status_1">结束</string>
+    <string name="dynamic_lesson_status_2">预约</string>
+    <string name="dynamic_lesson_status_3">已预约</string>
 
 </resources>

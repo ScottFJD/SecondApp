@@ -489,6 +489,12 @@
         <activity
             android:name=".homepage.sport_plan.SportSafetyMattersActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicLessonActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicLessonDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--友盟-->
         <meta-data

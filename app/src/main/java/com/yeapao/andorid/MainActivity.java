@@ -52,6 +52,8 @@ import com.yeapao.andorid.homepage.myself.MyselfPresenter;
 import com.yeapao.andorid.homepage.shopping.ShoppingFragmentView;
 import com.yeapao.andorid.homepage.shopping.ShoppingPresenter;
 import com.yeapao.andorid.homepage.sport_plan.SportPlanFragment;
+import com.yeapao.andorid.homepage.station.StationFragmentView;
+import com.yeapao.andorid.homepage.station.StationPresenter;
 import com.yeapao.andorid.homepage.video.VideoContract;
 import com.yeapao.andorid.homepage.video.VideoFragmentView;
 import com.yeapao.andorid.homepage.video.VideoPresenter;
@@ -93,12 +95,14 @@ public class MainActivity extends PermissionActivity {
     private VideoFragmentView videoFragmentView;
     private MapFragmentView mapFragmentView;
     private SportPlanFragment sportPlanFragment;
+    private StationFragmentView stationFragmentView;
 
     private LessonPresenter lessonPresenter;
     private ShoppingPresenter shoppingPresenter;
     private CirclePresenter circlePresenter;
     private MyselfPresenter myselfPresenter;
     private VideoPresenter videoPresenter;
+    private StationPresenter stationPresenter;
 
 
     private long exitTime = 0;
@@ -201,9 +205,12 @@ public class MainActivity extends PermissionActivity {
 //            videoFragmentView = (VideoFragmentView) fragmentManager.getFragment(savedInstanceState, "video");
             mapFragmentView = (MapFragmentView) fragmentManager.getFragment(savedInstanceState, "map");
             sportPlanFragment = (SportPlanFragment) fragmentManager.getFragment(savedInstanceState, "sport");
+            stationFragmentView = (StationFragmentView) fragmentManager.getFragment(savedInstanceState, "station");
+
 
             fragments.add(mapFragmentView);
-            fragments.add(sportPlanFragment);
+            fragments.add(stationFragmentView);
+//            fragments.add(sportPlanFragment);
 //            fragments.add(lessonFragmentView);
 //            fragments.add(shoppingFragmentView);
             fragments.add(circleFragmentView);
@@ -216,10 +223,13 @@ public class MainActivity extends PermissionActivity {
             myselfFragmentView = MyselfFragmentView.newInstance();
 //            videoFragmentView = VideoFragmentView.newInstance();
             mapFragmentView = MapFragmentView.newInstance();
-            sportPlanFragment = SportPlanFragment.newInstance();
+//            sportPlanFragment = SportPlanFragment.newInstance();
+            stationFragmentView = StationFragmentView.newInstance();
+
 
             fragments.add(mapFragmentView);
-            fragments.add(sportPlanFragment);
+//            fragments.add(sportPlanFragment);
+            fragments.add(stationFragmentView);
 //            fragments.add(videoFragmentView);
 //            fragments.add(lessonFragmentView);
 //            fragments.add(shoppingFragmentView);
@@ -232,7 +242,7 @@ public class MainActivity extends PermissionActivity {
         circlePresenter = new CirclePresenter(getContext(), circleFragmentView);
         myselfPresenter = new MyselfPresenter(getContext(), myselfFragmentView);
 //        videoPresenter = new VideoPresenter(getContext(), videoFragmentView);
-
+        stationPresenter = new StationPresenter(getContext(), stationFragmentView);
 //        fragments.add(lessonFragmentView);
 //        fragments.add(shoppingFragmentView);
 //        fragments.add(circleFragmentView);
@@ -240,7 +250,7 @@ public class MainActivity extends PermissionActivity {
 
 
         items.put(R.id.home_cang, 0);
-        items.put(R.id.home_scheme, 1);
+        items.put(R.id.home_run, 1);
         items.put(R.id.home_circle, 2);
         items.put(R.id.home_myself, 3);
 
