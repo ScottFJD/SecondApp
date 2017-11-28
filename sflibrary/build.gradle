@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+//    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -32,7 +32,7 @@ android {
         flatDir {
             dirs 'libs'}
     }
-    buildToolsVersion '26.0.2'
+//    buildToolsVersion '26.0.2'
 }
 
 dependencies {

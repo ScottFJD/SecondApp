@@ -16,6 +16,7 @@ import com.scottfu.sflibrary.util.LogUtil;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicLessonActivity;
+import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -81,7 +82,12 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
             @Override
             public void OnItemClick(View v, int position) {
                 LogUtil.e(TAG,String.valueOf(position));
-                DynamicLessonActivity.start(getContext());
+                if (position == 0) {
+                    DynamicLessonActivity.start(getContext());
+                } else if (position == 1) {
+                    TrainingLessonActivity.start(getContext());
+                }
+
             }
         });
     }

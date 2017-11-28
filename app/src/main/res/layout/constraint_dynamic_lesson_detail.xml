@@ -57,7 +57,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
-        android:layout_height="115dp"
+        android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,9 +103,8 @@
             android:id="@+id/ll_coach_title"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ll_coach"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="45dp"
             android:orientation="vertical">
 
             <TextView
@@ -138,15 +137,27 @@
 
         <ImageView
             android:id="@+id/iv_content_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_width="18dp"
+            android:layout_height="11dp"
             android:layout_above="@id/iv_dinner"
             android:layout_below="@id/ll_coach_title"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
             android:src="@drawable/order_more" />
 
 
     </RelativeLayout>
+
+    <com.scottfu.sflibrary.customview.CircleImageView
+        android:id="@+id/circleImageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:srcCompat="@drawable/y_you"
+        app:border_color="@color/colorPrimary"
+        app:border_width="1dp"/>
 
 </android.support.constraint.ConstraintLayout>
