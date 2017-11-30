@@ -198,7 +198,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView115" />
 
     <TextView
-        android:id="@+id/textView197"
+        android:id="@+id/tv_dynamic_order_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -209,7 +209,7 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView115" />
 
     <ImageView
-        android:id="@+id/imageView116"
+        android:id="@+id/iv_dynamic_card"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -225,9 +225,9 @@
         android:layout_marginStart="16dp"
         android:text="折扣卡"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView116"
-        app:layout_constraintStart_toStartOf="@+id/imageView116"
-        app:layout_constraintTop_toBottomOf="@+id/imageView116" />
+        app:layout_constraintBottom_toTopOf="@+id/iv_dynamic_card"
+        app:layout_constraintStart_toStartOf="@+id/iv_dynamic_card"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dynamic_card" />
 
     <TextView
         android:id="@+id/textView199"
@@ -245,9 +245,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView116"
-        app:layout_constraintEnd_toEndOf="@+id/imageView116"
-        app:layout_constraintTop_toTopOf="@+id/imageView116"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_dynamic_card"
+        app:layout_constraintEnd_toEndOf="@+id/iv_dynamic_card"
+        app:layout_constraintTop_toTopOf="@+id/iv_dynamic_card"
         app:srcCompat="@drawable/buy_right" />
 
     <ImageView
@@ -257,7 +257,7 @@
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView116"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dynamic_card"
         app:srcCompat="@color/bg_white" />
 
     <TextView
@@ -286,7 +286,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
-        android:text="1张"
+        android:text="0张"
         android:textColor="#1089dc"
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView200"

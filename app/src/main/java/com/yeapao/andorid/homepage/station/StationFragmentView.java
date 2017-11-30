@@ -14,13 +14,18 @@ import android.widget.TextView;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicLessonActivity;
 import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonActivity;
+import com.yeapao.andorid.model.StationMainBannerModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 2017/11/21.
@@ -39,7 +44,7 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     private StationConstract.Presenter mPresenter;
     private LinearLayoutManager linearLayoutManager;
     private StationMessageAdapter stationMessageAdapter;
-
+    private StationMainBannerModel stationMainBannerModel;
 
     public static StationFragmentView newInstance() {
         return new StationFragmentView();
@@ -56,6 +61,7 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_run_station, container, false);
         unbinder = ButterKnife.bind(this, view);
+        getNetWork();
         initViews(view);
         return view;
     }
@@ -72,16 +78,15 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvStationList.setLayoutManager(linearLayoutManager);
-        showResult();
     }
 
     private void showResult() {
-        stationMessageAdapter = new StationMessageAdapter(getContext());
+        stationMessageAdapter = new StationMessageAdapter(getContext(),stationMainBannerModel);
         rvStationList.setAdapter(stationMessageAdapter);
         stationMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
-                LogUtil.e(TAG,String.valueOf(position));
+                LogUtil.e(TAG, String.valueOf(position));
                 if (position == 0) {
                     DynamicLessonActivity.start(getContext());
                 } else if (position == 1) {
@@ -97,4 +102,35 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
         super.onDestroyView();
         unbinder.unbind();
     }
+
+    private void getNetWork() {
+        subscription = Network.getYeapaoApi()
+                .getStationMainModel()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver);
+    }
+
+    Observer<StationMainBannerModel> modelObserver = new Observer<StationMainBannerModel>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG, e.toString());
+
+        }
+
+        @Override
+        public void onNext(StationMainBannerModel model) {
+            LogUtil.e(TAG, model.getErrmsg());
+            if (model.getErrmsg().equals("ok")) {
+                stationMainBannerModel = model;
+                showResult();
+            }
+        }
+    };
+
 }

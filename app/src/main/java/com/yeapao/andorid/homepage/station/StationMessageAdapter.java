@@ -9,7 +9,9 @@ import android.widget.ImageView;
 
 import com.scottfu.sflibrary.customview.CircleImageView;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
+import com.scottfu.sflibrary.util.GlideUtil;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.model.StationMainBannerModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +26,8 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private Context mContext;
     private LayoutInflater mInflater;
     private OnRecyclerViewClickListener mListener;
+    private StationMainBannerModel stationMainBannerModel;
+    private GlideUtil glideUtil = new GlideUtil();
 
     public void setOnRecyclerViewClickListener(OnRecyclerViewClickListener listener) {
         if (listener != null) {
@@ -32,9 +36,10 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
 
-    public StationMessageAdapter(Context context) {
+    public StationMessageAdapter(Context context, StationMainBannerModel model) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        stationMainBannerModel = model;
     }
 
 
@@ -45,21 +50,24 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getUrl(),
+                R.drawable.dynamic_bg, ((StationViewHolder) holder).ivItemBg);
         if (position == 0) {
-            ((StationViewHolder) holder).ivItemBg.setImageResource(R.drawable.dynamic_bg);
             ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
         } else if (position == 1) {
-            ((StationViewHolder)holder).ivItemBg.setImageResource(R.drawable.high_bg);
             ((StationViewHolder) holder).civUserHeader.setVisibility(View.VISIBLE);
+            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
+                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
         } else if (position == 2) {
-            ((StationViewHolder) holder).ivItemBg.setImageResource(R.drawable.rehabilitate_bg);
             ((StationViewHolder) holder).civUserHeader.setVisibility(View.VISIBLE);
+            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
+                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return stationMainBannerModel.getData().size();
     }
 
     static class StationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

@@ -12,13 +12,19 @@ import android.widget.TextView;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.model.DynamicLessonOrderModel;
+import com.yeapao.andorid.util.GlobalDataYepao;
 import com.yeapao.andorid.util.MyPayWayDialogFragment;
 import com.yeapao.andorid.util.PayWayOnClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 2017/11/24.
@@ -61,8 +67,13 @@ public class DynamicLessonReservationActivity extends BaseActivity {
     private boolean userProtocolStatus = false;
     private MyPayWayDialogFragment myPayWayDialogFragment;
 
-    public static void start(Context context) {
+    private DynamicLessonOrderModel dynamicLessonOrderModel;
+    private String lessonId = "";
+    private int peopleSum = 0;
+
+    public static void start(Context context, String calendarId) {
         Intent intent = new Intent();
+        intent.putExtra("calendarId", calendarId);
         intent.setClass(context, DynamicLessonReservationActivity.class);
         context.startActivity(intent);
     }
@@ -73,17 +84,19 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         setContentView(R.layout.activity_dynamic_lesson_reservation);
         ButterKnife.bind(this);
         initTopBar();
+        lessonId = getIntent().getStringExtra("calendarId");
+        getNetWork(lessonId);
         initView();
     }
 
     private void initView() {
-//        myPayWayDialogFragment = new MyPayWayDialogFragment();
         myPayWayDialogFragment = MyPayWayDialogFragment.newInstance("100");
         myPayWayDialogFragment.setPayWayOnClickListener(new PayWayOnClickListener() {
             @Override
             public void onPayWay(int status) {
-                LogUtil.e(TAG,"payway wechat=1  "+String.valueOf(status));
+                LogUtil.e(TAG, "payway wechat=1  " + String.valueOf(status));
             }
+
             @Override
             public void onCloseWindow() {
                 myPayWayDialogFragment.dismiss();
@@ -91,7 +104,7 @@ public class DynamicLessonReservationActivity extends BaseActivity {
 
             @Override
             public void gotoPay() {
-                LogUtil.e(TAG,"gotoPay");
+                LogUtil.e(TAG, "gotoPay");
                 myPayWayDialogFragment.dismiss();
             }
         });
@@ -105,11 +118,11 @@ public class DynamicLessonReservationActivity extends BaseActivity {
 
     @OnClick(R.id.tv_immediately_pay)
     void setTvImmediatelyPayOnClick(View view) {
-        LogUtil.e(TAG,"onclick");
+        LogUtil.e(TAG, "onclick");
         if (userProtocolStatus) {
             showPayWay();
         } else {
-            ToastManager.showToast(getContext(),"请阅读用户协议");
+            ToastManager.showToast(getContext(), "请阅读用户协议");
         }
 
     }
@@ -133,10 +146,75 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         }
     }
 
+    private void showView() {
+        tvOrderNumber.setText(dynamicLessonOrderModel.getData().getCalendarOrderCode());
+        tvDynamicOrderTime.setText(dynamicLessonOrderModel.getData().getStartDate());
+        tvDynamivLessonTime.setText(dynamicLessonOrderModel.getData().getDate());
+        tvDynamocAddress.setText(dynamicLessonOrderModel.getData().getShopAddress());
+        ivReducePeople.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (peopleSum > 0) {
+                    peopleSum--;
+                    tvDynamicReservationPeople.setText(String.valueOf(peopleSum));
+                } else {
+                    peopleSum = 0;
+                }
+            }
+        });
+        ivAddPeople.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (peopleSum < dynamicLessonOrderModel.getData().getRecoveryMax()) {
+                    peopleSum++;
+                    tvDynamicReservationPeople.setText(String.valueOf(peopleSum));
+                } else {
+                    tvDynamicReservationPeople.setText(dynamicLessonOrderModel.getData().getRecoveryMax());
+                    ToastManager.showToast(getContext(),"已达到健身人数上限");
+                }
+            }
+        });
+    }
 
+    @OnClick(R.id.iv_dynamic_card)
+    void setDiscountCard(View view) {
+
+    }
 
     @Override
     protected Context getContext() {
         return this;
     }
+
+
+    private void getNetWork(String lessonId) {
+        LogUtil.e(TAG, lessonId);
+        subscription = Network.getYeapaoApi()
+                .requestDynamicLessonOrder(GlobalDataYepao.getUser(getContext()).getId(), lessonId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver);
+    }
+
+    Observer<DynamicLessonOrderModel> modelObserver = new Observer<DynamicLessonOrderModel>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG, e.toString());
+
+        }
+
+        @Override
+        public void onNext(DynamicLessonOrderModel model) {
+            LogUtil.e(TAG, model.getErrmsg());
+            if (model.getErrmsg().equals("ok")) {
+                dynamicLessonOrderModel = model;
+                showView();
+            }
+        }
+    };
 }

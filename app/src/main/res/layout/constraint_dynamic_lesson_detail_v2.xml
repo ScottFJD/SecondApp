@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:id="@+id/cl_dynamic_lesson_detail">
+
+    <ImageView
+        android:id="@+id/iv_dynamic_lesson"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lesson_three" />
+
+    <TextView
+        android:id="@+id/tv_dynamic_lesson_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/lesson_time_v2"
+        android:drawablePadding="10dp"
+        android:text="11/21 19:00-14:00"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dynamic_lesson" />
+
+    <TextView
+        android:id="@+id/tv_dynamic_lesson_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/lesson_site_v2"
+        android:drawablePadding="10dp"
+        android:text="苏州高新区运河路47号"
+        android:textColor="@color/text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dynamic_lesson_time" />
+
+    <ImageView
+        android:id="@+id/imageView108"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dynamic_lesson_address"
+        app:srcCompat="@color/bg_grey" />
+
+<!--教练信息-->
+
+        <LinearLayout
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageView108"
+            android:id="@+id/ll_coach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="苗新/"
+                android:textColor="@color/text_color"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="高级健身教练"
+                android:textColor="@color/text_color"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <com.scottfu.sflibrary.customview.CircleImageView
+            app:layout_constraintTop_toBottomOf="@id/imageView108"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/crl_dynamic_coach_header"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/y_you"
+            app:border_color="@color/colorPrimary"
+            app:border_width="1dp" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/ll_coach"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/ll_coach_title"
+            android:layout_width="270dp"
+            app:layout_goneMarginLeft="15dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:textSize="13sp"
+            android:lineSpacingExtra="4dp"
+            android:text="1\n2\n3">
+
+
+        </TextView>
+
+
+
+
+        <ImageView
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ll_coach_title"
+            android:id="@+id/iv_content_more"
+            android:padding="5dp"
+            android:layout_width="22dp"
+            android:layout_height="15dp"
+            android:layout_above="@id/iv_dinner"
+            android:layout_below="@id/ll_coach_title"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/order_more" />
+
+    <ImageView
+        android:layout_marginTop="3dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_content_more"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/iv_dinner"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_grey" />
+
+    <TextView
+        android:id="@+id/textView194"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="课程介绍"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dinner" />
+
+    <TextView
+        android:id="@+id/tv_lesson_info"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="4dp"
+        android:text="美国有氧体适能协会认证的专业健身指导员资格。AFAA资格认证体系已被世界73个国家"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView194" />
+
+    <ImageView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_lesson_info"
+        android:id="@+id/iv_content_more_2"
+        android:padding="5dp"
+        android:layout_width="22dp"
+        android:layout_height="15dp"
+        android:layout_above="@id/iv_dinner"
+        android:layout_below="@id/ll_coach_title"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/order_more" />
+
+    <ImageView
+        android:layout_marginTop="3dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_content_more_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/iv_dinner_2"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_grey" />
+
+    <TextView
+        android:id="@+id/textView195"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="注意事项"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dinner_2" />
+
+    <TextView
+        android:id="@+id/tv_safe_info"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="4dp"
+        android:text="美国有氧体适能协会认证的专业健身指导员资格。AFAA资格认证体系已被世界73个国家"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView195" />
+
+    <ImageView
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_safe_info"
+        android:id="@+id/iv_content_more_3"
+        android:padding="5dp"
+        android:layout_width="22dp"
+        android:layout_height="15dp"
+        android:layout_above="@id/iv_dinner"
+        android:layout_below="@id/ll_coach_title"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/order_more" />
+
+</android.support.constraint.ConstraintLayout>

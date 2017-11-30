@@ -10,7 +10,11 @@ import android.widget.TextView;
 
 import com.scottfu.sflibrary.customview.CircleImageView;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
+import com.scottfu.sflibrary.util.GlideUtil;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.model.DynamicLessonListModel;
+
+import javax.microedition.khronos.opengles.GL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +31,8 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
     private LayoutInflater inflater;
 
     private OnRecyclerViewClickListener mListener;
+    private DynamicLessonListModel dynamicLessonListModel;
+    private GlideUtil glideUtil = new GlideUtil();
 
     public void setOnRecyclerViewClickListener(OnRecyclerViewClickListener listener) {
         if (listener != null) {
@@ -34,7 +40,8 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    public DynamicLessonAdapter(Context context) {
+    public DynamicLessonAdapter(Context context, DynamicLessonListModel model) {
+        dynamicLessonListModel = model;
         mContext = context;
         inflater = LayoutInflater.from(context);
     }
@@ -47,12 +54,47 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        glideUtil.glideLoadingImage(mContext, dynamicLessonListModel.getData().get(position).getUrl(),
+                R.drawable.lesson_one, ((ViewHolder) holder).ivDynamicBackground);
+        glideUtil.glideLoadingImage(mContext, dynamicLessonListModel.getData().get(position).getHeadImage(),
+                R.drawable.y_you, ((ViewHolder) holder).civDynamicCoachPortrait);
+        ((ViewHolder) holder).tvDynamicCoach.setText(dynamicLessonListModel.getData().get(position).getEmployeeName()
+                + "·" + dynamicLessonListModel.getData().get(position).getSubjectName());
+        ((ViewHolder) holder).tvDynamicLessonAddress.setText(dynamicLessonListModel.getData().get(position).getStartTime()
+                + "-" + dynamicLessonListModel.getData().get(position).getEndTime() + "/"
+                + dynamicLessonListModel.getData().get(position).getShopAddress());
+        if (dynamicLessonListModel.getData().get(position).getMyCalendar() == 0) {
+            ((ViewHolder) holder).tvDynamicLessonReservation.setText("预约");
+        } else {
+            ((ViewHolder) holder).tvDynamicLessonReservation.setText("已预约");
+        }
+        switch (dynamicLessonListModel.getData().get(position).getStatus()) {
+            case 1:
+                ((ViewHolder) holder).tvDynamicLessonStatus.setText("可预约");
+                ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_s_shape));
+                break;
+            case 2:
+                ((ViewHolder) holder).tvDynamicLessonStatus.setText("已满");
+                ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
+                break;
+            case 3:
+                ((ViewHolder) holder).tvDynamicLessonStatus.setText("结束");
+                ((ViewHolder) holder).tvDynamicLessonReservation.setText("结束");
+                ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
+                break;
+            case 4:
+                ((ViewHolder) holder).tvDynamicLessonStatus.setText("紧张");
+                ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_s_shape));
+                break;
+            default:
+                break;
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return dynamicLessonListModel.getData().size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

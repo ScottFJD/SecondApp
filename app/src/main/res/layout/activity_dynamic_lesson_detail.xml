@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/constraint_dynamic_lesson_detail" />
+            <include layout="@layout/constraint_dynamic_lesson_detail_v2" />
         </LinearLayout>
 
     </ScrollView>
@@ -86,7 +86,7 @@
             app:rcProgress="14"
             app:rcSecondaryProgress="0"
             app:rcMax="16"
-            app:rcRadius="2dp"
+            app:rcRadius="5dp"
             app:rcBackgroundPadding="0dp"
             app:rcReverse="false"
             app:rcProgressColor="@color/colorPrimary"
