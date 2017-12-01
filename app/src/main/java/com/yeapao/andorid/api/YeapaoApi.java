@@ -26,6 +26,8 @@ import com.yeapao.andorid.model.CreateActualOrdersModel;
 import com.yeapao.andorid.model.CreateReservationTimeModel;
 import com.yeapao.andorid.model.DepositOrdersModel;
 import com.yeapao.andorid.model.DiTingDataModel;
+import com.yeapao.andorid.model.DiscountOrderModel;
+import com.yeapao.andorid.model.DynamicDiscountCardModel;
 import com.yeapao.andorid.model.DynamicLessonListModel;
 import com.yeapao.andorid.model.DynamicLessonOrderModel;
 import com.yeapao.andorid.model.DynamiclessonDetailModel;
@@ -219,6 +221,11 @@ public interface YeapaoApi {
     @POST("payment/callPayment")
     Observable<CallPaymentModel> requestPayment(@Query("price") String price, @Query("orderCode") String orderCode,
                                                 @Query("paymentType") String paymentType);
+
+    //支付
+    @POST("payment/callPayment")
+    Observable<CallPaymentModel> requestDynamicPayment(@Query("price") String price, @Query("orderCode") String orderCode,
+                                                       @Query("paymentType") String paymentType, @Query("reservationNum") String reservationNum);
 
     //打卡
     @POST("community/savePunch")
@@ -527,4 +534,10 @@ public interface YeapaoApi {
 
     @POST("RunningStationController/createCalendarOrder")
     Observable<DynamicLessonOrderModel> requestDynamicLessonOrder(@Query("customerId") String id, @Query("calendarId") String calendarId);
+
+    @POST("RunningStationController/myDiscountCard")
+    Observable<DynamicDiscountCardModel> requestDynamicDiscountCard(@Query("customerId") String id);
+
+    @POST("RunningStationController/createDiscountCardOrder")
+    Observable<DiscountOrderModel> requestDiscountOrder(@Query("customerId") String customerId);
 }

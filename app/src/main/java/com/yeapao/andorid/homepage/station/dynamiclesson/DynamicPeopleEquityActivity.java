@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,19 +20,19 @@ import android.widget.Toast;
 import com.alipay.sdk.app.PayTask;
 import com.scottfu.sflibrary.alipay.AuthResult;
 import com.scottfu.sflibrary.alipay.PayResult;
+import com.scottfu.sflibrary.util.GlideUtil;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yeapao.andorid.R;
-import com.yeapao.andorid.YeaPaoWebActivity;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
 import com.yeapao.andorid.homepage.map.repository.ReservationCangPayActivity;
 import com.yeapao.andorid.model.CallPaymentModel;
-import com.yeapao.andorid.model.DynamicLessonOrderModel;
+import com.yeapao.andorid.model.DiscountOrderModel;
+import com.yeapao.andorid.model.DynamicDiscountCardModel;
 import com.yeapao.andorid.util.GlobalDataYepao;
 import com.yeapao.andorid.util.MyPayWayDialogFragment;
 import com.yeapao.andorid.util.PayWayOnClickListener;
@@ -48,57 +47,37 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by fujindong on 2017/11/24.
+ * Created by fujindong on 2017/11/30.
  */
 
-public class DynamicLessonReservationActivity extends BaseActivity {
-    private static final String TAG = "DynamicLessonReservationActivity";
-    @BindView(R.id.tv_order_title)
-    TextView tvOrderTitle;
-    @BindView(R.id.ll_top_bar)
-    LinearLayout llTopBar;
-    @BindView(R.id.tv_immediately_pay)
-    TextView tvImmediatelyPay;
-    @BindView(R.id.tv_lesson_name)
-    TextView tvLessonName;
-    @BindView(R.id.tv_order_num)
-    TextView tvOrderNum;
-    @BindView(R.id.tv_order_number)
-    TextView tvOrderNumber;
-    @BindView(R.id.tv_dynamic_order_time)
-    TextView tvDynamicOrderTime;
-    @BindView(R.id.tv_dynamiv_lesson_time)
-    TextView tvDynamivLessonTime;
-    @BindView(R.id.tv_dynamoc_address)
-    TextView tvDynamocAddress;
-    @BindView(R.id.tv_dynamic_lesson_price)
-    TextView tvDynamicLessonPrice;
-    @BindView(R.id.iv_user_protocol_status)
-    ImageView ivUserProtocolStatus;
-    @BindView(R.id.tv_user_protocol)
-    TextView tvUserProtocol;
-    @BindView(R.id.iv_reduce_people)
-    ImageView ivReducePeople;
-    @BindView(R.id.tv_dynamic_reservation_people)
-    TextView tvDynamicReservationPeople;
-    @BindView(R.id.iv_add_people)
-    ImageView ivAddPeople;
-    @BindView(R.id.iv_dynamic_card)
-    ImageView ivDynamicCard;
-    @BindView(R.id.tv_dynamic_order_price)
-    TextView tvDynamicOrderPrice;
+public class DynamicPeopleEquityActivity extends BaseActivity {
+    private static final String TAG = "DynamicPeopleEquityActivity";
+    @BindView(R.id.ll_title)
+    LinearLayout llTitle;
+    @BindView(R.id.iv_discount_card)
+    ImageView ivDiscountCard;
+    @BindView(R.id.iv_qr_code)
+    ImageView ivQrCode;
+    @BindView(R.id.tv_discount_time)
+    TextView tvDiscountTime;
+    @BindView(R.id.iv_dinner)
+    ImageView ivDinner;
+    @BindView(R.id.iv_explain)
+    ImageView ivExplain;
+    @BindView(R.id.tv_explain_title)
+    TextView tvExplainTitle;
+    @BindView(R.id.tv_equity_price)
+    TextView tvEquityPrice;
+    @BindView(R.id.tv_immediately_pay_equity)
+    TextView tvImmediatelyPayEquity;
 
 
-    private boolean userProtocolStatus = false;
+    private String isDiscount;
+    private DynamicDiscountCardModel dynamicDiscountCardModel;
+    private DiscountOrderModel discountOrderModel;
+    private GlideUtil glideUtil = new GlideUtil();
+    private String payMentType;
     private MyPayWayDialogFragment myPayWayDialogFragment;
-
-    private DynamicLessonOrderModel dynamicLessonOrderModel;
-    private String lessonId = "";
-    private int peopleSum = 1;
-    private String payMentType = "";
-
-
-
 
 
     //    支付
@@ -108,33 +87,128 @@ public class DynamicLessonReservationActivity extends BaseActivity {
     private MessageSendReceiver numberReceiver;
     IWXAPI api;
 
-    public static void start(Context context, String calendarId) {
+
+
+    public static void start(Context context) {
         Intent intent = new Intent();
-        intent.putExtra("calendarId", calendarId);
-        intent.setClass(context, DynamicLessonReservationActivity.class);
+        intent.setClass(context, DynamicPeopleEquityActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dynamic_lesson_reservation);
+        setContentView(R.layout.activity_dynamic_equity);
         ButterKnife.bind(this);
         initTopBar();
-        lessonId = getIntent().getStringExtra("calendarId");
-        getNetWork(lessonId);
-//        initView();
-
-        if (numberReceiver == null) {
-            numberReceiver = new MessageSendReceiver();
-        }
-        getContext().registerReceiver(numberReceiver, new IntentFilter("wxPay.action"));
-        api = WXAPIFactory.createWXAPI(getContext(), ConstantYeaPao.APP_ID, true);
-        api.registerApp(ConstantYeaPao.APP_ID);
+        getNetWork(GlobalDataYepao.getUser(getContext()).getId());
     }
 
-    private void initView() {
-        myPayWayDialogFragment = MyPayWayDialogFragment.newInstance(realpayPrice());
+
+    private void showView() {
+        glideUtil.glideLoadingImage(getContext(),dynamicDiscountCardModel.getData().getUrl(),R.drawable.discount_card_n,ivDiscountCard);
+        if (dynamicDiscountCardModel.getData().getIsOpen().equals("1")) {
+            tvEquityPrice.setVisibility(View.GONE);
+            tvImmediatelyPayEquity.setVisibility(View.GONE);
+            tvDiscountTime.setVisibility(View.VISIBLE);
+            tvDiscountTime.setText("有效期至：" + dynamicDiscountCardModel.getData().getEndDate());
+            ivQrCode.setVisibility(View.VISIBLE);
+        } else {
+            ivQrCode.setVisibility(View.GONE);
+            tvDiscountTime.setVisibility(View.GONE);
+            tvEquityPrice.setVisibility(View.VISIBLE);
+            tvImmediatelyPayEquity.setVisibility(View.VISIBLE);
+            tvEquityPrice.setText(String.valueOf(getResources().getString(R.string.RMB) + dynamicDiscountCardModel.getData().getPrice()));
+        }
+    }
+
+
+    @Override
+    protected void initTopBar() {
+        initTitle("跑友权益卡");
+        initBack();
+    }
+
+    @Override
+    protected Context getContext() {
+        return this;
+    }
+
+
+    private void getNetWork(String id) {
+        LogUtil.e(TAG, id);
+        subscription = Network.getYeapaoApi()
+                .requestDynamicDiscountCard(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver);
+    }
+
+    Observer<DynamicDiscountCardModel> modelObserver = new Observer<DynamicDiscountCardModel>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG, e.toString());
+
+        }
+
+        @Override
+        public void onNext(DynamicDiscountCardModel model) {
+            LogUtil.e(TAG, model.getErrmsg());
+            if (model.getErrmsg().equals("ok")) {
+                dynamicDiscountCardModel = model;
+                showView();
+            }
+        }
+    };
+
+
+            private void getNetWorkOrder(String id) {
+                    LogUtil.e(TAG,id);
+                    subscription = Network.getYeapaoApi()
+                            .requestDiscountOrder(id)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe( modelObserverOrder);
+                }
+
+                  Observer<DiscountOrderModel> modelObserverOrder = new Observer<DiscountOrderModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.e(TAG,e.toString());
+                        ToastManager.showToast(getContext(),"创建订单失败");
+
+                    }
+
+                    @Override
+                    public void onNext(DiscountOrderModel model) {
+                        LogUtil.e(TAG, model.getErrmsg());
+                        if (model.getErrmsg().equals("ok")) {
+                            discountOrderModel = model;
+                            initPayUI();
+                        }
+                    }
+                };
+
+
+    @OnClick(R.id.tv_immediately_pay_equity)
+    void setTvImmediatelyPayEquity(View view) {
+        getNetWorkOrder(GlobalDataYepao.getUser(getContext()).getId());
+
+    }
+
+
+    private void initPayUI() {
+        myPayWayDialogFragment = MyPayWayDialogFragment.newInstance(String.valueOf(discountOrderModel.getData().getPrice()));
         myPayWayDialogFragment.setPayWayOnClickListener(new PayWayOnClickListener() {
             @Override
             public void onPayWay(int status) {
@@ -155,52 +229,13 @@ public class DynamicLessonReservationActivity extends BaseActivity {
             public void gotoPay() {
                 LogUtil.e(TAG, "gotoPay");
                 myPayWayDialogFragment.dismiss();
-                getPayment(realpayPrice(),dynamicLessonOrderModel.getData().getCalendarOrderCode(),payMentType);
+                getPayment(String.valueOf(discountOrderModel.getData().getPrice()),discountOrderModel.getData().getDisCardOrderCode(),payMentType);
             }
         });
-        showPayWay();
-    }
 
-    @Override
-    protected void initTopBar() {
-        initTitle("课程预约");
-        initBack();
-    }
 
-    @OnClick(R.id.tv_immediately_pay)
-    void setTvImmediatelyPayOnClick(View view) {
-        LogUtil.e(TAG, "onclick");
-        if (userProtocolStatus) {
-            initView();
-//            showPayWay();
-        } else {
-            ToastManager.showToast(getContext(), "请阅读用户协议");
-        }
 
-    }
 
-    @OnClick(R.id.iv_dynamic_card)
-    void setIvDynamicCard(View view) {
-        DynamicPeopleEquityActivity.start(getContext());
-    }
-
-    @OnClick(R.id.tv_user_protocol)
-    void setTvUserProtocol(View view) {
-        YeaPaoWebActivity.start(getContext(), "用户协议", "http://47.92.113.97:8008/agreement/agreement.html");
-    }
-
-    @OnClick(R.id.iv_user_protocol_status)
-    void setIvUserProtocolStatus(View view) {
-        if (userProtocolStatus) {
-            userProtocolStatus = false;
-            ivUserProtocolStatus.setImageResource(R.drawable.agreement_no_selected);
-        } else {
-            userProtocolStatus = true;
-            ivUserProtocolStatus.setImageResource(R.drawable.agreement_selected);
-        }
-    }
-
-    private void showPayWay() {
         if (myPayWayDialogFragment.isVisible()) {
             myPayWayDialogFragment.dismiss();
         } else {
@@ -208,105 +243,6 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         }
     }
 
-    private void showView() {
-        tvOrderNumber.setText(dynamicLessonOrderModel.getData().getCalendarOrderCode());
-        tvDynamicOrderTime.setText(dynamicLessonOrderModel.getData().getStartDate());
-        tvDynamivLessonTime.setText(dynamicLessonOrderModel.getData().getDate());
-        tvDynamocAddress.setText(dynamicLessonOrderModel.getData().getShopAddress());
-        tvDynamicOrderPrice.setText(getResources().getString(R.string.RMB) + String.valueOf(dynamicLessonOrderModel.getData().getPrice()));
-        tvDynamicLessonPrice.setText(getResources().getString(R.string.RMB)+realpayPrice());
-        ivReducePeople.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastManager.showToast(getContext(),"-");
-                if (peopleSum > 1) {
-                    peopleSum--;
-                    tvDynamicReservationPeople.setText(String.valueOf(peopleSum));
-                } else {
-                    peopleSum = 1;
-                }
-                tvDynamicOrderPrice.setText(getResources().getString(R.string.RMB) + payablePrice());
-                tvDynamicLessonPrice.setText(getResources().getString(R.string.RMB)+realpayPrice());
-            }
-        });
-        ivAddPeople.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastManager.showToast(getContext(),"+");
-                if (peopleSum < dynamicLessonOrderModel.getData().getRecoveryMax()) {
-                    peopleSum++;
-                    tvDynamicReservationPeople.setText(String.valueOf(peopleSum));
-                } else {
-                    tvDynamicReservationPeople.setText(String.valueOf(peopleSum));
-                    ToastManager.showToast(getContext(),"已达到健身人数上限");
-                }
-                tvDynamicOrderPrice.setText(getResources().getString(R.string.RMB) + payablePrice());
-                tvDynamicLessonPrice.setText(getResources().getString(R.string.RMB)+realpayPrice());
-            }
-        });
-    }
-
-
-    private String payablePrice() {
-        String payablePrice = "";
-        int price = dynamicLessonOrderModel.getData().getPrice();
-        int sumPrice = price * peopleSum;
-        payablePrice = String.valueOf(sumPrice);
-        return payablePrice;
-    }
-
-    private String realpayPrice() {
-        String realpayPrice = "";
-        int price = dynamicLessonOrderModel.getData().getPrice();
-        int sumPrice = price * peopleSum;
-        float realpay;
-        if (dynamicLessonOrderModel.getData().getIsOpen().equals("1")) {
-            realpay = sumPrice * Float.valueOf(dynamicLessonOrderModel.getData().getDiscount());
-            realpayPrice = String.valueOf(realpay);
-        } else {
-            realpayPrice = String.valueOf(sumPrice);
-        }
-        return realpayPrice;
-    }
-
-    @Override
-    protected Context getContext() {
-        return this;
-    }
-
-
-    private void getNetWork(String lessonId) {
-        LogUtil.e(TAG, lessonId);
-        subscription = Network.getYeapaoApi()
-                .requestDynamicLessonOrder(GlobalDataYepao.getUser(getContext()).getId(), lessonId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(modelObserver);
-    }
-
-    Observer<DynamicLessonOrderModel> modelObserver = new Observer<DynamicLessonOrderModel>() {
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            LogUtil.e(TAG, e.toString());
-            ToastManager.showToast(getContext(),"创建订单失败，请重试");
-            finish();
-
-        }
-
-        @Override
-        public void onNext(DynamicLessonOrderModel model) {
-            LogUtil.e(TAG, model.getErrmsg());
-            if (model.getErrmsg().equals("ok")) {
-                dynamicLessonOrderModel = model;
-                showView();
-            }
-        }
-    };
 
 
 
@@ -315,7 +251,7 @@ public class DynamicLessonReservationActivity extends BaseActivity {
 
         LogUtil.e(TAG, price+"==="+orderCode+"+++"+paymentType);
         subscription = Network.getYeapaoApi()
-                .requestDynamicPayment(price,orderCode,paymentType,String.valueOf(peopleSum))
+                .requestPayment(price,orderCode,paymentType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelObserverPayment);
@@ -366,7 +302,7 @@ public class DynamicLessonReservationActivity extends BaseActivity {
 
                         @Override
                         public void run() {
-                            PayTask alipay = new PayTask(DynamicLessonReservationActivity.this);
+                            PayTask alipay = new PayTask(DynamicPeopleEquityActivity.this);
                             Map<String, String> result = alipay.payV2(orderInfo,true);
                             Log.e("msp", result.toString());
                             Message msg = new Message();
@@ -454,15 +390,16 @@ public class DynamicLessonReservationActivity extends BaseActivity {
 
 
 
+
     class MessageSendReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("wxPay.action")) {
-//                ReservationCangPayActivity.this.setResult(1);
                 ((Activity)getContext()).finish();
             }
         }
     }
+
 
 }

@@ -502,6 +502,12 @@
         <activity
             android:name=".homepage.station.traininglesson.TrainingLessonActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicPeopleEquityActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".YeaPaoWebActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--友盟-->
         <meta-data

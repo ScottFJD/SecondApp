@@ -1,10 +1,13 @@
 package com.scottfu.sflibrary.util;
 
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by fujindong on 2017/7/31.
@@ -33,6 +36,33 @@ public class SystemDateUtil {
         return dateList;
     }
 
+    public static String getFetureDate(int past) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+        Date today = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("dd");
+        String result = format.format(today);
+        LogUtil.e("getFetureDate",result);
+        Log.e(null, result);
+        return result;
+    }
+
+    public static String getWeekOfDate(Date dt) {
+        String[] weekDays = {"日", "一", "二", "三", "四", "五", "六"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+
+    public static Date getDate(int past) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+        Date today = calendar.getTime();
+        return today;
+    }
 
     public static String[] getCurrentWeek() {
         String[] weekDays = new String[7];
