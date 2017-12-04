@@ -19,6 +19,7 @@ import com.yeapao.andorid.dialog.DialogUtils;
 import com.yeapao.andorid.model.ActialOrderDetailModel;
 import com.yeapao.andorid.model.ActualOrderListModel;
 import com.yeapao.andorid.model.CangDeleteActualOrdersModel;
+import com.yeapao.andorid.model.CangOrderModel;
 import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.util.GlobalDataYepao;
 
@@ -38,7 +39,7 @@ public class CangOrderFragment  extends BaseFragment{
     private RecyclerView mCangOrderRecyclerView;
     private RelativeLayout mNoDataRelativeLayout;
 
-    private ActualOrderListModel mActualOrderListModel;
+    private CangOrderModel mActualOrderListModel;
 
     private MyselfCangOrderMessageAdapter mMessageAdapter;
 
@@ -55,14 +56,14 @@ public class CangOrderFragment  extends BaseFragment{
     @Override
     public void onResume() {
         super.onResume();
-        getNetWork(GlobalDataYepao.getUser(getContext()).getId());
+        getNetWorkCangOrder(GlobalDataYepao.getUser(getContext()).getId());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cang_order, container, false);
-        getNetWork(GlobalDataYepao.getUser(getContext()).getId());
+        getNetWorkCangOrder(GlobalDataYepao.getUser(getContext()).getId());
         initViews(view);
         return view;
     }
@@ -79,36 +80,36 @@ public class CangOrderFragment  extends BaseFragment{
     }
 
 
-            private void getNetWork(String id) {
-                    LogUtil.e(TAG,id);
-                    subscription = Network.getYeapaoApi()
-                            .requestActualOrderList(id)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe( modelObserver);
-                }
-
-                  Observer<ActualOrderListModel> modelObserver = new Observer<ActualOrderListModel>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.e(TAG,e.toString());
-
-                    }
-
-                    @Override
-                    public void onNext(ActualOrderListModel model) {
-                        LogUtil.e(TAG, model.getErrmsg());
-                        if (model.getErrmsg().equals("ok")) {
-                            mActualOrderListModel = model;
-                            showResult();
-                        }
-                    }
-                };
+//            private void getNetWork(String id) {
+//                    LogUtil.e(TAG,id);
+//                    subscription = Network.getYeapaoApi()
+//                            .requestActualOrderList(id)
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe( modelObserver);
+//                }
+//
+//                  Observer<ActualOrderListModel> modelObserver = new Observer<ActualOrderListModel>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        LogUtil.e(TAG,e.toString());
+//
+//                    }
+//
+//                    @Override
+//                    public void onNext(ActualOrderListModel model) {
+//                        LogUtil.e(TAG, model.getErrmsg());
+//                        if (model.getErrmsg().equals("ok")) {
+//                            mActualOrderListModel = model;
+//                            showResult();
+//                        }
+//                    }
+//                };
 
     private void showResult() {
         if (mActualOrderListModel.getData().size() == 0) {
@@ -123,7 +124,11 @@ public class CangOrderFragment  extends BaseFragment{
         mMessageAdapter.setOnItemClickListener(new OnRecyclerViewClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
-                CangOrderDetailActivity.start(getContext(),String.valueOf(mActualOrderListModel.getData().get(position).getActualOrdersId()),CangOrderDetailActivity.CangOrder);
+                if (mActualOrderListModel.getData().get(position).getType().equals("1")) {
+                    CangOrderDetailActivity.start(getContext(), String.valueOf(mActualOrderListModel.getData().get(position).getId()), CangOrderDetailActivity.CangOrder);
+                } else {
+                    CangOrderDetailActivity.start(getContext(),String.valueOf(mActualOrderListModel.getData().get(position).getId()),CangOrderDetailActivity.CangReservation);
+                }
             }
         });
 
@@ -131,11 +136,15 @@ public class CangOrderFragment  extends BaseFragment{
             @Override
             public void cangOrderDo(int flag) {
                 if (mActualOrderListModel.getData().get(flag).getStatus().equals("1")) {
-                    CangOrderPayActivity.start(getContext(),String.valueOf(mActualOrderListModel.getData().get(flag).getActualOrdersId()));
+                    CangOrderPayActivity.start(getContext(),String.valueOf(mActualOrderListModel.getData().get(flag).getId()));
                 } else {
 //                    TODO 删除订单
-                    DialogUtils.showProgressDialog(getContext());
-                    getNetWorkDeleteCangOrder(String.valueOf(mActualOrderListModel.getData().get(flag).getActualOrdersId()));
+                    DialogUtils.showProgressDialog(getContext(),true);
+                    if (mActualOrderListModel.getData().get(flag).getType().equals("1")) {
+                        getNetWorkDeleteCangOrder(String.valueOf(mActualOrderListModel.getData().get(flag).getId()));
+                    } else {
+                        getNetWorkDeleteReservationOrders(String.valueOf(mActualOrderListModel.getData().get(flag).getId()));
+                    }
 
                 }
             }
@@ -168,6 +177,72 @@ public class CangOrderFragment  extends BaseFragment{
                         LogUtil.e(TAG, model.getErrmsg());
                         if (model.getErrmsg().equals("ok")) {
                             DialogUtils.cancelProgressDialog();
+                            getNetWorkCangOrder(GlobalDataYepao.getUser(getContext()).getId());
+                        }
+                    }
+                };
+
+
+
+    private void getNetWorkDeleteReservationOrders(String id) {
+        LogUtil.e(TAG,id);
+        subscription = Network.getYeapaoApi()
+                .requestDeleteCangReservationOrders(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe( modelObserverDeleteCangReservationOrders);
+    }
+
+    Observer<NormalDataModel> modelObserverDeleteCangReservationOrders = new Observer<NormalDataModel>() {
+        @Override
+        public void onCompleted() {
+            DialogUtils.cancelProgressDialog();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG,e.toString());
+            DialogUtils.cancelProgressDialog();
+        }
+
+        @Override
+        public void onNext(NormalDataModel model) {
+            LogUtil.e(TAG, model.getErrmsg());
+            if (model.getErrmsg().equals("ok")) {
+                DialogUtils.cancelProgressDialog();
+                getNetWorkCangOrder(GlobalDataYepao.getUser(getContext()).getId());
+            }
+        }
+    };
+
+
+            private void getNetWorkCangOrder(String id) {
+                    LogUtil.e(TAG,id);
+                    subscription = Network.getYeapaoApi()
+                            .requsetCangOrderList(id)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(modelObserverCangOrder );
+                }
+
+                  Observer<CangOrderModel> modelObserverCangOrder = new Observer<CangOrderModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.e(TAG,e.toString());
+
+                    }
+
+                    @Override
+                    public void onNext(CangOrderModel model) {
+                        LogUtil.e(TAG, model.getErrmsg());
+                        if (model.getErrmsg().equals("ok")) {
+                            mActualOrderListModel = model;
+                            showResult();
                         }
                     }
                 };

@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
+import com.scottfu.sflibrary.util.GlideUtil;
 import com.yeapao.andorid.R;
-import com.yeapao.andorid.model.ActualOrderListModel;
-import com.yeapao.andorid.model.CangOrderModel;
+import com.yeapao.andorid.model.StationOrderList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by fujindong on 2017/9/18.
  */
 
-public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class StationOrderMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = "MyselfCangOrderMessageAdapter";
 
@@ -31,8 +31,9 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
 
     private CangOrderStatusListener cangOrderStatusListener;
 
-    private CangOrderModel actualOrderListModel = new CangOrderModel();
+    GlideUtil glideUtil = new GlideUtil();
 
+    private StationOrderList stationOrderListModel = new StationOrderList();
 
     public void setCangOrderStatusListener(CangOrderStatusListener listener) {
         cangOrderStatusListener = listener;
@@ -43,10 +44,10 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
     }
 
 
-    public MyselfCangOrderMessageAdapter(Context context, CangOrderModel model) {
+    public StationOrderMessageAdapter(Context context, StationOrderList model) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
-        actualOrderListModel = model;
+        stationOrderListModel = model;
     }
 
 
@@ -59,8 +60,11 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ((ViewHolder)holder).tvMyOrderTitle.setText(actualOrderListModel.getData().get(position).getHouseName());
-        if (actualOrderListModel.getData().get(position).getStatus().equals("1")) {
+        glideUtil.glideLoadingImage(mContext,stationOrderListModel.getData().get(position).getUrl(),R.drawable.placeholder,
+                ((ViewHolder)holder).ivContent);
+
+        ((ViewHolder)holder).tvMyOrderTitle.setText(stationOrderListModel.getData().get(position).getSubjectType());
+        if (stationOrderListModel.getData().get(position).getStatus().equals("1")) {
             ((ViewHolder) holder).tvNPay.setText("未付款");
             ((ViewHolder) holder).tvNPay.setTextColor(mContext.getResources().getColor(R.color.yellow_text_color));
             ((ViewHolder) holder).tvDeleteOrder.setText("继续支付");
@@ -73,16 +77,16 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
             ((ViewHolder) holder).tvDeleteOrder.setTextColor(mContext.getResources().getColor(R.color.text_hint_color));
             ((ViewHolder) holder).tvDeleteOrder.setBackground(mContext.getResources().getDrawable(R.drawable.my_order_button_n_shape));
         }
-        ((ViewHolder) holder).tvTime.setText("使用时长  "+String.valueOf(actualOrderListModel.getData().get(position).getDuration())+"分钟");
+        ((ViewHolder) holder).tvTime.setText(stationOrderListModel.getData().get(position).getSubjectName());
 
-        ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB)+actualOrderListModel.getData()
+        ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB)+ stationOrderListModel.getData()
         .get(position).getPrice());
 
     }
 
     @Override
     public int getItemCount() {
-        return actualOrderListModel.getData().size();
+        return stationOrderListModel.getData().size();
     }
 
     static class ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{

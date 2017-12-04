@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by fujindong on 2017/7/31.
@@ -45,6 +46,29 @@ public class SystemDateUtil {
         LogUtil.e("getFetureDate",result);
         Log.e(null, result);
         return result;
+    }
+
+    public static String getFetureDateYMD(int past) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+        Date today = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String result = format.format(today);
+        LogUtil.e("getFetureDate",result);
+        Log.e(null, result);
+        return result;
+    }
+
+    public static ArrayList<String> getFetureSevenDayYMD() {
+        ArrayList<String> dateList = new ArrayList<>();
+        dateList.add(getFetureDateYMD(0));
+        dateList.add(getFetureDateYMD(1));
+        dateList.add(getFetureDateYMD(2));
+        dateList.add(getFetureDateYMD(3));
+        dateList.add(getFetureDateYMD(4));
+        dateList.add(getFetureDateYMD(5));
+        dateList.add(getFetureDateYMD(6));
+        return dateList;
     }
 
     public static String getWeekOfDate(Date dt) {

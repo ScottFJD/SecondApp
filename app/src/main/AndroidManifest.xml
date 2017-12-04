@@ -509,6 +509,10 @@
             android:name=".YeaPaoWebActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".homepage.myself.orders.StationOrderDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"

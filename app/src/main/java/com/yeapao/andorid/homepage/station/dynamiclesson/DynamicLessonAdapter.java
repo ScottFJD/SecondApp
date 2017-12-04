@@ -55,7 +55,7 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         glideUtil.glideLoadingImage(mContext, dynamicLessonListModel.getData().get(position).getUrl(),
-                R.drawable.lesson_one, ((ViewHolder) holder).ivDynamicBackground);
+                R.drawable.lesson_placeholder, ((ViewHolder) holder).ivDynamicBackground);
         glideUtil.glideLoadingImage(mContext, dynamicLessonListModel.getData().get(position).getHeadImage(),
                 R.drawable.y_you, ((ViewHolder) holder).civDynamicCoachPortrait);
         ((ViewHolder) holder).tvDynamicCoach.setText(dynamicLessonListModel.getData().get(position).getEmployeeName()
@@ -72,19 +72,23 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
             case 1:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("可预约");
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_s_shape));
+                ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.text_color));
                 break;
             case 2:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("已满");
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
+                ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.bg_white));
                 break;
             case 3:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("结束");
                 ((ViewHolder) holder).tvDynamicLessonReservation.setText("结束");
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
+                ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.bg_white));
                 break;
             case 4:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("紧张");
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_s_shape));
+                ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.text_color));
                 break;
             default:
                 break;

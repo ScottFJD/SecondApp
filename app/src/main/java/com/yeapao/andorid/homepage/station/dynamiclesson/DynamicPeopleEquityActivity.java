@@ -29,6 +29,7 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.dialog.DialogUtils;
 import com.yeapao.andorid.homepage.map.repository.ReservationCangPayActivity;
 import com.yeapao.andorid.model.CallPaymentModel;
 import com.yeapao.andorid.model.DiscountOrderModel;
@@ -70,6 +71,8 @@ public class DynamicPeopleEquityActivity extends BaseActivity {
     TextView tvEquityPrice;
     @BindView(R.id.tv_immediately_pay_equity)
     TextView tvImmediatelyPayEquity;
+    @BindView(R.id.iv_discount_status)
+    ImageView ivDiscountStatus;
 
 
     private String isDiscount;
@@ -106,20 +109,29 @@ public class DynamicPeopleEquityActivity extends BaseActivity {
 
 
     private void showView() {
-        glideUtil.glideLoadingImage(getContext(),dynamicDiscountCardModel.getData().getUrl(),R.drawable.discount_card_n,ivDiscountCard);
+        glideUtil.glideLoadingImage(getContext(),dynamicDiscountCardModel.getData().getUrl(),R.drawable.placeholder,ivDiscountCard);
         if (dynamicDiscountCardModel.getData().getIsOpen().equals("1")) {
             tvEquityPrice.setVisibility(View.GONE);
             tvImmediatelyPayEquity.setVisibility(View.GONE);
             tvDiscountTime.setVisibility(View.VISIBLE);
-            tvDiscountTime.setText("有效期至：" + dynamicDiscountCardModel.getData().getEndDate());
+            tvDiscountTime.setText("有效期：" + dynamicDiscountCardModel.getData().getStartDate() + "至" + dynamicDiscountCardModel.getData().getEndDate());
             ivQrCode.setVisibility(View.VISIBLE);
+            ivDiscountStatus.setImageResource(R.drawable.discount_label_s);
         } else {
             ivQrCode.setVisibility(View.GONE);
             tvDiscountTime.setVisibility(View.GONE);
             tvEquityPrice.setVisibility(View.VISIBLE);
             tvImmediatelyPayEquity.setVisibility(View.VISIBLE);
             tvEquityPrice.setText(String.valueOf(getResources().getString(R.string.RMB) + dynamicDiscountCardModel.getData().getPrice()));
+            ivQrCode.setVisibility(View.GONE);
+            ivDiscountStatus.setImageResource(R.drawable.discount_card_n);
         }
+    }
+
+
+    @OnClick(R.id.iv_qr_code)
+    void setIvQrCode(View view) {
+        DialogUtils.showQRCodeV2(getContext(),GlobalDataYepao.getUser(getContext()).getId());
     }
 
 

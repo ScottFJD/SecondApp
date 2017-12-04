@@ -87,6 +87,8 @@ public class DynamicLessonReservationActivity extends BaseActivity {
     ImageView ivDynamicCard;
     @BindView(R.id.tv_dynamic_order_price)
     TextView tvDynamicOrderPrice;
+    @BindView(R.id.tv_discount_status)
+    TextView tvDiscountStatus;
 
 
     private boolean userProtocolStatus = false;
@@ -213,12 +215,12 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         tvDynamicOrderTime.setText(dynamicLessonOrderModel.getData().getStartDate());
         tvDynamivLessonTime.setText(dynamicLessonOrderModel.getData().getDate());
         tvDynamocAddress.setText(dynamicLessonOrderModel.getData().getShopAddress());
+        tvDiscountStatus.setText(dynamicLessonOrderModel.getData().getDiscountName());
         tvDynamicOrderPrice.setText(getResources().getString(R.string.RMB) + String.valueOf(dynamicLessonOrderModel.getData().getPrice()));
         tvDynamicLessonPrice.setText(getResources().getString(R.string.RMB)+realpayPrice());
         ivReducePeople.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastManager.showToast(getContext(),"-");
                 if (peopleSum > 1) {
                     peopleSum--;
                     tvDynamicReservationPeople.setText(String.valueOf(peopleSum));
@@ -232,7 +234,6 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         ivAddPeople.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastManager.showToast(getContext(),"+");
                 if (peopleSum < dynamicLessonOrderModel.getData().getRecoveryMax()) {
                     peopleSum++;
                     tvDynamicReservationPeople.setText(String.valueOf(peopleSum));

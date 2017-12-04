@@ -16,6 +16,7 @@ import com.yeapao.andorid.model.BodySideTwoGetBackModel;
 import com.yeapao.andorid.model.CallPaymentModel;
 import com.yeapao.andorid.model.CalorieMessageModel;
 import com.yeapao.andorid.model.CangDeleteActualOrdersModel;
+import com.yeapao.andorid.model.CangOrderModel;
 import com.yeapao.andorid.model.CangReservationOrderListModel;
 import com.yeapao.andorid.model.CircleListModel;
 import com.yeapao.andorid.model.CircleMessageModel;
@@ -54,7 +55,9 @@ import com.yeapao.andorid.model.SelectReservationTimeModel;
 import com.yeapao.andorid.model.SingleCommunityModel;
 import com.yeapao.andorid.model.SportListModel;
 import com.yeapao.andorid.model.SportPlanDetailModel;
+import com.yeapao.andorid.model.StationDynamicOrderModel;
 import com.yeapao.andorid.model.StationMainBannerModel;
+import com.yeapao.andorid.model.StationOrderList;
 import com.yeapao.andorid.model.TestData;
 import com.yeapao.andorid.model.UserDetailsModel;
 import com.yeapao.andorid.model.VersionDataModel;
@@ -540,4 +543,16 @@ public interface YeapaoApi {
 
     @POST("RunningStationController/createDiscountCardOrder")
     Observable<DiscountOrderModel> requestDiscountOrder(@Query("customerId") String customerId);
+
+    @POST("RunningStationController/runStationOrderList")
+    Observable<StationOrderList> requestStationOrder(@Query("customerId") String customerId);
+
+    @POST("RunningStationController/calendarOrderDetail")
+    Observable<StationDynamicOrderModel> requestStationDynamicOrderDetail(@Query("calOrderId") String calOrderId);
+
+    @POST("RunningStationController/deleteRunStationOrder")
+    Observable<NormalDataModel> requestDeleteStationOrder(@Query("id") String id, @Query("type") String type);
+
+    @POST("order/cabinOrderList")
+    Observable<CangOrderModel> requsetCangOrderList(@Query("customerId") String customerId);
 }

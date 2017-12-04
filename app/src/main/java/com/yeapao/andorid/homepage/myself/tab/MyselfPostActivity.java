@@ -93,6 +93,10 @@ public class MyselfPostActivity extends BaseActivity {
                     //获取第一个可见view的位置
                     int firstItemPosition = manager.findFirstVisibleItemPosition();
 //                TODO
+                if (lastItemPosition == 0) {
+                    return;
+                }
+                
                 LogUtil.e(TAG,CircleDateUtils.getYearString(myselfPostModel.getData().getCommunityList().get(lastItemPosition-1).getCreateTime()));
                 fab.setText(CircleDateUtils.getYearString(myselfPostModel.getData().getCommunityList().get(lastItemPosition-1).getCreateTime()));
 

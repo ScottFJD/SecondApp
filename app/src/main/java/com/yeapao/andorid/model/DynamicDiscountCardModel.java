@@ -49,9 +49,17 @@ public class DynamicDiscountCardModel {
 
         private String isOpen;
         private String endDate;
+        private String startDate;
         private String url;
         private int price;
 
+
+        public String getStartDate() {
+            return startDate;
+        }
+        public void setStartDate(String startDate) {
+            this.startDate = startDate;
+        }
         public int getPrice() {
             return price;
         }

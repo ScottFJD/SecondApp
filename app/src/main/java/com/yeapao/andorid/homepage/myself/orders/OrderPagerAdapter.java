@@ -16,24 +16,24 @@ public class OrderPagerAdapter extends FragmentPagerAdapter {
     private Context context;
 
     private CangOrderFragment orderFragment;
-    private CangReservationFragment cangReservationFragment;
+    private StationOrderFragment stationorderFragment;
 
 
 
     public OrderPagerAdapter(FragmentManager fragmentManager, Context context, CangOrderFragment cangOrderFragment,
-                             CangReservationFragment cangReservationFragment) {
+                             StationOrderFragment stationOrderFragment) {
         super(fragmentManager);
         this.context = context;
-        titles = new String[]{"健身舱使用","健身舱预约"};
+        titles = new String[]{"健身舱订单","跑站订单"};
         this.orderFragment = cangOrderFragment;
-        this.cangReservationFragment = cangReservationFragment;
+        this.stationorderFragment = stationOrderFragment;
     }
 
     @Override
     public Fragment getItem(int position) {
 
         if (position == 1) {
-            return cangReservationFragment;
+            return stationorderFragment;
         } else {
             return orderFragment;
         }

@@ -63,7 +63,7 @@ public class DynamicLessonActivity extends BaseActivity {
         sevenDay = (TextView) findViewById(R.id.tv_seven_day);
 
         PagerModelManager manager = new PagerModelManager();
-        manager.addCommonFragment(DynamicLessonListFragment.class, SystemDateUtil.getCurrentWeekYMD(), getTitlesV2());
+        manager.addCommonFragment(DynamicLessonListFragment.class, SystemDateUtil.getFetureSevenDayYMD(), getTitlesV2());
         ModelPagerAdapter adapter = new ModelPagerAdapter(getSupportFragmentManager(), manager);
         viewPager.setAdapter(adapter);
         viewPager.fixScrollSpeed();

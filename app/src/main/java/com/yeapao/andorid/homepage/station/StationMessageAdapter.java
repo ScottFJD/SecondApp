@@ -51,17 +51,17 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getUrl(),
-                R.drawable.dynamic_bg, ((StationViewHolder) holder).ivItemBg);
+                R.drawable.lesson_placeholder, ((StationViewHolder) holder).ivItemBg);
         if (position == 0) {
             ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
         } else if (position == 1) {
-            ((StationViewHolder) holder).civUserHeader.setVisibility(View.VISIBLE);
-            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
-                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
+            ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
+//            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
+//                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
         } else if (position == 2) {
-            ((StationViewHolder) holder).civUserHeader.setVisibility(View.VISIBLE);
-            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
-                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
+            ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
+//            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
+//                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
         }
     }
 

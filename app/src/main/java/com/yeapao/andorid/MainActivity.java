@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,6 +104,11 @@ public class MainActivity extends PermissionActivity {
     private MyselfPresenter myselfPresenter;
     private VideoPresenter videoPresenter;
     private StationPresenter stationPresenter;
+
+    private ImageView tab1;
+    private ImageView tab2;
+    private ImageView tab3;
+    private ImageView tab4;
 
 
     private long exitTime = 0;
@@ -187,6 +193,9 @@ public class MainActivity extends PermissionActivity {
         loginAccount();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);//初始隐藏键盘
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+
+
 
         initView();
         permissionCheck();
@@ -306,6 +315,50 @@ public class MainActivity extends PermissionActivity {
 //        loginAccount();
         // add badge
 //        addBadgeAt(2, 1);
+
+        bind.ivYeapao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(0);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_s);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_n);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_n);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_n);
+            }
+        });
+
+        bind.ivYeapao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(1);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_n);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_s);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_n);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_n);
+            }
+        });
+
+        bind.ivYeapao3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(2);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_n);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_n);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_s);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_n);
+            }
+        });
+
+        bind.ivYeapao4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(3);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_n);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_n);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_n);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_s);
+            }
+        });
     }
 
 

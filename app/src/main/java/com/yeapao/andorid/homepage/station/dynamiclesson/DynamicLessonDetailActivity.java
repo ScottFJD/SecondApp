@@ -136,7 +136,7 @@ public class DynamicLessonDetailActivity extends BaseActivity {
     private void showView() {
         if (dynamiclessonDetailModel != null) {
             glideUtil.glideLoadingImage(getContext(), dynamiclessonDetailModel.getData().getUrl(),
-                    R.drawable.lesson_three, ivDynamicLesson);
+                    R.drawable.lesson_placeholder, ivDynamicLesson);
             glideUtil.glideLoadingImage(getContext(), dynamiclessonDetailModel.getData().getHeadImage(),
                     R.drawable.y_you, crlDynamicCoachHeader);
             tvDynamicCoachName.setText(dynamiclessonDetailModel.getData().getCoachName() + "／");
@@ -144,8 +144,8 @@ public class DynamicLessonDetailActivity extends BaseActivity {
             tvDynamicLessonAddress.setText(dynamiclessonDetailModel.getData().getShopAddress());
             tvDynamicLessonTime.setText(dynamiclessonDetailModel.getData().getDate() + " " +
                     dynamiclessonDetailModel.getData().getStartTime() + "-" + dynamiclessonDetailModel.getData().getEndTime());
-            tvLessonInfo.setText(dynamiclessonDetailModel.getData().getNote() + getResources().getString(R.string.sport_plan));
-            tvSafeInfo.setText(dynamiclessonDetailModel.getData().getAttention() + getResources().getString(R.string.sport_plan));
+            tvLessonInfo.setText(dynamiclessonDetailModel.getData().getNote() );
+            tvSafeInfo.setText(dynamiclessonDetailModel.getData().getAttention() );
             int defaultHeight = ScreenUtil.dpToPxInt(getContext(), 42);
             String coachTitle = "";
             for (int i = 0; i < dynamiclessonDetailModel.getData().getInformation().size(); i++) {
@@ -178,10 +178,31 @@ public class DynamicLessonDetailActivity extends BaseActivity {
             tvReservationPeopleSum.setText(dynamiclessonDetailModel.getData().getReservation() +
                     "/" + dynamiclessonDetailModel.getData().getMaxMember());
             int status = dynamiclessonDetailModel.getData().getStatus();
+
+//            if (dynamiclessonDetailModel.getData().getMyCalendar().equals("1")) {
+//                tvImmediatelyReservation.setBackgroundColor(getResources().getColor(R.color.bg_grey));
+//                tvImmediatelyReservation.setTextColor(getResources().getColor(R.color.bg_white));
+//                tvImmediatelyReservation.setText("已预约");
+//            }
             if (status == 2 || status == 3) {
-                tvImmediatelyReservation.setBackgroundColor(getResources().getColor(R.color.bg_grey));
+                tvImmediatelyReservation.setClickable(false);
+                tvImmediatelyReservation.setBackgroundColor(getResources().getColor(R.color.bg_grey_v2));
+                tvImmediatelyReservation.setTextColor(getResources().getColor(R.color.bg_white));
+                if (status == 2) {
+                    tvImmediatelyReservation.setText("已约满");
+                } else {
+                    tvImmediatelyReservation.setText("已结束");
+                }
             } else {
+                tvImmediatelyReservation.setClickable(true);
                 tvImmediatelyReservation.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            }
+
+            if (("1").equals(dynamiclessonDetailModel.getData().getMyCalendar())) {
+                tvImmediatelyReservation.setClickable(false);
+                tvImmediatelyReservation.setBackgroundColor(getResources().getColor(R.color.bg_grey_v2));
+                tvImmediatelyReservation.setTextColor(getResources().getColor(R.color.bg_white));
+                tvImmediatelyReservation.setText("已预约");
             }
 
             clDynamicLessonDetail = (ConstraintLayout) findViewById(R.id.cl_dynamic_lesson_detail);
@@ -294,5 +315,14 @@ public class DynamicLessonDetailActivity extends BaseActivity {
             }
         }
     };
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtil.e(TAG,"onresume");
+        getNetWork(GlobalDataYepao.getUser(getContext()).getId(), lessonId);
+    }
+
 
 }

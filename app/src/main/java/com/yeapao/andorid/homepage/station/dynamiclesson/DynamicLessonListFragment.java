@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.LogUtil;
@@ -29,6 +30,7 @@ public class DynamicLessonListFragment extends BaseFragment {
 
 
     private RecyclerView rvDynamicLesson;
+    private ImageView noLessonImageView;
     private String bgRes;
     private DynamicLessonAdapter dynamicLessonAdapter;
     private DynamicLessonListModel dynamicLessonListModel;
@@ -57,6 +59,7 @@ public class DynamicLessonListFragment extends BaseFragment {
 
     private void initView(View view) {
         rvDynamicLesson = (RecyclerView) view.findViewById(R.id.rv_dynamic_lesson_list);
+        noLessonImageView = (ImageView) view.findViewById(R.id.iv_no_lesson);
         rvDynamicLesson.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -99,7 +102,14 @@ public class DynamicLessonListFragment extends BaseFragment {
             LogUtil.e(TAG, model.getErrmsg());
             if (model.getErrmsg().equals("ok")) {
                 dynamicLessonListModel = model;
-                showResult();
+                if (dynamicLessonListModel.getData().size() == 0) {
+                    noLessonImageView.setVisibility(View.VISIBLE);
+                    rvDynamicLesson.setVisibility(View.GONE);
+                } else {
+                    noLessonImageView.setVisibility(View.GONE);
+                    rvDynamicLesson.setVisibility(View.VISIBLE);
+                    showResult();
+                }
             }
         }
     };

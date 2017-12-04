@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.LogUtil;
+import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
@@ -37,8 +38,8 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     TextView tvRightBtn;
     @BindView(R.id.rv_station_list)
     RecyclerView rvStationList;
-    @BindView(R.id.srl_station)
-    SwipeRefreshLayout srlStation;
+//    @BindView(R.id.srl_station)
+//    SwipeRefreshLayout srlStation;
     Unbinder unbinder;
 
     private StationConstract.Presenter mPresenter;
@@ -90,7 +91,10 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
                 if (position == 0) {
                     DynamicLessonActivity.start(getContext());
                 } else if (position == 1) {
-                    TrainingLessonActivity.start(getContext());
+                    ToastManager.showToast(getContext(), "敬请期待！！！");
+//                    TrainingLessonActivity.start(getContext());
+                } else {
+                    ToastManager.showToast(getContext(), "敬请期待！！！");
                 }
 
             }
