@@ -96,6 +96,7 @@ public class DynamicLessonReservationActivity extends BaseActivity {
 
     private DynamicLessonOrderModel dynamicLessonOrderModel;
     private String lessonId = "";
+    private String lessonName = "";
     private int peopleSum = 1;
     private String payMentType = "";
 
@@ -110,9 +111,11 @@ public class DynamicLessonReservationActivity extends BaseActivity {
     private MessageSendReceiver numberReceiver;
     IWXAPI api;
 
-    public static void start(Context context, String calendarId) {
+    public static void start(Context context, String calendarId, String lessonName) {
+
         Intent intent = new Intent();
         intent.putExtra("calendarId", calendarId);
+        intent.putExtra("lessonName", lessonName);
         intent.setClass(context, DynamicLessonReservationActivity.class);
         context.startActivity(intent);
     }
@@ -124,6 +127,7 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         ButterKnife.bind(this);
         initTopBar();
         lessonId = getIntent().getStringExtra("calendarId");
+        lessonName = getIntent().getStringExtra("lessonName");
         getNetWork(lessonId);
 //        initView();
 
@@ -133,6 +137,12 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         getContext().registerReceiver(numberReceiver, new IntentFilter("wxPay.action"));
         api = WXAPIFactory.createWXAPI(getContext(), ConstantYeaPao.APP_ID, true);
         api.registerApp(ConstantYeaPao.APP_ID);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getNetWork(lessonId);
     }
 
     private void initView() {
@@ -176,7 +186,7 @@ public class DynamicLessonReservationActivity extends BaseActivity {
             initView();
 //            showPayWay();
         } else {
-            ToastManager.showToast(getContext(), "请阅读用户协议");
+            ToastManager.showToast(getContext(), "请阅读并勾选用户协议");
         }
 
     }
@@ -211,11 +221,17 @@ public class DynamicLessonReservationActivity extends BaseActivity {
     }
 
     private void showView() {
+        tvLessonName.setText(lessonName);
         tvOrderNumber.setText(dynamicLessonOrderModel.getData().getCalendarOrderCode());
         tvDynamicOrderTime.setText(dynamicLessonOrderModel.getData().getStartDate());
         tvDynamivLessonTime.setText(dynamicLessonOrderModel.getData().getDate());
         tvDynamocAddress.setText(dynamicLessonOrderModel.getData().getShopAddress());
-        tvDiscountStatus.setText(dynamicLessonOrderModel.getData().getDiscountName());
+
+        if (dynamicLessonOrderModel.getData().getDiscountName() == null || ("").equals(dynamicLessonOrderModel.getData().getDiscountName())) {
+            tvDiscountStatus.setText("尚未开通");
+        } else {
+            tvDiscountStatus.setText(dynamicLessonOrderModel.getData().getDiscountName());
+        }
         tvDynamicOrderPrice.setText(getResources().getString(R.string.RMB) + String.valueOf(dynamicLessonOrderModel.getData().getPrice()));
         tvDynamicLessonPrice.setText(getResources().getString(R.string.RMB)+realpayPrice());
         ivReducePeople.setOnClickListener(new View.OnClickListener() {

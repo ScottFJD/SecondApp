@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.scottfu.sflibrary.customview.CircleImageView;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.GlideUtil;
+import com.scottfu.sflibrary.util.LogUtil;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.model.DynamicLessonListModel;
 
@@ -63,35 +64,49 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((ViewHolder) holder).tvDynamicLessonAddress.setText(dynamicLessonListModel.getData().get(position).getStartTime()
                 + "-" + dynamicLessonListModel.getData().get(position).getEndTime() + "/"
                 + dynamicLessonListModel.getData().get(position).getShopAddress());
+        LogUtil.e(TAG,"1111111"+String.valueOf(dynamicLessonListModel.getData().get(position).getMyCalendar()));
         if (dynamicLessonListModel.getData().get(position).getMyCalendar() == 0) {
             ((ViewHolder) holder).tvDynamicLessonReservation.setText("预约");
         } else {
             ((ViewHolder) holder).tvDynamicLessonReservation.setText("已预约");
+//            ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
         }
         switch (dynamicLessonListModel.getData().get(position).getStatus()) {
             case 1:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("可预约");
+                ((ViewHolder) holder).tvDynamicLessonStatus.setBackgroundResource(R.drawable.order_can);
+                ((ViewHolder) holder).tvDynamicLessonStatus.setTextColor(mContext.getResources().getColor(R.color.text_color));
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_s_shape));
                 ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.text_color));
                 break;
             case 2:
-                ((ViewHolder) holder).tvDynamicLessonStatus.setText("已满");
+                ((ViewHolder) holder).tvDynamicLessonStatus.setText("约满");
+                ((ViewHolder) holder).tvDynamicLessonStatus.setTextColor(0xfb911e);
+                ((ViewHolder) holder).tvDynamicLessonStatus.setBackgroundResource(R.drawable.order_full);
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
                 ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.bg_white));
                 break;
             case 3:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("结束");
+                ((ViewHolder) holder).tvDynamicLessonStatus.setBackgroundResource(R.drawable.order_finish);
                 ((ViewHolder) holder).tvDynamicLessonReservation.setText("结束");
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
                 ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.bg_white));
                 break;
             case 4:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("紧张");
+                ((ViewHolder) holder).tvDynamicLessonStatus.setTextColor(mContext.getResources().getColor(R.color.bg_white));
+                ((ViewHolder) holder).tvDynamicLessonStatus.setBackgroundResource(R.drawable.order_nervous);
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_s_shape));
                 ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.text_color));
                 break;
             default:
                 break;
+        }
+
+        if (dynamicLessonListModel.getData().get(position).getMyCalendar() == 1) {
+            ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
+            ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.bg_white));
         }
 
     }

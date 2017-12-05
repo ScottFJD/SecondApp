@@ -16,6 +16,7 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.model.DynamicLessonListModel;
+import com.yeapao.andorid.util.GlobalDataYepao;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -48,7 +49,11 @@ public class DynamicLessonListFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dynamic_lesson, container, false);
         initView(view);
-        getNetWork("0",bgRes);
+        if (GlobalDataYepao.isLogin()) {
+            getNetWork(GlobalDataYepao.getUser(getContext()).getId(), bgRes);
+        } else {
+            getNetWork("0",bgRes);
+        }
         return view;
     }
 
@@ -70,7 +75,8 @@ public class DynamicLessonListFragment extends BaseFragment {
             @Override
             public void OnItemClick(View v, int position) {
                 DynamicLessonDetailActivity.start(getContext(),
-                        String.valueOf(dynamicLessonListModel.getData().get(position).getCalendarId()));
+                        String.valueOf(dynamicLessonListModel.getData().get(position).getCalendarId()),
+                        dynamicLessonListModel.getData().get(position).getSubjectName());
             }
         });
 

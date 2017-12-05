@@ -102,11 +102,13 @@ public class DynamicLessonDetailActivity extends BaseActivity {
     private boolean ivContentStatus2 = false;
     private boolean ivContentStatus3 = false;
     private String lessonId = "";
+    private String lessonName = "";
 
-    public static void start(Context context, String lessonId) {
+    public static void start(Context context, String lessonId, String lessonName) {
 
         Intent intent = new Intent();
         intent.putExtra("lessonId", lessonId);
+        intent.putExtra("lessonName", lessonName);
         intent.setClass(context, DynamicLessonDetailActivity.class);
         context.startActivity(intent);
     }
@@ -116,8 +118,9 @@ public class DynamicLessonDetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic_lesson_detail);
         ButterKnife.bind(this);
-        initTopBar();
         lessonId = getIntent().getStringExtra("lessonId");
+        lessonName = getIntent().getStringExtra("lessonName");
+        initTopBar();
         LogUtil.e(TAG, lessonId);
 
         if (GlobalDataYepao.getUser(getContext()) != null) {
@@ -218,14 +221,14 @@ public class DynamicLessonDetailActivity extends BaseActivity {
 
     @Override
     protected void initTopBar() {
-        initTitle("动感光影跑");
+        initTitle(lessonName);
         initBack();
     }
 
     @OnClick(R.id.tv_immediately_reservation)
     void reservationOnClick(View view) {
         if (GlobalDataYepao.getUser(getContext()) != null) {
-            DynamicLessonReservationActivity.start(getContext(), lessonId);
+            DynamicLessonReservationActivity.start(getContext(), lessonId,lessonName);
         } else {
             ToastManager.showToast(getContext(),"请先登陆");
             LoginActivity.start(getContext());
@@ -321,7 +324,9 @@ public class DynamicLessonDetailActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         LogUtil.e(TAG,"onresume");
-        getNetWork(GlobalDataYepao.getUser(getContext()).getId(), lessonId);
+        if (GlobalDataYepao.isLogin()) {
+            getNetWork(GlobalDataYepao.getUser(getContext()).getId(), lessonId);
+        }
     }
 
 

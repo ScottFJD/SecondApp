@@ -1,5 +1,6 @@
 package com.yeapao.andorid.homepage.circle;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
@@ -20,13 +21,17 @@ import com.scottfu.sflibrary.recyclerview.GridSpacingItemDecoration;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.recyclerview.SpaceItemDecoration;
 import com.scottfu.sflibrary.util.GlideUtil;
+import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ScreenUtil;
+import com.yeapao.andorid.LoginActivity;
+import com.yeapao.andorid.MainActivity;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.homepage.circle.circledetail.CircleViewPager;
 import com.yeapao.andorid.homepage.myself.MyselfMessageAdapter;
 import com.yeapao.andorid.model.CircleListModel;
 import com.yeapao.andorid.util.AccountGradeUtils;
 import com.yeapao.andorid.util.CircleDateUtils;
+import com.yeapao.andorid.util.GlobalDataYepao;
 import com.yeapao.andorid.util.SpannableTextUtils;
 
 import butterknife.BindView;
@@ -48,6 +53,8 @@ public class CircleMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
     private OnRecyclerViewClickListener mListener;
     private PraiseClickListener mPraiseListener;
 
+    private MainActivity mainActivity;
+
     private static final int HEADER_TYPE = 0;
     private static final int GROUP_TYPE = 1;
     private static final int CIRCLE_TYPE = 2;
@@ -59,15 +66,93 @@ public class CircleMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private boolean footerFlag = false;
 
+    private int position1 = 0;
+
+
+    private  Thread thread =  new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                count++;
+                if (count < mCircleListModel.getData().getBannerList().size()) {
+                    mRefreshBanner.refresh(count);
+                } else {
+                    count = 0;
+                    mRefreshBanner.refresh(count);
+                }
+
+
+//                        int position = ((HeaderViewHolder) holder).vpCircleImage.getCurrentItem();
+//                        int realPosition = position;
+//                        int realCount = mCircleListModel.getData().getBannerList().size();
+//                        if (realCount == 0) {
+//                            mRefreshBanner.refresh(0);
+//                            return;
+//                        }
+//                        if (true) {
+//                            realPosition = (position - 1) % realCount;
+//                            if (realPosition < 0) realPosition += realCount;
+//                        }
+//                            mRefreshBanner.refresh(realPosition);
+//
+//
+//                        if (count < mCircleListModel.getData().getBannerList().size()) {
+//                            count++;
+//                            mRefreshBanner.refresh(count);
+//                        } else {
+//                            count = 0;
+//                        }
+
+            }
+        }
+    });
+
+
+    public interface refreshBanner {
+        void refresh(int count);
+    }
+
+
+    private refreshBanner mRefreshBanner;
+    private int count = 0;
+
+    public void setRefreshBanner(refreshBanner refresh){
+        mRefreshBanner = refresh;
+    }
+
+
 
     public void setmPraiseListener(PraiseClickListener listener) {
         mPraiseListener = listener;
+    }
+
+    public void setCount(int count) {
+        LogUtil.e("setcount    ",String.valueOf(count));
+        this.count = count;
+        notifyItemChanged(0);
+
     }
 
     public CircleMessageAdapter(Context context,CircleListModel circleListModel) {
         mContext = context;
         inflater = LayoutInflater.from(context);
         mCircleListModel = circleListModel;
+        refreshBanner();
+    }
+
+
+
+
+
+    private void refreshBanner() {
+//            thread.start();
+
     }
 
     /**
@@ -109,12 +194,13 @@ public class CircleMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 
         if (holder instanceof HeaderViewHolder) {
             ((HeaderViewHolder) holder).vpCircleImage.setAdapter(new CircleViewPager(mContext, mCircleListModel.getData().getBannerList()));
             ((HeaderViewHolder) holder).ciCircleIndicator.setViewPager(((HeaderViewHolder) holder).vpCircleImage);
-            ((HeaderViewHolder) holder).vpCircleImage.setCurrentItem(0);
+            ((HeaderViewHolder) holder).vpCircleImage.setCurrentItem(count);
+
         } else if (holder instanceof CircleItemViewHolder) {
 //            ((CircleItemViewHolder) holder).ivCircleBadge.setImageDrawable(AccountGradeUtils.getGradeDrawable(mContext,
 //                    mCircleListModel.getData().getCommunityList().get(position - 1).getGrade()));
@@ -156,6 +242,14 @@ public class CircleMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
             ((CircleItemViewHolder) holder).tvPublishTime.setText(CircleDateUtils.getCircleDate(mCircleListModel.getData().getCommunityList().get(position-1).getCreateTime()));
 
             ((CircleItemViewHolder) holder).tvComment.setText(String.valueOf(mCircleListModel.getData().getCommunityList().get(position - 1).getCommentNumber()));
+            ((CircleItemViewHolder) holder).tvComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (GlobalDataYepao.getUser(mContext) == null) {
+                        LoginActivity.start(mContext);
+                    }
+                }
+            });
             ((CircleItemViewHolder) holder).tvFinger.setText(String.valueOf(mCircleListModel.getData().getCommunityList().get(position - 1).getThumbsUp()));
             glideUtil.glideLoadingImage(mContext, mCircleListModel.getData().getCommunityList().get(position - 1).getHeadUrl(), R.drawable.y_you, ((CircleItemViewHolder) holder).ivHeader);
 //            if (mCircleListModel.getData().getCommunityList().get(position - 1).getMaster().equals("1")) {
