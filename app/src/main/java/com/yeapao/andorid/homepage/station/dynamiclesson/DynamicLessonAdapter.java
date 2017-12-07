@@ -81,7 +81,7 @@ public class DynamicLessonAdapter extends RecyclerView.Adapter<RecyclerView.View
                 break;
             case 2:
                 ((ViewHolder) holder).tvDynamicLessonStatus.setText("约满");
-                ((ViewHolder) holder).tvDynamicLessonStatus.setTextColor(0xfb911e);
+                ((ViewHolder) holder).tvDynamicLessonStatus.setTextColor(mContext.getResources().getColor(R.color.text_full_color));
                 ((ViewHolder) holder).tvDynamicLessonStatus.setBackgroundResource(R.drawable.order_full);
                 ((ViewHolder) holder).tvDynamicLessonReservation.setBackground(mContext.getResources().getDrawable(R.drawable.yellow_2_n_shape));
                 ((ViewHolder) holder).tvDynamicLessonReservation.setTextColor(mContext.getResources().getColor(R.color.bg_white));

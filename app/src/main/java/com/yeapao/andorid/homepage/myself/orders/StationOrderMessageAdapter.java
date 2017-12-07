@@ -13,6 +13,8 @@ import com.scottfu.sflibrary.util.GlideUtil;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.model.StationOrderList;
 
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -34,6 +36,8 @@ public class StationOrderMessageAdapter extends RecyclerView.Adapter<RecyclerVie
     GlideUtil glideUtil = new GlideUtil();
 
     private StationOrderList stationOrderListModel = new StationOrderList();
+
+    private DecimalFormat decimalFormat=new DecimalFormat(".00");
 
     public void setCangOrderStatusListener(CangOrderStatusListener listener) {
         cangOrderStatusListener = listener;
@@ -79,8 +83,8 @@ public class StationOrderMessageAdapter extends RecyclerView.Adapter<RecyclerVie
         }
         ((ViewHolder) holder).tvTime.setText(stationOrderListModel.getData().get(position).getSubjectName());
 
-        ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB)+ stationOrderListModel.getData()
-        .get(position).getPrice());
+        ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB)+ decimalFormat.format(stationOrderListModel.getData()
+                .get(position).getPrice()) );
 
     }
 

@@ -60,9 +60,9 @@ public class StationDynamicOrderModel {
         private String types;
         private int calendarOrderId;
         private String calendarOrderCode;
-        private int actualPrice;
+        private float actualPrice;
         private int num;
-        private int discountPrice;
+        private float discountPrice;
         private String time;
         private String shopAddress;
         private String startDate;
@@ -107,11 +107,11 @@ public class StationDynamicOrderModel {
             this.calendarOrderCode = calendarOrderCode;
         }
 
-        public int getActualPrice() {
+        public float getActualPrice() {
             return actualPrice;
         }
 
-        public void setActualPrice(int actualPrice) {
+        public void setActualPrice(float actualPrice) {
             this.actualPrice = actualPrice;
         }
 
@@ -123,11 +123,11 @@ public class StationDynamicOrderModel {
             this.num = num;
         }
 
-        public int getDiscountPrice() {
+        public float getDiscountPrice() {
             return discountPrice;
         }
 
-        public void setDiscountPrice(int discountPrice) {
+        public void setDiscountPrice(float discountPrice) {
             this.discountPrice = discountPrice;
         }
 

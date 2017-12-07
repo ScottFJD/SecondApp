@@ -38,6 +38,7 @@ import com.yeapao.andorid.util.GlobalDataYepao;
 import com.yeapao.andorid.util.MyPayWayDialogFragment;
 import com.yeapao.andorid.util.PayWayOnClickListener;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -279,7 +280,9 @@ public class DynamicLessonReservationActivity extends BaseActivity {
         float realpay;
         if (dynamicLessonOrderModel.getData().getIsOpen().equals("1")) {
             realpay = sumPrice * Float.valueOf(dynamicLessonOrderModel.getData().getDiscount());
-            realpayPrice = String.valueOf(realpay);
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            realpayPrice = decimalFormat.format(realpay);
+//            realpayPrice = String.valueOf(realpay);
         } else {
             realpayPrice = String.valueOf(sumPrice);
         }

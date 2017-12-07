@@ -146,6 +146,7 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
     @Override
     public void onResume() {
         super.onResume();
+        threadStatus = true;
         LogUtil.e(TAG, "onResume");
         if (isPhotoPreView) {
             if (singleCommunityFlag) {
@@ -329,8 +330,8 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+//        thread.start();
 
-        thread.start();
     }
 
 
@@ -340,6 +341,37 @@ public class CircleFragmentView extends BaseFragment implements CircleContract.V
         threadStatus = false;
     }
 
+    public void refreshBanner() {
+        if (circleMessageAdapter != null) {
+            count++;
+            if (count < mCircleListModel.getData().getBannerList().size()) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LogUtil.e(TAG, "banner    =   " + String.valueOf(count));
+
+//                            circleMessageAdapter.notifyItemChanged(0);
+                        circleMessageAdapter.setCount(count);
+                    }
+                });
+
+
+            } else {
+                count = 0;
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        LogUtil.e(TAG, "banner    =   " + String.valueOf(count));
+
+//                            circleMessageAdapter.notifyItemChanged(0);
+                        circleMessageAdapter.setCount(count);
+                    }
+                });
+
+            }
+        }
+
+    }
 
     private Thread thread = new Thread(new Runnable() {
         @Override

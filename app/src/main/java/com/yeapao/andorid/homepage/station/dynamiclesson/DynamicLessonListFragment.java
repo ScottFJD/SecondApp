@@ -58,6 +58,16 @@ public class DynamicLessonListFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (GlobalDataYepao.isLogin()) {
+            getNetWork(GlobalDataYepao.getUser(getContext()).getId(), bgRes);
+        } else {
+            getNetWork("0",bgRes);
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }

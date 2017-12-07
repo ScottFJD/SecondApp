@@ -70,7 +70,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@id/iv_right_icon"
-                    android:text="V1.7.0"
+                    android:text="V1.8.0"
                     android:textColor="@color/text_color"
                     android:textSize="16sp" />
             </RelativeLayout>

@@ -555,4 +555,8 @@ public interface YeapaoApi {
 
     @POST("order/cabinOrderList")
     Observable<CangOrderModel> requsetCangOrderList(@Query("customerId") String customerId);
+
+    @POST("community/saveComplaint")
+    Observable<NormalDataModel> requestComplaint(@Query("communityId") String communityId, @Query("customerId") String customerId,
+                                                 @Query("content") String content);
 }

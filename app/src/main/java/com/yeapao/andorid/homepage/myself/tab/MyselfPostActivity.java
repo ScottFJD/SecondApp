@@ -138,7 +138,6 @@ public class MyselfPostActivity extends BaseActivity {
             mPostMessageAdapter.setItemOnClickListener(new OnRecyclerViewClickListener() {
                 @Override
                 public void OnItemClick(View v, int position) {
-                    ToastManager.showToast(getContext(), "onItemClick");
                     CircleDetailActivity.start(getContext(),
                             String.valueOf(myselfPostModel.getData().getCommunityList().get(position).getCommunityId()),"0");
                 }

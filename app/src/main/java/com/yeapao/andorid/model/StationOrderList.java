@@ -55,7 +55,7 @@ public class StationOrderList {
 
         private int id;
         private String types;
-        private int price;
+        private float price;
         private String subjectType;
         private String status;
         private String url;
@@ -77,11 +77,11 @@ public class StationOrderList {
             this.types = types;
         }
 
-        public int getPrice() {
+        public float getPrice() {
             return price;
         }
 
-        public void setPrice(int price) {
+        public void setPrice(float price) {
             this.price = price;
         }
 

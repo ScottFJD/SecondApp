@@ -15,6 +15,8 @@ import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
 import com.yeapao.andorid.model.StationDynamicOrderModel;
 
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -112,7 +114,8 @@ public class StationOrderDetailActivity extends BaseActivity {
         tvStationOrderPrice.setText(getResources().getString(R.string.RMB) + String.valueOf(stationDynamicOrderModel.getData().getActualPrice()));
         tvStationCoupon.setText("无");
         tvDiscount.setText(stationDynamicOrderModel.getData().getDiscountName());
-        tvRealPay.setText(getResources().getString(R.string.RMB)+String.valueOf(stationDynamicOrderModel.getData().getDiscountPrice()));
+        DecimalFormat decimalFormat=new DecimalFormat(".00");
+        tvRealPay.setText(getResources().getString(R.string.RMB)+decimalFormat.format(stationDynamicOrderModel.getData().getDiscountPrice()));
 
     }
 

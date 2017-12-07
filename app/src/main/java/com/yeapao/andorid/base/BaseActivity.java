@@ -34,6 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     protected Subscription subscription;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,5 +121,14 @@ public abstract class BaseActivity extends AppCompatActivity{
         tvRightTextView = (TextView) findViewById(R.id.tv_right);
         tvRightTextView.setText(content);
         tvRightTextView.setVisibility(View.VISIBLE);
+    }
+
+    protected void initRightTextWithClick(String content, View.OnClickListener onClickListener) {
+        ivRightImage = (ImageView) findViewById(R.id.iv_right);
+        ivRightImage.setVisibility(View.INVISIBLE);
+        tvRightTextView = (TextView) findViewById(R.id.tv_right);
+        tvRightTextView.setText(content);
+        tvRightTextView.setVisibility(View.VISIBLE);
+        tvRightTextView.setOnClickListener(onClickListener);
     }
 }

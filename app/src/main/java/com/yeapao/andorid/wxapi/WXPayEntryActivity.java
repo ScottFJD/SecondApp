@@ -50,8 +50,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 //		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
 
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-				ToastManager.showToast(this,resp.errCode);
-			ToastManager.showToast(this,resp.errStr);
+//				ToastManager.showToast(this,resp.errCode);
+//			ToastManager.showToast(this,resp.errStr);
 			if(resp.errCode == 0){
 				ToastManager.showToast(this, "支付成功");
 				Intent intent = new Intent("wxPay.action");

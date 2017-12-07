@@ -272,7 +272,28 @@ public class MainActivity extends PermissionActivity {
 
         checkVersion();
 
+        thread.start();
+
     }
+
+
+
+    private Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (circleFragmentView != null) {
+                    circleFragmentView.refreshBanner();
+                }
+
+            }
+        }
+    });
 
 
     public void checkItem() {
@@ -469,7 +490,7 @@ public class MainActivity extends PermissionActivity {
                 Manifest.permission.READ_PHONE_STATE}, new PermissionListener() {
             @Override
             public void onGranted() {
-                Toast.makeText(getContext(), "所有权限已同意", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "所有权限已同意", Toast.LENGTH_SHORT).show();
                 if (mapFragmentView != null) {
                     mapFragmentView.onResume();
                 } else {
@@ -613,6 +634,7 @@ public class MainActivity extends PermissionActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+
     }
 
     @Override
