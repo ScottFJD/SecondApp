@@ -59,6 +59,8 @@ public class CangOrderDetailActivity extends BaseActivity {
     @BindView(R.id.tv_cang_order_time)
     TextView tvCangOrderTime;
 
+
+
     private String mActualOrderId;
 
     private ActualOrderDetailModel mActualModel = new ActualOrderDetailModel();

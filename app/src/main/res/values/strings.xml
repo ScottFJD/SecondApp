@@ -143,5 +143,17 @@
     <string name="account_bmi_one">&#160;&#160;&#160;&#160;&#160;&#160;您的身体质量参数(BMI)为：</string>
     <string name="account_bmi_two">建议您使用我们的</string>
     <string name="account_bmi_three">健身方案。</string>
+    
+    
+    <!--动感课程-->
+    <string name="dynamic_lesson_status_1">结束</string>
+    <string name="dynamic_lesson_status_2">预约</string>
+    <string name="dynamic_lesson_status_3">已预约</string>
+    <string name="people_explain">1.在一年有效期内,可以免费使用基础跑步服务和课程预约8折优惠。\n
+2.在一年有效期内，享受健身舱使用8折优惠(预约除外)。\n
+3.成功支付199元费用后获得优惠预约权益，新跑友权益卡有效期为支付成功日起一年。\n
+4.每次限购一年，交易成功后不可退款，开通跑友权益卡的费用不可作为余额，不可抵用课程使用费\n
+5.优惠权益仅限本人使用，不可转借他人。\n
+6.除非另有公告，所有门店均可使用8折预约的权益。</string>
 
 </resources>

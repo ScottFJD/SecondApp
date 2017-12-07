@@ -13,9 +13,12 @@
 
 
     <color name="bg_grey">#f2f2f2</color>
+    <color name="bg_grey_v2">#cdcdcd</color>
+
     <color name="grey_line">#ececec</color>
     <color name="bg_white">#ffffff</color>
     <color name="text_color">#37343e</color>
+    <color name="text_full_color">#fb911e</color>
     <color name="text_hint_color">#544f4f</color>
     <color name="text_hint_title_color">#726d7c</color>
     <color name="text_red">#ff5b45</color>

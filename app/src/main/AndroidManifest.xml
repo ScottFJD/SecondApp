@@ -259,8 +259,17 @@
                 <!--android:resource="@xml/file_paths_public"></meta-data>-->
         <!--</provider>-->
 
+        <!--<activity-->
+            <!--android:name=".YeaPaoIntroActivity"-->
+            <!--android:theme="@style/splash" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
         <activity
-            android:name=".YeaPaoIntroActivity"
+            android:name=".YeaPaoVideoIntroActivity"
             android:theme="@style/splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -268,7 +277,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <activity
             android:name=".MainActivity"
@@ -489,6 +497,30 @@
         <activity
             android:name=".homepage.sport_plan.SportSafetyMattersActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicLessonActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicLessonDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicLessonReservationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".homepage.station.traininglesson.TrainingLessonActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.dynamiclesson.DynamicPeopleEquityActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".YeaPaoWebActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".homepage.myself.orders.StationOrderDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
 
         <!--友盟-->
         <meta-data

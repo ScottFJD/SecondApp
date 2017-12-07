@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:id="@+id/ll_top_bar"
+       android:layout_alignParentTop="true"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+       <include layout="@layout/normal_top_bar" />
+   </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_immediately_pay"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:text="立即支付"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/text_color"/>
+    <ScrollView
+        android:layout_above="@id/tv_immediately_pay"
+        android:layout_below="@id/ll_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/constraint_dynamic_lesson_reservation" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

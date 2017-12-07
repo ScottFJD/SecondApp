@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,8 @@ import com.yeapao.andorid.homepage.myself.MyselfPresenter;
 import com.yeapao.andorid.homepage.shopping.ShoppingFragmentView;
 import com.yeapao.andorid.homepage.shopping.ShoppingPresenter;
 import com.yeapao.andorid.homepage.sport_plan.SportPlanFragment;
+import com.yeapao.andorid.homepage.station.StationFragmentView;
+import com.yeapao.andorid.homepage.station.StationPresenter;
 import com.yeapao.andorid.homepage.video.VideoContract;
 import com.yeapao.andorid.homepage.video.VideoFragmentView;
 import com.yeapao.andorid.homepage.video.VideoPresenter;
@@ -93,12 +96,19 @@ public class MainActivity extends PermissionActivity {
     private VideoFragmentView videoFragmentView;
     private MapFragmentView mapFragmentView;
     private SportPlanFragment sportPlanFragment;
+    private StationFragmentView stationFragmentView;
 
     private LessonPresenter lessonPresenter;
     private ShoppingPresenter shoppingPresenter;
     private CirclePresenter circlePresenter;
     private MyselfPresenter myselfPresenter;
     private VideoPresenter videoPresenter;
+    private StationPresenter stationPresenter;
+
+    private ImageView tab1;
+    private ImageView tab2;
+    private ImageView tab3;
+    private ImageView tab4;
 
 
     private long exitTime = 0;
@@ -184,6 +194,9 @@ public class MainActivity extends PermissionActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);//初始隐藏键盘
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+
+
+
         initView();
         permissionCheck();
         registerMessageReceiver();//极光
@@ -201,9 +214,12 @@ public class MainActivity extends PermissionActivity {
 //            videoFragmentView = (VideoFragmentView) fragmentManager.getFragment(savedInstanceState, "video");
             mapFragmentView = (MapFragmentView) fragmentManager.getFragment(savedInstanceState, "map");
             sportPlanFragment = (SportPlanFragment) fragmentManager.getFragment(savedInstanceState, "sport");
+            stationFragmentView = (StationFragmentView) fragmentManager.getFragment(savedInstanceState, "station");
+
 
             fragments.add(mapFragmentView);
-            fragments.add(sportPlanFragment);
+            fragments.add(stationFragmentView);
+//            fragments.add(sportPlanFragment);
 //            fragments.add(lessonFragmentView);
 //            fragments.add(shoppingFragmentView);
             fragments.add(circleFragmentView);
@@ -216,10 +232,13 @@ public class MainActivity extends PermissionActivity {
             myselfFragmentView = MyselfFragmentView.newInstance();
 //            videoFragmentView = VideoFragmentView.newInstance();
             mapFragmentView = MapFragmentView.newInstance();
-            sportPlanFragment = SportPlanFragment.newInstance();
+//            sportPlanFragment = SportPlanFragment.newInstance();
+            stationFragmentView = StationFragmentView.newInstance();
+
 
             fragments.add(mapFragmentView);
-            fragments.add(sportPlanFragment);
+//            fragments.add(sportPlanFragment);
+            fragments.add(stationFragmentView);
 //            fragments.add(videoFragmentView);
 //            fragments.add(lessonFragmentView);
 //            fragments.add(shoppingFragmentView);
@@ -232,7 +251,7 @@ public class MainActivity extends PermissionActivity {
         circlePresenter = new CirclePresenter(getContext(), circleFragmentView);
         myselfPresenter = new MyselfPresenter(getContext(), myselfFragmentView);
 //        videoPresenter = new VideoPresenter(getContext(), videoFragmentView);
-
+        stationPresenter = new StationPresenter(getContext(), stationFragmentView);
 //        fragments.add(lessonFragmentView);
 //        fragments.add(shoppingFragmentView);
 //        fragments.add(circleFragmentView);
@@ -240,7 +259,7 @@ public class MainActivity extends PermissionActivity {
 
 
         items.put(R.id.home_cang, 0);
-        items.put(R.id.home_scheme, 1);
+        items.put(R.id.home_run, 1);
         items.put(R.id.home_circle, 2);
         items.put(R.id.home_myself, 3);
 
@@ -253,7 +272,28 @@ public class MainActivity extends PermissionActivity {
 
         checkVersion();
 
+        thread.start();
+
     }
+
+
+
+    private Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (circleFragmentView != null) {
+                    circleFragmentView.refreshBanner();
+                }
+
+            }
+        }
+    });
 
 
     public void checkItem() {
@@ -296,6 +336,50 @@ public class MainActivity extends PermissionActivity {
 //        loginAccount();
         // add badge
 //        addBadgeAt(2, 1);
+
+        bind.ivYeapao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(0);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_s);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_n);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_n);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_n);
+            }
+        });
+
+        bind.ivYeapao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(1);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_n);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_s);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_n);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_n);
+            }
+        });
+
+        bind.ivYeapao3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(2);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_n);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_n);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_s);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_n);
+            }
+        });
+
+        bind.ivYeapao4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bind.vp.setCurrentItem(3);
+                bind.ivYeapao1.setImageResource(R.drawable.cangv2_n);
+                bind.ivYeapao2.setImageResource(R.drawable.run_station_n);
+                bind.ivYeapao3.setImageResource(R.drawable.circle_n);
+                bind.ivYeapao4.setImageResource(R.drawable.myself_s);
+            }
+        });
     }
 
 
@@ -406,7 +490,7 @@ public class MainActivity extends PermissionActivity {
                 Manifest.permission.READ_PHONE_STATE}, new PermissionListener() {
             @Override
             public void onGranted() {
-                Toast.makeText(getContext(), "所有权限已同意", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "所有权限已同意", Toast.LENGTH_SHORT).show();
                 if (mapFragmentView != null) {
                     mapFragmentView.onResume();
                 } else {
@@ -550,6 +634,7 @@ public class MainActivity extends PermissionActivity {
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+
     }
 
     @Override

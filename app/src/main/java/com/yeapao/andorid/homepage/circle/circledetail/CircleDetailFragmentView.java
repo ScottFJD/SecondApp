@@ -24,16 +24,21 @@ import com.scottfu.sflibrary.util.SoftInputUtils;
 import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.LoginActivity;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.dialog.DialogCallback;
 import com.yeapao.andorid.dialog.DialogUtils;
 import com.yeapao.andorid.model.CommunityDetailModel;
+import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.util.GlobalDataYepao;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 2017/7/18.
@@ -359,4 +364,37 @@ public class CircleDetailFragmentView extends BaseFragment implements CircleDeta
                 break;
         }
     }
+
+
+            public void getNetWorkComplaint(String content) {
+                    LogUtil.e(TAG,content);
+                    subscription = Network.getYeapaoApi()
+                            .requestComplaint(String.valueOf(mCommunityDetailModel.getData().getCommunityId()),GlobalDataYepao.getUser(getContext()).getId(),content)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe( modelObserverComplaint);
+                }
+
+                  Observer<NormalDataModel> modelObserverComplaint = new Observer<NormalDataModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.e(TAG,e.toString());
+
+                    }
+
+                    @Override
+                    public void onNext(NormalDataModel model) {
+                        LogUtil.e(TAG, model.getErrmsg());
+                        if (model.getErrmsg().equals("ok")) {
+
+                        }
+                    }
+                };
+
+
 }

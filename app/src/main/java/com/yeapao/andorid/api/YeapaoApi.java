@@ -16,6 +16,7 @@ import com.yeapao.andorid.model.BodySideTwoGetBackModel;
 import com.yeapao.andorid.model.CallPaymentModel;
 import com.yeapao.andorid.model.CalorieMessageModel;
 import com.yeapao.andorid.model.CangDeleteActualOrdersModel;
+import com.yeapao.andorid.model.CangOrderModel;
 import com.yeapao.andorid.model.CangReservationOrderListModel;
 import com.yeapao.andorid.model.CircleListModel;
 import com.yeapao.andorid.model.CircleMessageModel;
@@ -26,6 +27,11 @@ import com.yeapao.andorid.model.CreateActualOrdersModel;
 import com.yeapao.andorid.model.CreateReservationTimeModel;
 import com.yeapao.andorid.model.DepositOrdersModel;
 import com.yeapao.andorid.model.DiTingDataModel;
+import com.yeapao.andorid.model.DiscountOrderModel;
+import com.yeapao.andorid.model.DynamicDiscountCardModel;
+import com.yeapao.andorid.model.DynamicLessonListModel;
+import com.yeapao.andorid.model.DynamicLessonOrderModel;
+import com.yeapao.andorid.model.DynamiclessonDetailModel;
 import com.yeapao.andorid.model.FoodInfoModel;
 import com.yeapao.andorid.model.HealthDataModel;
 import com.yeapao.andorid.model.IAmCoachListModel;
@@ -49,6 +55,9 @@ import com.yeapao.andorid.model.SelectReservationTimeModel;
 import com.yeapao.andorid.model.SingleCommunityModel;
 import com.yeapao.andorid.model.SportListModel;
 import com.yeapao.andorid.model.SportPlanDetailModel;
+import com.yeapao.andorid.model.StationDynamicOrderModel;
+import com.yeapao.andorid.model.StationMainBannerModel;
+import com.yeapao.andorid.model.StationOrderList;
 import com.yeapao.andorid.model.TestData;
 import com.yeapao.andorid.model.UserDetailsModel;
 import com.yeapao.andorid.model.VersionDataModel;
@@ -215,6 +224,11 @@ public interface YeapaoApi {
     @POST("payment/callPayment")
     Observable<CallPaymentModel> requestPayment(@Query("price") String price, @Query("orderCode") String orderCode,
                                                 @Query("paymentType") String paymentType);
+
+    //支付
+    @POST("payment/callPayment")
+    Observable<CallPaymentModel> requestDynamicPayment(@Query("price") String price, @Query("orderCode") String orderCode,
+                                                       @Query("paymentType") String paymentType, @Query("reservationNum") String reservationNum);
 
     //打卡
     @POST("community/savePunch")
@@ -509,4 +523,40 @@ public interface YeapaoApi {
 
     @POST("video/clickRate")
     Observable<NormalDataModel> requestVideoClick(@Query("videoId") String videoId, @Query("programmeId") String programmeId);
+
+    //跑站首页
+    @GET("RunningStationController/mainBannerList")
+    Observable<StationMainBannerModel> getStationMainModel();
+//动感课程列表
+    @POST("RunningStationController/calendarListOutList")
+    Observable<DynamicLessonListModel> requestDynamicLesson(@Query("customerId") String id, @Query("date") String date);
+
+    //动感课程详情
+    @POST("RunningStationController/calendarDetail")
+    Observable<DynamiclessonDetailModel> requestDynamicDetail(@Query("customerId") String id, @Query("calendarId") String calendarId);
+
+    @POST("RunningStationController/createCalendarOrder")
+    Observable<DynamicLessonOrderModel> requestDynamicLessonOrder(@Query("customerId") String id, @Query("calendarId") String calendarId);
+
+    @POST("RunningStationController/myDiscountCard")
+    Observable<DynamicDiscountCardModel> requestDynamicDiscountCard(@Query("customerId") String id);
+
+    @POST("RunningStationController/createDiscountCardOrder")
+    Observable<DiscountOrderModel> requestDiscountOrder(@Query("customerId") String customerId);
+
+    @POST("RunningStationController/runStationOrderList")
+    Observable<StationOrderList> requestStationOrder(@Query("customerId") String customerId);
+
+    @POST("RunningStationController/calendarOrderDetail")
+    Observable<StationDynamicOrderModel> requestStationDynamicOrderDetail(@Query("calOrderId") String calOrderId);
+
+    @POST("RunningStationController/deleteRunStationOrder")
+    Observable<NormalDataModel> requestDeleteStationOrder(@Query("id") String id, @Query("type") String type);
+
+    @POST("order/cabinOrderList")
+    Observable<CangOrderModel> requsetCangOrderList(@Query("customerId") String customerId);
+
+    @POST("community/saveComplaint")
+    Observable<NormalDataModel> requestComplaint(@Query("communityId") String communityId, @Query("customerId") String customerId,
+                                                 @Query("content") String content);
 }

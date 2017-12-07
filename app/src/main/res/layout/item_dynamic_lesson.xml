@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        app:cardCornerRadius="3dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/iv_dynamic_background"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/lesson_one" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_lesson_reservation"
+                android:layout_width="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:layout_height="25dp"
+                android:layout_gravity="right|bottom"
+                android:layout_marginBottom="40dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/yellow_2_n_shape"
+                android:gravity="center"
+                android:text="@string/dynamic_lesson_status_1"
+                android:textColor="@color/bg_white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_lesson_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/order_finish"
+                android:gravity="center"
+                android:text="结束"
+                android:textColor="@color/bg_white"
+                android:textSize="11sp" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_lesson_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="9:00-10:00/苏州市高新区运河路47号"
+                android:textColor="@color/bg_white" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|bottom"
+                android:layout_marginBottom="40dp"
+                android:layout_marginLeft="55dp"
+                android:text="王永祥·动感光影跑"
+                android:textColor="@color/bg_white"
+                android:textSize="17sp" />
+
+            <com.scottfu.sflibrary.customview.CircleImageView
+                android:id="@+id/civ_dynamic_coach_portrait"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom|left"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/y_you"
+                app:border_color="@color/bg_white"
+                app:border_width="0dp" />
+
+
+
+
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+//    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -32,7 +32,7 @@ android {
         flatDir {
             dirs 'libs'}
     }
-    buildToolsVersion '26.0.2'
+//    buildToolsVersion '26.0.2'
 }
 
 dependencies {
@@ -72,7 +72,7 @@ dependencies {
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
 
     //底部tab栏
-    compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.1'
+    compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     compile 'q.rorbin:badgeview:1.1.0'
 //轮播滑动多种样式
     compile 'com.github.crosswall:Android-Coverflow:release-v1.0.4'

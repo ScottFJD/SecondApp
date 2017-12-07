@@ -29,6 +29,7 @@ import com.scottfu.sflibrary.zxing.GenerateQRCode;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.model.UserData;
+import com.yeapao.andorid.util.GlobalDataYepao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -251,6 +252,28 @@ public class DialogUtils {
         Display display = m.getDefaultDisplay();
         WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.width = (int) (display.getWidth() * 0.9);
+        dialog.getWindow().setAttributes(params);
+
+
+    }
+
+    public static void showQRCodeV2(final Context context, String code) {
+        final AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.show();
+        ImageView QRCode;
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_show_qrcode_station, null);
+        QRCode = (ImageView) view.findViewById(R.id.iv_qrcode);
+
+        GenerateQRCode generateQRCode = new GenerateQRCode();
+//        generateQRCode.createEnglishQRCodeWithLogo(context,code,QRCode,R.drawable.y_you);
+        generateQRCode.createEnglishQRCode(context, code,QRCode);
+
+        Window window = dialog.getWindow();
+        window.setContentView(view);
+        WindowManager m = ((Activity) context).getWindowManager();
+        Display display = m.getDefaultDisplay();
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = (int) (display.getWidth() * 1);
         dialog.getWindow().setAttributes(params);
 
 

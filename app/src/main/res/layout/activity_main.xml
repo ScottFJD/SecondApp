@@ -30,18 +30,56 @@
     <!--</FrameLayout>-->
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#1c1a27">
+        <ImageView
+            android:id="@+id/iv_yeapao_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/cangv2_s"/>
+        <ImageView
+            android:id="@+id/iv_yeapao_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/run_station_n"/>
+        <ImageView
+            android:id="@+id/iv_yeapao_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/circle_n"/>
+        <ImageView
+            android:id="@+id/iv_yeapao_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/myself_n"/>
+    </LinearLayout>
+
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:visibility="gone"
         android:id="@+id/bnv_tab"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/bottomBackgroundColor"
+        android:background="#1c1a27"
         android:layout_gravity="bottom"
+        app:menu="@menu/navigation"
         app:itemIconTint="@color/selector_bottom_item_yellow"
         app:itemTextColor="@color/selector_bottom_item_yellow"
-        app:menu="@menu/navigation" />
+        />
 
 
-
+    app:itemIconTint="@color/selector_bottom_item_yellow"
+    app:itemTextColor="@color/selector_bottom_item_yellow"
 
 </LinearLayout>
 </layout>

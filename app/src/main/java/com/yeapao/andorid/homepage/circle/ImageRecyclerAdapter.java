@@ -72,7 +72,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         });
 
-        glideUtil.glideLoadingImage(mContext,imagesUrlList.get(position).getImageUrl(),R.drawable.home_banner_take_place,((ViewHolder) holder).ivCircleImage);
+        glideUtil.glideLoadingImage(mContext,imagesUrlList.get(position).getImageUrl(),R.drawable.circle_onepic_take_place,((ViewHolder) holder).ivCircleImage);
     }
 
     @Override

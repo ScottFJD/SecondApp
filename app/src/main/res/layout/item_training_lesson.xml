@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_item_training_lesson"
+    android:background="@color/bg_white"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+    <com.scottfu.sflibrary.customview.CircleImageView
+        android:id="@+id/civ_teach_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/y_you"
+        app:border_width="1dp"
+        app:border_color="@color/colorPrimary"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_teach_name"
+        android:layout_toRightOf="@id/civ_teach_icon"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/text_color"
+        android:text="XX/高级健身教练"/>
+
+    <TextView
+        android:id="@+id/tv_teach_title_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="1.国际健身协会有氧训练师认证"
+        android:layout_below="@id/tv_teach_name"
+        android:layout_toRightOf="@id/civ_teach_icon"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_teach_title_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="美国有氧体适能协会认证的专业健身"
+        android:layout_below="@id/tv_teach_title_one"
+        android:layout_toRightOf="@id/civ_teach_icon"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:id="@+id/tv_teach_people_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已服务12人"
+        android:textColor="#544f5f"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="13sp"/>
+
+
+</RelativeLayout>

@@ -29,6 +29,7 @@ import com.yeapao.andorid.homepage.myself.tab.health.HealthRepositoryActivity;
 import com.yeapao.andorid.homepage.myself.tab.health.testCoordinatorLayoutActivity;
 import com.yeapao.andorid.homepage.myself.tab.setting.ChangeDataActivity;
 import com.yeapao.andorid.homepage.myself.tab.shopkeeper.MyselfShopOwnerActivity;
+import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicPeopleEquityActivity;
 import com.yeapao.andorid.model.UserData;
 import com.yeapao.andorid.model.UserDetailsModel;
 import com.yeapao.andorid.userinfo.FillUserInfoActivity;
@@ -174,6 +175,8 @@ public class MyselfFragmentView extends Fragment implements MyselfContract.View 
 //                        getContext().startActivity(new Intent(getContext(),testCoordinatorLayoutActivity.class));
                     } else if (name.equals("认证")) {
                         MyselfCertificationActivity.start(getContext());
+                    } else if (name.equals("权益卡")) {
+                        DynamicPeopleEquityActivity.start(getContext());
                     }
                 }
             });

@@ -23,6 +23,7 @@ public class MyselfOrdersActivity extends BaseActivity {
     private TabLayout tabLayout;
     private CangOrderFragment cangOrderFragment;
     private CangReservationFragment cangReservationFragment;
+    private StationOrderFragment stationOrderFragment;
     private OrderPagerAdapter orderPagerAdapter;
 
 
@@ -42,9 +43,11 @@ public class MyselfOrdersActivity extends BaseActivity {
             FragmentManager manager = getSupportFragmentManager();
             cangOrderFragment = (CangOrderFragment) manager.getFragment(savedInstanceState, "order");
             cangReservationFragment = (CangReservationFragment) manager.getFragment(savedInstanceState, "reservation");
+            stationOrderFragment = (StationOrderFragment) manager.getFragment(savedInstanceState, "stationOrder");
         } else {
             cangOrderFragment = new CangOrderFragment();
             cangReservationFragment = new CangReservationFragment();
+            stationOrderFragment = new StationOrderFragment();
         }
 
         initView();
@@ -71,10 +74,9 @@ public class MyselfOrdersActivity extends BaseActivity {
     private void initView() {
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_orders);
-        orderPagerAdapter = new OrderPagerAdapter(getSupportFragmentManager(), getContext(), cangOrderFragment, cangReservationFragment);
+        orderPagerAdapter = new OrderPagerAdapter(getSupportFragmentManager(), getContext(), cangOrderFragment, stationOrderFragment);
         viewPager.setAdapter(orderPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     @Override

@@ -76,7 +76,7 @@ public class MyselfMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             myselfTabModels.clear();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
 
             MyselfTabModel myselfTabModel = new MyselfTabModel();
             switch (i) {
@@ -87,10 +87,15 @@ public class MyselfMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
                     break;
                 case 1:
                     myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_record));
-                    myselfTabModel.setTabName("健康数据库");
+                    myselfTabModel.setTabName("权益卡");
                     myselfTabModels.add(myselfTabModel);
                     break;
                 case 2:
+                    myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_record));
+                    myselfTabModel.setTabName("健康数据库");
+                    myselfTabModels.add(myselfTabModel);
+                    break;
+                case 3:
                     myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_note));
                     myselfTabModel.setTabName("我的帖子");
                     myselfTabModels.add(myselfTabModel);
@@ -104,7 +109,7 @@ public class MyselfMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
 //                    myselfTabModel.setTabName("我的预约");
 //                    myselfTabModels.add(myselfTabModel);
 //                    break;
-                case 3:
+                case 4:
                     myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_phacse_order));
                     myselfTabModel.setTabName("我的订单");
                     myselfTabModels.add(myselfTabModel);
@@ -114,7 +119,7 @@ public class MyselfMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
 //                    myselfTabModel.setTabName("我的课程");
 //                    myselfTabModels.add(myselfTabModel);
 //                    break;
-                case 4:
+                case 5:
                     myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_phacse_order));
                     myselfTabModel.setTabName("我的订单");
                     myselfTabModels.add(myselfTabModel);
@@ -124,12 +129,12 @@ public class MyselfMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
 //                    myselfTabModel.setTabName("我的帖子");
 //                    myselfTabModels.add(myselfTabModel);
 //                    break;
-                case 5:
+                case 6:
                     myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_coach));
                     myselfTabModel.setTabName("我是教练");
                     myselfTabModels.add(myselfTabModel);
                     break;
-                case 6:
+                case 7:
                     myselfTabModel.setViewId(mContext.getResources().getDrawable(R.drawable.my_shopkeeper));
                     myselfTabModel.setTabName("我是店长");
                     myselfTabModels.add(myselfTabModel);

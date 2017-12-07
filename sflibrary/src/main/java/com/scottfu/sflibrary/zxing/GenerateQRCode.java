@@ -47,7 +47,7 @@ public class GenerateQRCode {
         new AsyncTask<Void, Void, Bitmap>() {
             @Override
             protected Bitmap doInBackground(Void... params) {
-                return cn.bingoogolapple.qrcode.zxing.QRCodeEncoder.syncEncodeQRCode(code, BGAQRCodeUtil.dp2px(context, 150), Color.parseColor("#ff0000"));
+                return cn.bingoogolapple.qrcode.zxing.QRCodeEncoder.syncEncodeQRCode(code, BGAQRCodeUtil.dp2px(context, 280), Color.parseColor("#000000"));
             }
 
             @Override

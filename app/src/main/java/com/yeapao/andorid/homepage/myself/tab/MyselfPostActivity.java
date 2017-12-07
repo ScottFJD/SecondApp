@@ -93,6 +93,10 @@ public class MyselfPostActivity extends BaseActivity {
                     //获取第一个可见view的位置
                     int firstItemPosition = manager.findFirstVisibleItemPosition();
 //                TODO
+                if (lastItemPosition == 0) {
+                    return;
+                }
+                
                 LogUtil.e(TAG,CircleDateUtils.getYearString(myselfPostModel.getData().getCommunityList().get(lastItemPosition-1).getCreateTime()));
                 fab.setText(CircleDateUtils.getYearString(myselfPostModel.getData().getCommunityList().get(lastItemPosition-1).getCreateTime()));
 
@@ -134,7 +138,6 @@ public class MyselfPostActivity extends BaseActivity {
             mPostMessageAdapter.setItemOnClickListener(new OnRecyclerViewClickListener() {
                 @Override
                 public void OnItemClick(View v, int position) {
-                    ToastManager.showToast(getContext(), "onItemClick");
                     CircleDetailActivity.start(getContext(),
                             String.valueOf(myselfPostModel.getData().getCommunityList().get(position).getCommunityId()),"0");
                 }

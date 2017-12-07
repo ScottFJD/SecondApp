@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.model.ActualOrderListModel;
+import com.yeapao.andorid.model.CangOrderModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +31,7 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
 
     private CangOrderStatusListener cangOrderStatusListener;
 
-    private   ActualOrderListModel actualOrderListModel = new ActualOrderListModel();
+    private CangOrderModel actualOrderListModel = new CangOrderModel();
 
 
     public void setCangOrderStatusListener(CangOrderStatusListener listener) {
@@ -42,7 +43,7 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
     }
 
 
-    public MyselfCangOrderMessageAdapter(Context context, ActualOrderListModel model) {
+    public MyselfCangOrderMessageAdapter(Context context, CangOrderModel model) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
         actualOrderListModel = model;
@@ -58,7 +59,7 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ((ViewHolder)holder).tvMyOrderTitle.setText("健身舱使用");
+        ((ViewHolder)holder).tvMyOrderTitle.setText(actualOrderListModel.getData().get(position).getHouseName());
         if (actualOrderListModel.getData().get(position).getStatus().equals("1")) {
             ((ViewHolder) holder).tvNPay.setText("未付款");
             ((ViewHolder) holder).tvNPay.setTextColor(mContext.getResources().getColor(R.color.yellow_text_color));

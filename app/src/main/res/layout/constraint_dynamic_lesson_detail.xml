@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white">
+
+    <ImageView
+        android:id="@+id/iv_dynamic_lesson"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lesson_three" />
+
+    <TextView
+        android:id="@+id/tv_dynamic_lesson_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/lesson_time_v2"
+        android:drawablePadding="10dp"
+        android:text="11/21 19:00-14:00"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_dynamic_lesson" />
+
+    <TextView
+        android:id="@+id/tv_dynamic_lesson_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/lesson_site_v2"
+        android:drawablePadding="10dp"
+        android:text="苏州高新区运河路47号"
+        android:textColor="@color/text_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dynamic_lesson_time" />
+
+    <ImageView
+        android:id="@+id/imageView108"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dynamic_lesson_address"
+        app:srcCompat="@color/bg_grey" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView108">
+
+        <LinearLayout
+            android:id="@+id/ll_coach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="苗新/"
+                android:textColor="@color/text_color"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="高级健身教练"
+                android:textColor="@color/text_color"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <com.scottfu.sflibrary.customview.CircleImageView
+            android:id="@+id/crl_dynamic_coach_header"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/y_you"
+            app:border_color="@color/colorPrimary"
+            app:border_width="1dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_coach_title"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="45dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="270dp"
+                android:singleLine="true"
+                android:text="1.国际健身协会有氧训练师认证。"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_dynamic_coach_title_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:maxWidth="270dp"
+                android:singleLine="true"
+                android:text="2.美国有氧体适能协会认证的专业健身"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_dinner"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/bg_grey" />
+
+        <ImageView
+            android:id="@+id/iv_content_more"
+            android:padding="3dp"
+            android:layout_width="18dp"
+            android:layout_height="11dp"
+            android:layout_above="@id/iv_dinner"
+            android:layout_below="@id/ll_coach_title"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/order_more" />
+
+
+    </RelativeLayout>
+
+    <com.scottfu.sflibrary.customview.CircleImageView
+        android:id="@+id/circleImageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:srcCompat="@drawable/y_you"
+        app:border_color="@color/colorPrimary"
+        app:border_width="1dp"/>
+
+</android.support.constraint.ConstraintLayout>
