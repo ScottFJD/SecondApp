@@ -32,7 +32,7 @@
                android:layout_height="match_parent"
                android:orientation="vertical">
 
-
+               <include layout="@layout/constraint_training_lesson_detail" />
            </LinearLayout>
 
        </ScrollView>

@@ -19,12 +19,17 @@ import com.yeapao.andorid.base.BaseActivity;
 
 public class TrainingLessonActivity extends BaseActivity {
     private static final String TAG  = "TrainingLessonActivity";
+    public static final String HIGH = "high_lesson";
+    public static final String HEALTH = "health";
 
     private RecyclerView trainingLessonList;
     private LinearLayoutManager linearLayoutManager;
     private TrainingLessonMessageAdapter trainingLessonMessageAdapter;
 
-    public static void start(Context context) {
+
+    private String type;
+
+    public static void start(Context context,String type) {
         Intent intent = new Intent();
         intent.setClass(context, TrainingLessonActivity.class);
         context.startActivity(intent);
@@ -55,6 +60,7 @@ public class TrainingLessonActivity extends BaseActivity {
             @Override
             public void OnItemClick(View v, int position) {
                 LogUtil.e(TAG,String.valueOf(position));
+                TrainingLessonDetailActivity.start(getContext());
             }
         });
     }

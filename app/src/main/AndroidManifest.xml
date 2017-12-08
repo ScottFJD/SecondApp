@@ -520,7 +520,15 @@
         <activity
             android:name=".homepage.myself.orders.StationOrderDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".homepage.station.traininglesson.TrainingLessonDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.traininglesson.TrainingLessonOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.myself.mylesson.MyselfLessonActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--友盟-->
         <meta-data

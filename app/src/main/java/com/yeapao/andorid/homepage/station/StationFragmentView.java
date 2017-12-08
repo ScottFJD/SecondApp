@@ -19,6 +19,7 @@ import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicLessonActivity;
 import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonActivity;
+import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonOrderActivity;
 import com.yeapao.andorid.model.StationMainBannerModel;
 
 import butterknife.BindView;
@@ -91,10 +92,9 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
                 if (position == 0) {
                     DynamicLessonActivity.start(getContext());
                 } else if (position == 1) {
-                    ToastManager.showToast(getContext(), "敬请期待！！！");
-//                    TrainingLessonActivity.start(getContext());
+                    TrainingLessonActivity.start(getContext(), TrainingLessonActivity.HIGH);
                 } else {
-                    ToastManager.showToast(getContext(), "敬请期待！！！");
+                    TrainingLessonActivity.start(getContext(),TrainingLessonActivity.HEALTH);
                 }
 
             }

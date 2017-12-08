@@ -158,7 +158,8 @@ public class MyselfFragmentView extends Fragment implements MyselfContract.View 
                     if (name.equals("我的帖子")) {
                         MyselfPostActivity.start(getContext());
                     } else if (name.equals("我的课程")) {
-                        MyselfLessonActivity.start(getContext());
+//                        MyselfLessonActivity.start(getContext());
+                        com.yeapao.andorid.homepage.myself.mylesson.MyselfLessonActivity.start(getContext());
                     } else if (name.equals("我的订单")) {
                         MyselfOrdersActivity.start(getContext());
 //                        MyselfOrderActivity.start(getContext());

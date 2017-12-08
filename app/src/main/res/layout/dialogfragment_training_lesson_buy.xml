@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView130"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/buy_mark" />
+
+    <TextView
+        android:id="@+id/tv_buy_lesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="购买高阶服务"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView130"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_cancel"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView130"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@color/bg_grey" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_lesson_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView130" />
+
+    <ImageView
+        android:id="@+id/imageView131"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_lesson_price"
+        app:srcCompat="@color/bg_white" />
+
+    <ImageView
+        android:id="@+id/iv_agree_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView131"
+        app:layout_constraintEnd_toStartOf="@+id/textView199"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView131"
+        app:srcCompat="@drawable/agreement_no_selected" />
+
+    <TextView
+        android:id="@+id/textView199"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="我已阅读并同意"
+        android:textColor="@color/text_hint_title_color"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView131"
+        app:layout_constraintEnd_toStartOf="@+id/tv_user_protocol"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_agree_status"
+        app:layout_constraintTop_toTopOf="@+id/imageView131" />
+
+    <TextView
+        android:id="@+id/tv_user_protocol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="用户协议"
+        android:textColor="#1089dc"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView199"
+        app:layout_constraintEnd_toEndOf="@+id/imageView131"
+        app:layout_constraintStart_toEndOf="@+id/textView199" />
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="确认购买"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView131" />
+
+</android.support.constraint.ConstraintLayout>

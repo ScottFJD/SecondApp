@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_date_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:text="xxxx-xx-xx"
+        android:textColor="@color/text_color"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_date_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="xx:xx-xx:xx"
+        android:textColor="@color/text_hint_title_color"
+        android:textSize="15sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_date_1"
+        app:layout_constraintStart_toEndOf="@+id/tv_date_1" />
+
+    <ImageView
+        android:id="@+id/imageView140"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_1"
+        app:srcCompat="@drawable/my_lessonv2" />
+
+    <TextView
+        android:id="@+id/tv_lesson_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="13dp"
+        android:text="XXXXXXXX"
+        android:textColor="@color/text_hint_title_color"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView140"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date_1" />
+
+    <TextView
+        android:id="@+id/tv_lesson_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:text="XXXXXXXXXXXXXXXXXXXX"
+        android:textColor="@color/text_hint_title_color"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lesson_name" />
+
+    <TextView
+        android:id="@+id/tv_lesson_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="正在上课"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="@drawable/lesson_status_shape_1"
+        android:textColor="@color/bg_white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_qr_code_lesson"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lesson_status"
+        app:srcCompat="@drawable/qr_codelesson" />
+</android.support.constraint.ConstraintLayout>
