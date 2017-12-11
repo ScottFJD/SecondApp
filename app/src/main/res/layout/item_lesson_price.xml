@@ -22,17 +22,17 @@
         android:id="@+id/tv_lesson_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="XXXX"
         android:textColor="@color/text_hint_title_color"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_lesson_name"
-        app:layout_constraintStart_toEndOf="@+id/tv_lesson_name" />
+        app:layout_constraintStart_toEndOf="@+id/tv_training_price" />
 
     <CheckBox
         android:id="@+id/iv_choose_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        style="@style/DepositCheckBox"
         app:layout_constraintBottom_toTopOf="@+id/imageView132"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,4 +46,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/bg_grey" />
+
+    <TextView
+        android:id="@+id/tv_training_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/RMB"
+        android:textColor="@color/text_red"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_lesson_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_lesson_name" />
+
 </android.support.constraint.ConstraintLayout>

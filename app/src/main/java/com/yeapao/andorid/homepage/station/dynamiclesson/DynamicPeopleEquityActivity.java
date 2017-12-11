@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +26,7 @@ import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.Network;
@@ -105,6 +107,14 @@ public class DynamicPeopleEquityActivity extends BaseActivity {
         ButterKnife.bind(this);
         initTopBar();
         getNetWork(GlobalDataYepao.getUser(getContext()).getId());
+
+//        之前的少了这一段不知道有没有问题
+        if (numberReceiver == null) {
+            numberReceiver = new MessageSendReceiver();
+        }
+        getContext().registerReceiver(numberReceiver, new IntentFilter("wxPay.action"));
+        api = WXAPIFactory.createWXAPI(getContext(), ConstantYeaPao.APP_ID, true);
+        api.registerApp(ConstantYeaPao.APP_ID);
     }
 
 

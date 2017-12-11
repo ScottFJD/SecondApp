@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView116" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/tv_training_lesson_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -84,38 +84,56 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/textView21"
         app:layout_constraintEnd_toEndOf="@+id/imageView116" />
 
-    <ImageView
-        android:id="@+id/imageView125"
+    <LinearLayout
+        android:id="@+id/ll_lesson_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="100dp"
         android:layout_marginTop="8dp"
+        android:minHeight="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView116"
-        app:srcCompat="@color/bg_white" />
+        android:background="@color/bg_white"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView55"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="健身服务流程"
-        android:textColor="@color/text_color"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView125" />
 
-    <TextView
-        android:id="@+id/textView56"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="（一对一高阶健身服务）"
-        android:textColor="@color/text_hint_title_color"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView55"
-        app:layout_constraintStart_toEndOf="@+id/textView55" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="健身服务流程"
+                android:textColor="@color/text_color"
+                android:textSize="17sp"
+                />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="（一对一高阶健身服务）"
+                android:layout_gravity="bottom"
+                android:textColor="@color/text_hint_title_color"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_lesson_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:src="@color/bg_grey"/>
+
+    </LinearLayout>
+
+
 
     <TextView
         android:id="@+id/tv_coach_title_1"
@@ -166,5 +184,7 @@
         android:textColor="@color/bg_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_coach_title_4" />
+
+
 
 </android.support.constraint.ConstraintLayout>

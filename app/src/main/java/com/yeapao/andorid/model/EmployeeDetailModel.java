@@ -1,12 +1,13 @@
 package com.yeapao.andorid.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by fujindong on 2017/12/8.
  */
 
-public class EmployeeDetailModel {
+public class EmployeeDetailModel implements Serializable{
 
     /**
      * errcode : 0
@@ -42,7 +43,7 @@ public class EmployeeDetailModel {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         /**
          * haveCoach : 0
          * employeeFeeOut : [{"subjectFeeId":37,"feeName":"高级训练收费","subjectNum":3,"price":98,"dateRange":1},{"subjectFeeId":38,"feeName":"高级训练收费","subjectNum":12,"price":358,"dateRange":4},{"subjectFeeId":39,"feeName":"高级训练收费","subjectNum":36,"price":798,"dateRange":12},{"subjectFeeId":40,"feeName":"高级训练收费","subjectNum":72,"price":1398,"dateRange":24}]
@@ -77,7 +78,7 @@ public class EmployeeDetailModel {
             this.employeeFeeOut = employeeFeeOut;
         }
 
-        public static class EmployeeDetailOutBean {
+        public static class EmployeeDetailOutBean implements Serializable{
             /**
              * employeeId : 1
              * coachName : 朱永磊
@@ -153,7 +154,7 @@ public class EmployeeDetailModel {
             }
         }
 
-        public static class EmployeeFeeOutBean {
+        public static class EmployeeFeeOutBean implements Serializable{
             /**
              * subjectFeeId : 37
              * feeName : 高级训练收费

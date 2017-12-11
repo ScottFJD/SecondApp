@@ -13,7 +13,10 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.model.EmployeeDetailModel;
+import com.yeapao.andorid.util.MyPayWayDialogFragment;
 
 /**
  * Created by fujindong on 2017/12/7.
@@ -29,6 +32,20 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
     private TextView userProtocol;
     private TextView gotoPay;
 
+    private boolean mProtocolStatus = false;
+
+    private EmployeeDetailModel employeeDetailModel;
+
+
+
+    public static TrainingLessonBuyFragment newInstance(EmployeeDetailModel employeeDetailModel) {
+        TrainingLessonBuyFragment mTrainingLessonBuyFragment = new TrainingLessonBuyFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("employeeDetail",employeeDetailModel);
+        mTrainingLessonBuyFragment.setArguments(args);
+        return mTrainingLessonBuyFragment;
+    }
+
     private TrainingLessonPriceMessageAdapter trainingLessonPriceMessageAdapter;
 
     public interface TrainingLessonBuyListener {
@@ -37,6 +54,9 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
         void userProtocol();
 
         void gotoPay();
+
+        void chooseLesson(int position);
+
     }
 
     private TrainingLessonBuyListener lessonBuyListener;
@@ -51,6 +71,8 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        employeeDetailModel = (EmployeeDetailModel) getArguments().getSerializable("employeeDetail");
 
         Dialog dialog = new Dialog(getActivity(), R.style.CustomDatePickerDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -71,11 +93,18 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
         gotoPay = (TextView) dialog.findViewById(R.id.tv_pay);
 
         lessonpriceList.setLayoutManager(new LinearLayoutManager(getContext()));
-        trainingLessonPriceMessageAdapter = new TrainingLessonPriceMessageAdapter(getContext());
+        trainingLessonPriceMessageAdapter = new TrainingLessonPriceMessageAdapter(getContext(),employeeDetailModel);
         lessonpriceList.setAdapter(trainingLessonPriceMessageAdapter);
         trainingLessonPriceMessageAdapter.setChooseStatusListener(new TrainingLessonPriceMessageAdapter.ChooseStatusListener() {
             @Override
-            public void chooseStatus(boolean status) {
+            public void chooseStatus(boolean status,int position) {
+                trainingLessonPriceMessageAdapter.notifyDataSetChanged();
+                if (status) {
+                    lessonBuyListener.chooseLesson(position);
+                } else {
+
+                }
+
 
             }
         });
@@ -95,13 +124,24 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
                 lessonBuyListener.cancelClick();
                 break;
             case R.id.iv_agree_status:
-
+                if (mProtocolStatus) {
+                    mProtocolStatus = false;
+                    userProtocolStatus.setImageResource(R.drawable.agreement_no_selected);
+                } else {
+                    mProtocolStatus = true;
+                    userProtocolStatus.setImageResource(R.drawable.agreement_selected);
+                }
                 break;
             case R.id.tv_user_protocol:
                 lessonBuyListener.userProtocol();
                 break;
             case R.id.tv_pay:
+                if (mProtocolStatus) {
+
                     lessonBuyListener.gotoPay();
+                } else {
+                    ToastManager.showToast(getContext(),"请阅读并勾选用户协议");
+                }
                 break;
             default:
                 break;

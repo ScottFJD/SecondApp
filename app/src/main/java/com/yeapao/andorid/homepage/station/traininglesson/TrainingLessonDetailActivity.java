@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scottfu.sflibrary.customview.CircleImageView;
 import com.scottfu.sflibrary.util.GlideUtil;
 import com.scottfu.sflibrary.util.LogUtil;
+import com.yeapao.andorid.LoginActivity;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
@@ -44,17 +46,26 @@ public class TrainingLessonDetailActivity extends BaseActivity {
     TextView tvCoachTitle4;
     @BindView(R.id.tv_coach_title_5)
     TextView tvCoachTitle5;
+    @BindView(R.id.tv_training_lesson_address)
+    TextView tvTrainingAddress;
+    @BindView(R.id.iv_lesson_content)
+    ImageView ivLessonContent;
 
     private TrainingLessonBuyFragment trainingLessonBuyFragment;
 
     private TextView gotoPay;
 
+    private String type;
+
+    private int mPosition = 111;
+
     private String employeeDetail;
     private GlideUtil glideUtil = new GlideUtil();
     private EmployeeDetailModel detailModel = new EmployeeDetailModel();
 
-    public static void start(Context context, String employeeDetail) {
+    public static void start(Context context, String employeeDetail, String type) {
         Intent intent = new Intent();
+        intent.putExtra("type", type);
         intent.putExtra("employeeDetail", employeeDetail);
         intent.setClass(context, TrainingLessonDetailActivity.class);
         context.startActivity(intent);
@@ -68,7 +79,61 @@ public class TrainingLessonDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_training_lesson_detail);
         ButterKnife.bind(this);
         employeeDetail = getIntent().getStringExtra("employeeDetail");
-        trainingLessonBuyFragment = new TrainingLessonBuyFragment();
+        type = getIntent().getStringExtra("type");
+        gotoPay = (TextView) findViewById(R.id.tv_buy_training_lesson);
+        gotoPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPayWay();
+            }
+        });
+
+        initTopBar();
+
+        if (type.equals(TrainingLessonActivity.HIGH)) {
+            getNetWork(employeeDetail);
+        } else {
+            getNetWorkRecovery(employeeDetail);
+        }
+
+
+    }
+
+    @Override
+    protected void initTopBar() {
+        initTitle("教练服务");
+        initBack();
+    }
+
+
+    private void showResult() {
+        glideUtil.glideLoadingImage(getContext(), detailModel.getData().getEmployeeDetailOut().getHeadImage(),
+                R.drawable.y_you, civCoachHead);
+        tvTeachName.setText(detailModel.getData().getEmployeeDetailOut().getCoachName() + "/");
+        tvCoachTitle.setText(detailModel.getData().getEmployeeDetailOut().getJobTitle());
+        for (int i = 0; i < detailModel.getData().getEmployeeDetailOut().getInformation().size(); i++) {
+            switch (i) {
+                case 0:
+                    tvCoachTitle1.setText(detailModel.getData().getEmployeeDetailOut().getInformation().get(i));
+                    break;
+                case 1:
+                    tvCoachTitle2.setText(detailModel.getData().getEmployeeDetailOut().getInformation().get(i));
+                    break;
+                case 2:
+                    tvCoachTitle3.setText(detailModel.getData().getEmployeeDetailOut().getInformation().get(i));
+                    break;
+                case 3:
+                    tvCoachTitle4.setText(detailModel.getData().getEmployeeDetailOut().getInformation().get(i));
+                    break;
+                case 4:
+                    tvCoachTitle5.setText(detailModel.getData().getEmployeeDetailOut().getInformation().get(i));
+                    break;
+                default:
+                    break;
+            }
+        }
+        glideUtil.glideLoadingImage(getContext(), detailModel.getData().getEmployeeDetailOut().getUrl(), R.color.bg_white, ivLessonContent);
+        trainingLessonBuyFragment = TrainingLessonBuyFragment.newInstance(detailModel);
         trainingLessonBuyFragment.setTrainingLessonListener(new TrainingLessonBuyFragment.TrainingLessonBuyListener() {
             @Override
             public void cancelClick() {
@@ -83,34 +148,21 @@ public class TrainingLessonDetailActivity extends BaseActivity {
             @Override
             public void gotoPay() {
                 LogUtil.e(TAG, "gotoPay");
-                TrainingLessonOrderActivity.start(getContext());
+                if (GlobalDataYepao.isLogin()) {
+                    TrainingLessonOrderActivity.start(getContext(), String.valueOf(detailModel.getData().getEmployeeDetailOut().getEmployeeId()),
+                            String.valueOf(detailModel.getData().getEmployeeFeeOut().get(mPosition).getSubjectFeeId()), type);
+                } else {
+                    LoginActivity.start(getContext());
+                }
+
 
             }
-        });
-        gotoPay = (TextView) findViewById(R.id.tv_buy_training_lesson);
-        gotoPay.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                showPayWay();
+            public void chooseLesson(int position) {
+                mPosition = position;
             }
         });
-
-        initTopBar();
-
-        getNetWork(employeeDetail);
-    }
-
-    @Override
-    protected void initTopBar() {
-        initTitle("教练服务");
-        initBack();
-    }
-
-
-    private void showResult() {
-        glideUtil.glideLoadingImage(getContext(),detailModel.getData().getEmployeeDetailOut().getHeadImage(),
-                R.drawable.y_you,civCoachHead);
-
     }
 
 
@@ -137,6 +189,17 @@ public class TrainingLessonDetailActivity extends BaseActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelObserver);
     }
+
+
+    private void getNetWorkRecovery(String id) {
+        LogUtil.e(TAG, id);
+        subscription = Network.getYeapaoApi()
+                .requestRecoverDetail(id, GlobalDataYepao.getUser(getContext()).getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver);
+    }
+
 
     Observer<EmployeeDetailModel> modelObserver = new Observer<EmployeeDetailModel>() {
         @Override

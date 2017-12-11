@@ -77,14 +77,19 @@ public class TrainingLessonActivity extends BaseActivity {
             @Override
             public void OnItemClick(View v, int position) {
                 LogUtil.e(TAG,String.valueOf(position));
-                TrainingLessonDetailActivity.start(getContext(),String.valueOf(listModel.getData().get(position).getEmployeeId()));
+                TrainingLessonDetailActivity.start(getContext(),String.valueOf(listModel.getData().get(position).getEmployeeId()),type);
             }
         });
     }
 
     @Override
     protected void initTopBar() {
-        initTitle("高阶训练");
+        if (type.equals(HIGH)) {
+            initTitle("高阶训练");
+        } else {
+            initTitle("康复训练");
+        }
+
         initBack();
     }
 

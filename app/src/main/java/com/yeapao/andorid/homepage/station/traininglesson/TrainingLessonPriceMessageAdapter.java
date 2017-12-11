@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.model.EmployeeDetailModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,14 +23,17 @@ public class TrainingLessonPriceMessageAdapter extends RecyclerView.Adapter<Recy
 
     private Context mContext;
     private LayoutInflater inflater;
+    private static int pos = 111;
+    private EmployeeDetailModel detailModel;
 
-    public TrainingLessonPriceMessageAdapter(Context context) {
+    public TrainingLessonPriceMessageAdapter(Context context, EmployeeDetailModel employeeDetailModel) {
+        detailModel = employeeDetailModel;
         mContext = context;
         inflater = LayoutInflater.from(context);
     }
 
     public interface ChooseStatusListener {
-        void chooseStatus(boolean status);
+        void chooseStatus(boolean status,int position);
     }
 
 
@@ -47,17 +51,37 @@ public class TrainingLessonPriceMessageAdapter extends RecyclerView.Adapter<Recy
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (((ViewHolder) holder).ivChooseStatus.isChecked()) {
-            statusListener.chooseStatus(true);
-        } else {
-            statusListener.chooseStatus(false);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        ((ViewHolder)holder).tvLessonName.setText(String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getSubjectNum())
+                +"节"+detailModel.getData().getEmployeeFeeOut().get(position).getFeeName());
+        ((ViewHolder) holder).tvTrainingPrice.setText(mContext.getResources().getString(R.string.RMB)+String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getPrice()));
+        ((ViewHolder) holder).tvLessonNum.setText("(有效期"+String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getDateRange())+"天)");
+
+        if (position != pos) {
+            ((ViewHolder) holder).ivChooseStatus.setChecked(false);
         }
+
+        ((ViewHolder) holder).ivChooseStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (((ViewHolder) holder).ivChooseStatus.isChecked()) {
+                    statusListener.chooseStatus(true,position);
+                    pos = position;
+                } else {
+                    statusListener.chooseStatus(false,position);
+                    pos = 111;
+                }
+            }
+        });
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return detailModel.getData().getEmployeeFeeOut().size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -67,6 +91,8 @@ public class TrainingLessonPriceMessageAdapter extends RecyclerView.Adapter<Recy
         TextView tvLessonNum;
         @BindView(R.id.iv_choose_status)
         CheckBox ivChooseStatus;
+        @BindView(R.id.tv_training_price)
+        TextView tvTrainingPrice;
 
         ViewHolder(View view) {
             super(view);

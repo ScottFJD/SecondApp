@@ -36,6 +36,7 @@ import com.yeapao.andorid.model.EmployeeDetailModel;
 import com.yeapao.andorid.model.EmployeeListModel;
 import com.yeapao.andorid.model.FoodInfoModel;
 import com.yeapao.andorid.model.HealthDataModel;
+import com.yeapao.andorid.model.HighEmOrderModel;
 import com.yeapao.andorid.model.IAmCoachListModel;
 import com.yeapao.andorid.model.IsAmShopModel;
 import com.yeapao.andorid.model.LessonOrderModel;
@@ -570,4 +571,17 @@ public interface YeapaoApi {
 
     @POST("RunningStationController/employeeDetail")
     Observable<EmployeeDetailModel> requsetEmployeeDetail(@Query("employeeId") String employeeId, @Query("customerId") String customerId);
+
+    @POST("RunningStationController/createHighEmOrder")
+    Observable<HighEmOrderModel> requestHighEmOrder(@Query("customerId") String id, @Query("employeeId") String emId,
+                                                    @Query("subjectFeeId") String subjectFeeId);
+
+    @POST("RunningStationController/recoveryDetail")
+    Observable<EmployeeDetailModel> requestRecoverDetail(@Query("employeeId") String employeeId, @Query("customerId") String customerId);
+
+    @POST("RunningStationController/createRecoveryOrder")
+    Observable<HighEmOrderModel> requestRecoveryOrder(@Query("customerId") String id, @Query("employeeId") String emId,
+                                                      @Query("subjectFeeId") String subjectFeeId);
+
+
 }
