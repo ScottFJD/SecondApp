@@ -30,6 +30,11 @@
     <color name="food_text_color">#888888</color>
 
 
+    <color name="coach_one">#ffe1e1</color>
+    <color name="coach_two">#fff3ea</color>
+    <color name="coach_three">#e6f1ff</color>
+
+
     <color name="indicator_1">#ffcc00</color>
     <color name="indicator_2">#ffd739</color>
     <color name="indicator_3">#ffe166</color>

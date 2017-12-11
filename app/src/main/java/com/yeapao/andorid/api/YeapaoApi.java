@@ -32,6 +32,8 @@ import com.yeapao.andorid.model.DynamicDiscountCardModel;
 import com.yeapao.andorid.model.DynamicLessonListModel;
 import com.yeapao.andorid.model.DynamicLessonOrderModel;
 import com.yeapao.andorid.model.DynamiclessonDetailModel;
+import com.yeapao.andorid.model.EmployeeDetailModel;
+import com.yeapao.andorid.model.EmployeeListModel;
 import com.yeapao.andorid.model.FoodInfoModel;
 import com.yeapao.andorid.model.HealthDataModel;
 import com.yeapao.andorid.model.IAmCoachListModel;
@@ -559,4 +561,13 @@ public interface YeapaoApi {
     @POST("community/saveComplaint")
     Observable<NormalDataModel> requestComplaint(@Query("communityId") String communityId, @Query("customerId") String customerId,
                                                  @Query("content") String content);
+
+    @GET("RunningStationController/employeeList")
+    Observable<EmployeeListModel> requestEmployeeList();
+
+    @GET("RunningStationController/recoveryList")
+    Observable<EmployeeListModel> requestRecoveryList();
+
+    @POST("RunningStationController/employeeDetail")
+    Observable<EmployeeDetailModel> requsetEmployeeDetail(@Query("employeeId") String employeeId, @Query("customerId") String customerId);
 }

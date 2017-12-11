@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.scottfu.sflibrary.customview.CircleImageView;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
+import com.scottfu.sflibrary.util.GlideUtil;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.model.EmployeeListModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +27,8 @@ public class TrainingLessonMessageAdapter extends RecyclerView.Adapter<RecyclerV
     private Context mContext;
     private LayoutInflater inflater;
     private OnRecyclerViewClickListener onRecyclerViewClickListener;
+    private EmployeeListModel employeeListModel;
+    private GlideUtil glideUtil = new GlideUtil();
 
 
     public void setOnRecyclerViewClickListener(OnRecyclerViewClickListener listener) {
@@ -34,7 +38,8 @@ public class TrainingLessonMessageAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
 
-    public TrainingLessonMessageAdapter(Context context) {
+    public TrainingLessonMessageAdapter(Context context, EmployeeListModel employeeListModel) {
+        this.employeeListModel = employeeListModel;
         mContext = context;
         inflater = LayoutInflater.from(context);
     }
@@ -43,17 +48,34 @@ public class TrainingLessonMessageAdapter extends RecyclerView.Adapter<RecyclerV
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
 
-        return new ViewHolder(inflater.inflate(R.layout.item_training_lesson, parent, false),onRecyclerViewClickListener);
+        return new ViewHolder(inflater.inflate(R.layout.item_training_lesson, parent,
+                false),onRecyclerViewClickListener);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        glideUtil.glideLoadingImage(mContext,employeeListModel.getData().get(position).getHeadImage(),
+                R.drawable.y_you,((ViewHolder)holder).civTeachIcon);
+        ((ViewHolder) holder).tvTeachName.setText(employeeListModel.getData().get(position).getEmployeeName()+
+        "/"+employeeListModel.getData().get(position).getJobTitle());
+        ((ViewHolder) holder).tvTeachTitleOne.setText(employeeListModel.getData().get(position).getInformation().get(0));
+        ((ViewHolder) holder).tvTeachTitleTwo.setText(employeeListModel.getData().get(position).getInformation().get(1));
+        ((ViewHolder) holder).tvTeachPeopleNum.setText("已服务" + String.valueOf(employeeListModel.getData().get(position).getHighServerTime() )+ "人");
 
+        if (position == 0) {
+            ((ViewHolder) holder).rlItemTrainingLesson.setBackgroundColor(mContext.getResources().getColor(R.color.coach_one));
+        } else if (position == 1) {
+            ((ViewHolder) holder).rlItemTrainingLesson.setBackgroundColor(mContext.getResources().getColor(R.color.coach_two));
+        } else if (position == 2) {
+            ((ViewHolder) holder).rlItemTrainingLesson.setBackgroundColor(mContext.getResources().getColor(R.color.coach_three));
+        } else {
+            ((ViewHolder) holder).rlItemTrainingLesson.setBackgroundColor(mContext.getResources().getColor(R.color.bg_white));
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return employeeListModel.getData().size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

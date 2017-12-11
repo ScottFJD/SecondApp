@@ -4,7 +4,8 @@
     android:id="@+id/rl_item_training_lesson"
     android:background="@color/bg_white"
     android:layout_width="match_parent"
-    android:layout_height="90dp">
+    android:layout_height="90dp"
+    android:layout_marginBottom="10dp">
 
     <com.scottfu.sflibrary.customview.CircleImageView
         android:id="@+id/civ_teach_icon"
@@ -31,7 +32,7 @@
         android:id="@+id/tv_teach_title_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:text="1.国际健身协会有氧训练师认证"
         android:layout_below="@id/tv_teach_name"
         android:layout_toRightOf="@id/civ_teach_icon"
@@ -42,8 +43,9 @@
         android:id="@+id/tv_teach_title_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:text="美国有氧体适能协会认证的专业健身"
+        android:singleLine="true"
         android:layout_below="@id/tv_teach_title_one"
         android:layout_toRightOf="@id/civ_teach_icon"
         android:layout_marginLeft="15dp"
