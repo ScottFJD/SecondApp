@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.model.MyselfClassModel;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +26,7 @@ public class MyselfLessonListMessageAdapter extends RecyclerView.Adapter<Recycle
     private Context mContext;
     private LayoutInflater inflater;
     private OnRecyclerViewClickListener mlistener;
-
+    private ArrayList<MyselfClassModel.DataBean.MyClassListBean> myClassList = new ArrayList<>();
 
     public void setRecyclerViewClickListener(OnRecyclerViewClickListener listener) {
         if (listener != null) {
@@ -31,7 +34,9 @@ public class MyselfLessonListMessageAdapter extends RecyclerView.Adapter<Recycle
         }
     }
 
-    public MyselfLessonListMessageAdapter(Context context) {
+    public MyselfLessonListMessageAdapter(Context context,MyselfClassModel myselfClassModel) {
+        myClassList.addAll(myselfClassModel.getData().getTodayIsClassList());
+        myClassList.addAll(myselfClassModel.getData().getMyClassList());
         mContext = context;
         inflater = LayoutInflater.from(context);
     }
@@ -43,17 +48,38 @@ public class MyselfLessonListMessageAdapter extends RecyclerView.Adapter<Recycle
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+
+
+
         ((ViewHolder)holder).ivQrCodeLesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mlistener.OnItemClick(v, position);
             }
         });
+        ((ViewHolder) holder).tvDate1.setText(myClassList.get(position).getDate());
+        ((ViewHolder) holder).tvDate2.setText(myClassList.get(position).getTime());
+        ((ViewHolder) holder).tvLessonAddress.setText(myClassList.get(position).getShopAddress());
+        ((ViewHolder) holder).tvLessonName.setText(myClassList.get(position).getSubjectName());
+        if (myClassList.get(position).getStatus().equals("0")) {
+            ((ViewHolder) holder).tvLessonStatus.setText("还未开课");
+            ((ViewHolder) holder).tvLessonStatus.setBackgroundResource(R.drawable.lesson_status_shape_3);
+        } else if (myClassList.get(position).getStatus().equals("1")) {
+            ((ViewHolder) holder).tvLessonStatus.setText("正在上课");
+            ((ViewHolder) holder).tvLessonStatus.setBackgroundResource(R.drawable.lesson_status_shape_1);
+        } else if (myClassList.get(position).getStatus().equals("2")) {
+            ((ViewHolder) holder).tvLessonStatus.setText("即将开课");
+            ((ViewHolder) holder).tvLessonStatus.setBackgroundResource(R.drawable.lesson_status_shape_2);
+        } else {
+            ((ViewHolder) holder).tvLessonStatus.setText("已结束");
+            ((ViewHolder) holder).tvLessonStatus.setBackgroundResource(R.drawable.lesson_status_shape_4);
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return myClassList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

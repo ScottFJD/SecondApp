@@ -44,6 +44,7 @@ import com.yeapao.andorid.model.MessageListModel;
 import com.yeapao.andorid.model.MyAuthenticationModel;
 import com.yeapao.andorid.model.MyOrderDataModel;
 import com.yeapao.andorid.model.Myfiles;
+import com.yeapao.andorid.model.MyselfClassModel;
 import com.yeapao.andorid.model.MyselfLessonModel;
 import com.yeapao.andorid.model.MyselfPostModel;
 import com.yeapao.andorid.model.NormalDataModel;
@@ -583,5 +584,7 @@ public interface YeapaoApi {
     Observable<HighEmOrderModel> requestRecoveryOrder(@Query("customerId") String id, @Query("employeeId") String emId,
                                                       @Query("subjectFeeId") String subjectFeeId);
 
+    @POST("RunningStationController/myCLass")
+    Observable<MyselfClassModel> requestMyselfClass(@Query("customerId") String id);
 
 }
