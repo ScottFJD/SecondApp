@@ -18,6 +18,7 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicLessonActivity;
+import com.yeapao.andorid.homepage.station.inclusive.InclusiveActivity;
 import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonActivity;
 import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonOrderActivity;
 import com.yeapao.andorid.model.StationMainBannerModel;
@@ -77,6 +78,12 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
 
     @Override
     public void initViews(View view) {
+        tvRightBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InclusiveActivity.start(getContext());
+            }
+        });
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvStationList.setLayoutManager(linearLayoutManager);

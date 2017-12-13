@@ -530,6 +530,13 @@
             android:name=".homepage.myself.mylesson.MyselfLessonActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".homepage.station.inclusive.InclusiveActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.station.inclusive.InclusiveOrderActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"

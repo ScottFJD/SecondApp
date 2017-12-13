@@ -48,6 +48,28 @@ public class SystemDateUtil {
         return result;
     }
 
+    public static String getFetureDateMMDD(int past) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+        Date today = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("MM月dd日");
+        String result = format.format(today);
+        LogUtil.e("getFetureDate",result);
+        Log.e(null, result);
+        return result;
+    }
+
+
+    public static String getWeekOfDateV2(Date dt) {
+        String[] weekDays = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+
     public static String getFetureDateYMD(int past) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
