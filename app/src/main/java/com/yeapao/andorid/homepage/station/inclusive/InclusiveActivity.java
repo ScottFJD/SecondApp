@@ -7,12 +7,19 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.scottfu.sflibrary.util.GlideUtil;
+import com.scottfu.sflibrary.util.LogUtil;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.model.PrivateUseDetailModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 2017/12/12.
@@ -57,6 +64,9 @@ public class InclusiveActivity extends BaseActivity {
     private boolean isAgreeProtocol = false;
     private InclusiveTimePickerDialogFragment inclusiveTimePickerDialogFragment;
 
+    private String chooseTime;
+    private PrivateUseDetailModel inclusiveModel;
+
     public static void start(Context context) {
         Intent intent = new Intent();
         intent.setClass(context, InclusiveActivity.class);
@@ -70,6 +80,7 @@ public class InclusiveActivity extends BaseActivity {
         setContentView(R.layout.activity_inclusive);
         ButterKnife.bind(this);
         initTopBar();
+        getNetWork();
     }
 
     @Override
@@ -77,6 +88,21 @@ public class InclusiveActivity extends BaseActivity {
         initTitle("土豪包场");
         initBack();
         inclusiveTimePickerDialogFragment = new InclusiveTimePickerDialogFragment();
+        inclusiveTimePickerDialogFragment.setPickerPainListener(new InclusiveDateChooseListener() {
+            @Override
+            public void inclusiveCancel() {
+                inclusiveTimePickerDialogFragment.dismiss();
+            }
+
+            @Override
+            public void success(String time1, String time2) {
+                LogUtil.e(TAG, time1);
+                inclusiveTimePickerDialogFragment.dismiss();
+                chooseTime = time1.substring(0, time1.length() - 2) + " " + time2;
+                LogUtil.e(TAG, chooseTime);
+                tvInclusiveTimeStatus.setText(chooseTime);
+            }
+        });
 
     }
 
@@ -106,6 +132,16 @@ public class InclusiveActivity extends BaseActivity {
 
     }
 
+    @OnClick(R.id.tv_inclusive_time_status)
+    void setTvInclusiveTimeStatusClick() {
+        if (inclusiveTimePickerDialogFragment.isVisible()) {
+            inclusiveTimePickerDialogFragment.dismiss();
+        } else {
+            inclusiveTimePickerDialogFragment.show(getSupportFragmentManager(), "time");
+        }
+    }
+
+
     @OnClick(R.id.tv_inclusive_sure)
     public void onTvInclusiveSureClicked() {
         InclusiveOrderActivity.start(getContext());
@@ -121,5 +157,46 @@ public class InclusiveActivity extends BaseActivity {
             ivAgreementProtocol.setImageResource(R.drawable.agreement_selected);
         }
     }
+
+    private void showResult() {
+
+        GlideUtil glideUtil = new GlideUtil();
+        glideUtil.glideLoadingImage(getContext(),inclusiveModel.getData().getUrl(),R.drawable.local_tyrant_bg,ivInclusiveImage);
+        if (isNeedCoach) {
+
+        }
+
+    }
+
+
+    private void getNetWork() {
+        subscription = Network.getYeapaoApi()
+                .requestInclusive()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver);
+    }
+
+    Observer<PrivateUseDetailModel> modelObserver = new Observer<PrivateUseDetailModel>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG, e.toString());
+
+        }
+
+        @Override
+        public void onNext(PrivateUseDetailModel model) {
+            LogUtil.e(TAG, model.getErrmsg());
+            if (model.getErrmsg().equals("ok")) {
+                inclusiveModel = model;
+
+            }
+        }
+    };
 
 }

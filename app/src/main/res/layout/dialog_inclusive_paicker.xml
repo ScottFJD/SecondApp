@@ -54,6 +54,8 @@
         android:textColor="#726d7c"
         android:textSize="15sp" />
 
+
+
     <RelativeLayout
         android:background="@color/bg_white"
         android:layout_width="match_parent"
@@ -61,30 +63,32 @@
 
         <com.aigestudio.wheelpicker.WheelPicker
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:id="@+id/pain_wheel_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/bg_white"
             aigestudio:wheel_atmospheric="true"
-            aigestudio:wheel_curved="true"
             aigestudio:wheel_cyclic="true"
+            aigestudio:wheel_visible_item_count="5"
             aigestudio:wheel_item_text_color="@color/text_color"
-            aigestudio:wheel_item_text_size="24sp"
+            aigestudio:wheel_item_text_size="15sp"
             aigestudio:wheel_selected_item_text_color="@color/colorPrimary" />
 
         <com.aigestudio.wheelpicker.WheelPicker
             android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:id="@+id/pain_wheel_center_2"
-            android:layout_toRightOf="@id/pain_wheel_center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/bg_white"
             aigestudio:wheel_atmospheric="true"
-            aigestudio:wheel_curved="true"
             aigestudio:wheel_cyclic="true"
+            aigestudio:wheel_visible_item_count="5"
             aigestudio:wheel_item_text_color="@color/text_color"
-            aigestudio:wheel_item_text_size="24sp"
+            aigestudio:wheel_item_text_size="15sp"
             aigestudio:wheel_selected_item_text_color="@color/colorPrimary" />
+
 
     </RelativeLayout>
 

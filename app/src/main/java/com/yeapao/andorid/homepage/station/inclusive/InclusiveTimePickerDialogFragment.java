@@ -33,11 +33,13 @@ public class InclusiveTimePickerDialogFragment extends DialogFragment {
     private TextView title;
     private List<String> pickerList = new ArrayList<>();
 
+    private String time1 = "";
+    private String time2 = "";
 
-    private PickerPainListener mListener;
+    private InclusiveDateChooseListener mListener;
 
 
-    public void setPickerPainListener(PickerPainListener listener) {
+    public void setPickerPainListener(InclusiveDateChooseListener listener) {
         mListener = listener;
     }
 
@@ -68,30 +70,44 @@ public class InclusiveTimePickerDialogFragment extends DialogFragment {
         todayDate = (TextView) dialog.findViewById(R.id.tv_today_time);
         mWeelPicker = (WheelPicker) dialog.findViewById(R.id.pain_wheel_center);
         mWeelPicker2 = (WheelPicker) dialog.findViewById(R.id.pain_wheel_center_2);
-
+        todayDate.setText("今天是"+SystemDateUtil.getFetureDateMMDD(0)+SystemDateUtil.getWeekOfDateV2(SystemDateUtil.getDate(0)));
         mWeelPicker.setData(getFutureDays());
         mWeelPicker2.setData(getDateHour());
         mWeelPicker.setOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
             @Override
             public void onItemSelected(WheelPicker picker, Object data, int position) {
 //                mListener.getPainValue(String.valueOf(data));
+                time1 = String.valueOf(data);
+
+            }
+        });
+        mWeelPicker2.setOnItemSelectedListener(new WheelPicker.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(WheelPicker picker, Object data, int position) {
+                time2 = String.valueOf(data);
             }
         });
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mListener.cancel();
+                mListener.inclusiveCancel();
             }
         });
         mDetermine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                mListener.determine();
+                if (time1.equals("") || time1 == null) {
+                    time1 = getFutureDays().get(0);
+                }
+                if (time2.equals("") || time2 == null) {
+                    time2 = getDateHour().get(0);
+                }
+                mListener.success(time1,time2);
             }
         });
         return dialog;
-
     }
 
     private ArrayList<String> getFutureDays() {

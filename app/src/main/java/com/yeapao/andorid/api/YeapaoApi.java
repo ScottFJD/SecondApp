@@ -49,6 +49,7 @@ import com.yeapao.andorid.model.MyselfLessonModel;
 import com.yeapao.andorid.model.MyselfPostModel;
 import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.model.OrderDetailModel;
+import com.yeapao.andorid.model.PrivateUseDetailModel;
 import com.yeapao.andorid.model.PunchTheClockModel;
 import com.yeapao.andorid.model.RecommendLessonModel;
 import com.yeapao.andorid.model.RegisterModel;
@@ -586,5 +587,8 @@ public interface YeapaoApi {
 
     @POST("RunningStationController/myCLass")
     Observable<MyselfClassModel> requestMyselfClass(@Query("customerId") String id);
+
+    @GET("RunningStationController/privateUseDetail")
+    Observable<PrivateUseDetailModel> requestInclusive();
 
 }
