@@ -7,5 +7,5 @@ package com.yeapao.andorid.homepage.station.inclusive;
 public interface InclusiveDateChooseListener {
     void inclusiveCancel();
 
-    void success(String time1, String time2);
+    void success(String time1, String time2,int day1);
 }

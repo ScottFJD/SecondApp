@@ -59,6 +59,17 @@ public class SystemDateUtil {
         return result;
     }
 
+    public static String getFetureDateYYYYMMDD(int past) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR, calendar.get(Calendar.DAY_OF_YEAR) + past);
+        Date today = calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String result = format.format(today);
+        LogUtil.e("getFetureDate",result);
+        Log.e(null, result);
+        return result;
+    }
+
 
     public static String getWeekOfDateV2(Date dt) {
         String[] weekDays = {"周日", "周一", "周二", "周三", "周四", "周五", "周六"};

@@ -293,5 +293,47 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView214" />
 
+    <TextView
+        android:id="@+id/textView206"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="跑步操"
+        android:textColor="@color/bg_white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_running"
+        app:layout_constraintEnd_toEndOf="@+id/iv_running"
+        app:layout_constraintStart_toStartOf="@+id/iv_running"
+        app:layout_constraintTop_toTopOf="@+id/iv_running" />
+
+    <TextView
+        android:id="@+id/textView208"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="搏击操"
+        android:textColor="@color/bg_white"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView206"
+        app:layout_constraintEnd_toEndOf="@+id/iv_kick"
+        app:layout_constraintStart_toStartOf="@+id/iv_kick" />
+
+    <TextView
+        android:id="@+id/textView212"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="HIIT"
+        android:textColor="@color/bg_white"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView208"
+        app:layout_constraintEnd_toEndOf="@+id/iv_hiit"
+        app:layout_constraintStart_toStartOf="@+id/iv_hiit" />
+
 
 </android.support.constraint.ConstraintLayout>

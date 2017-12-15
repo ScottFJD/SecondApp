@@ -24,6 +24,7 @@ import com.yeapao.andorid.model.ClassBeginsModel;
 import com.yeapao.andorid.model.CommunityDetailModel;
 import com.yeapao.andorid.model.CookListDetailModel;
 import com.yeapao.andorid.model.CreateActualOrdersModel;
+import com.yeapao.andorid.model.CreateInclusiveModel;
 import com.yeapao.andorid.model.CreateReservationTimeModel;
 import com.yeapao.andorid.model.DepositOrdersModel;
 import com.yeapao.andorid.model.DiTingDataModel;
@@ -590,5 +591,10 @@ public interface YeapaoApi {
 
     @GET("RunningStationController/privateUseDetail")
     Observable<PrivateUseDetailModel> requestInclusive();
+
+    @POST("RunningStationController/createPrivateUse")
+    Observable<CreateInclusiveModel> requestInclusiveModel(@Query("customerId") String id, @Query("fieldType") String fieldType,
+                                                           @Query("fieldAddress") String fieldAddress, @Query("selectEmployee") String selectEmployee,
+                                                           @Query("date") String date, @Query("time") String time);
 
 }

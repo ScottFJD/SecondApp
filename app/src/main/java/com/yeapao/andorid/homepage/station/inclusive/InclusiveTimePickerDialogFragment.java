@@ -35,6 +35,7 @@ public class InclusiveTimePickerDialogFragment extends DialogFragment {
 
     private String time1 = "";
     private String time2 = "";
+    private int day1 = 0;
 
     private InclusiveDateChooseListener mListener;
 
@@ -78,6 +79,7 @@ public class InclusiveTimePickerDialogFragment extends DialogFragment {
             public void onItemSelected(WheelPicker picker, Object data, int position) {
 //                mListener.getPainValue(String.valueOf(data));
                 time1 = String.valueOf(data);
+                day1 = position;
 
             }
         });
@@ -104,7 +106,7 @@ public class InclusiveTimePickerDialogFragment extends DialogFragment {
                 if (time2.equals("") || time2 == null) {
                     time2 = getDateHour().get(0);
                 }
-                mListener.success(time1,time2);
+                mListener.success(time1,time2,day1);
             }
         });
         return dialog;
