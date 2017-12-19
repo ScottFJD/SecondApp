@@ -51,6 +51,9 @@ public class CangOrderModel {
          * type : 2
          * houseName : 健身舱预约
          * code : yy201709200000100014
+         * "isOpen": "1",
+         "discountName": "八折卡",
+         "discountPrice": 2.4
          */
 
         private int id;
@@ -60,6 +63,33 @@ public class CangOrderModel {
         private String type;
         private String houseName;
         private String code;
+        private String isOpen;
+        private String discountName;
+        private double discountPrice;
+
+        public String getIsOpen() {
+            return isOpen;
+        }
+
+        public void setIsOpen(String isOpen) {
+            this.isOpen = isOpen;
+        }
+
+        public String getDiscountName() {
+            return discountName;
+        }
+
+        public void setDiscountName(String discountName) {
+            this.discountName = discountName;
+        }
+
+        public double getDiscountPrice() {
+            return discountPrice;
+        }
+
+        public void setDiscountPrice(double discountPrice) {
+            this.discountPrice = discountPrice;
+        }
 
         public int getId() {
             return id;

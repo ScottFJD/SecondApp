@@ -25,8 +25,10 @@ public class TrainingLessonPriceMessageAdapter extends RecyclerView.Adapter<Recy
     private LayoutInflater inflater;
     private static int pos = 111;
     private EmployeeDetailModel detailModel;
+    private String type;
 
-    public TrainingLessonPriceMessageAdapter(Context context, EmployeeDetailModel employeeDetailModel) {
+    public TrainingLessonPriceMessageAdapter(Context context, EmployeeDetailModel employeeDetailModel, String type) {
+        this.type = type;
         detailModel = employeeDetailModel;
         mContext = context;
         inflater = LayoutInflater.from(context);
@@ -52,10 +54,17 @@ public class TrainingLessonPriceMessageAdapter extends RecyclerView.Adapter<Recy
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        ((ViewHolder)holder).tvLessonName.setText(String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getSubjectNum())
-                +"节"+detailModel.getData().getEmployeeFeeOut().get(position).getFeeName());
+
+        ((ViewHolder)holder).tvLessonName.setText(detailModel.getData().getEmployeeFeeOut().get(position).getFeeName());
         ((ViewHolder) holder).tvTrainingPrice.setText(mContext.getResources().getString(R.string.RMB)+String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getPrice()));
-        ((ViewHolder) holder).tvLessonNum.setText("(有效期"+String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getDateRange())+"天)");
+
+        if (type.equals(TrainingLessonActivity.HIGH)) {
+            ((ViewHolder) holder).tvLessonNum.setText("(共"+String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getSubjectNum())+"课时)");
+
+        } else {
+            ((ViewHolder) holder).tvLessonNum.setText("(有效期"+String.valueOf(detailModel.getData().getEmployeeFeeOut().get(position).getDateRange())+"天)");
+
+        }
 
         if (position != pos) {
             ((ViewHolder) holder).ivChooseStatus.setChecked(false);

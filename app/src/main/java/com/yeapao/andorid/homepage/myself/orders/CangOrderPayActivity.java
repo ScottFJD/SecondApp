@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +30,11 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
-import com.yeapao.andorid.homepage.map.repository.SportFinishActivity;
-import com.yeapao.andorid.model.ActialOrderDetailModel;
+import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicPeopleEquityActivity;
 import com.yeapao.andorid.model.ActualOrderDetailModel;
 import com.yeapao.andorid.model.CallPaymentModel;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -53,8 +54,6 @@ public class CangOrderPayActivity extends BaseActivity {
     private static final String TAG = "CangOrderPayActivity";
     @BindView(R.id.tv_pay)
     TextView tvPay;
-    @BindView(R.id.tv_fit_pay_price)
-    TextView tvFitPayPrice;
     @BindView(R.id.tv_fit_time)
     TextView tvFitTime;
     @BindView(R.id.tv_fit_order_code)
@@ -65,7 +64,17 @@ public class CangOrderPayActivity extends BaseActivity {
     CheckBox cbWechatPay;
     @BindView(R.id.cb_alipay)
     CheckBox cbAlipay;
+    @BindView(R.id.tv_need_pay_price)
+    TextView tvNeedPayPrice;
+    @BindView(R.id.iv_cang_cost)
+    ImageView ivCangCost;
+    @BindView(R.id.tv_cang_cost)
+    TextView tvCangCost;
+    @BindView(R.id.tv_real_price)
+    TextView tvRealPrice;
 
+
+    DecimalFormat decimalFormat=new DecimalFormat("0.00");
 
     private ActualOrderDetailModel actialOrderDetailModel = new ActualOrderDetailModel();
     private String payMentType;
@@ -83,16 +92,15 @@ public class CangOrderPayActivity extends BaseActivity {
     public static void start(Context context, String actualOrdersId) {
         Intent intent = new Intent();
         intent.putExtra("actualOrderId", actualOrdersId);
-        intent.setClass(context,CangOrderPayActivity.class);
+        intent.setClass(context, CangOrderPayActivity.class);
         context.startActivity(intent);
     }
-
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cang_pay);
+        setContentView(R.layout.activity_cang_pay_v2);
         ButterKnife.bind(this);
         initTopBar();
 
@@ -122,6 +130,7 @@ public class CangOrderPayActivity extends BaseActivity {
     }
 
     private void getNetWork(String actualOrdersId) {
+        LogUtil.e(TAG,actualOrdersId);
         subscription = Network.getYeapaoApi()
                 .requestActualOrderDetail(actualOrdersId)
                 .subscribeOn(Schedulers.io())
@@ -152,10 +161,23 @@ public class CangOrderPayActivity extends BaseActivity {
     };
 
     private void initView() {
-        tvFitPayPrice.setText(getContext().getResources().getString(R.string.RMB)+getPrice());
-        tvFitTime.setText(String.valueOf(actialOrderDetailModel.getData().getDuration())+"分钟");
+        DecimalFormat decimalFormat=new DecimalFormat("0.00");
+        tvNeedPayPrice.setText(getContext().getResources().getString(R.string.RMB)+decimalFormat.format(actialOrderDetailModel.getData().getPrice()));
+//        tvNeedPayPrice.setText(getContext().getResources().getString(R.string.RMB) + getPrice());
+        tvFitTime.setText(String.valueOf(actialOrderDetailModel.getData().getDuration()) + "分钟");
         tvFitOrderCode.setText(actialOrderDetailModel.getData().getActualOrdersCode());
         tvFitCangId.setText(actialOrderDetailModel.getData().getWarehouseName());
+
+        tvCangCost.setText(actialOrderDetailModel.getData().getDiscountName());
+
+        tvRealPrice.setText(getContext().getResources().getString(R.string.RMB)+decimalFormat.format(actialOrderDetailModel.getData().getDiscountPrice()));
+
+        ivCangCost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DynamicPeopleEquityActivity.start(getContext());
+            }
+        });
     }
 
     @OnClick({R.id.tv_pay, R.id.cb_wechat_pay, R.id.cb_alipay})
@@ -163,9 +185,9 @@ public class CangOrderPayActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_pay:
                 if (cbWechatPay.isChecked() || cbAlipay.isChecked()) {
-                    getPayment(getPrice(), actialOrderDetailModel.getData().getActualOrdersCode(), payMentType);
+                    getPayment(decimalFormat.format(actialOrderDetailModel.getData().getDiscountPrice()), actialOrderDetailModel.getData().getActualOrdersCode(), payMentType);
                 } else {
-                    ToastManager.showToast(getContext(),"请选择支付方式");
+                    ToastManager.showToast(getContext(), "请选择支付方式");
                 }
 
                 break;
@@ -200,14 +222,11 @@ public class CangOrderPayActivity extends BaseActivity {
     }
 
 
-
-
-
     private void getPayment(String price, String orderCode, String paymentType) {
 
-        LogUtil.e(TAG, price+"==="+orderCode+"+++"+paymentType);
+        LogUtil.e(TAG, price + "===" + orderCode + "+++" + paymentType);
         subscription = Network.getYeapaoApi()
-                .requestPayment(price,orderCode,paymentType)
+                .requestPayment(price, orderCode, paymentType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelObserverPayment);
@@ -221,7 +240,7 @@ public class CangOrderPayActivity extends BaseActivity {
 
         @Override
         public void onError(Throwable e) {
-            LogUtil.e(TAG,e.toString());
+            LogUtil.e(TAG, e.toString());
 
         }
 
@@ -259,7 +278,7 @@ public class CangOrderPayActivity extends BaseActivity {
                         @Override
                         public void run() {
                             PayTask alipay = new PayTask(CangOrderPayActivity.this);
-                            Map<String, String> result = alipay.payV2(orderInfo,true);
+                            Map<String, String> result = alipay.payV2(orderInfo, true);
                             Log.e("msp", result.toString());
                             Message msg = new Message();
                             msg.what = SDK_PAY_FLAG;
@@ -270,7 +289,7 @@ public class CangOrderPayActivity extends BaseActivity {
                     // 必须异步调用
                     Thread payThread = new Thread(payRunnable);
                     payThread.start();
-                }else{
+                } else {
 
                     PayReq request = new PayReq();
                     request.appId = ConstantYeaPao.APP_ID;
@@ -285,11 +304,9 @@ public class CangOrderPayActivity extends BaseActivity {
                 }
 
 
-
             }
         }
     };
-
 
 
     @SuppressLint("HandlerLeak")
@@ -309,7 +326,7 @@ public class CangOrderPayActivity extends BaseActivity {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Toast.makeText(getContext(), "支付成功", Toast.LENGTH_SHORT).show();
-                        ((Activity)getContext()).finish();
+                        ((Activity) getContext()).finish();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         Toast.makeText(getContext(), "支付失败", Toast.LENGTH_SHORT).show();
@@ -340,14 +357,10 @@ public class CangOrderPayActivity extends BaseActivity {
                 default:
                     break;
             }
-        };
+        }
+
+        ;
     };
-
-
-
-
-
-
 
 
     class MessageSendReceiver extends BroadcastReceiver {
@@ -355,11 +368,10 @@ public class CangOrderPayActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("wxPay.action")) {
-                ((Activity)getContext()).finish();
+                ((Activity) getContext()).finish();
             }
         }
     }
-
 
 
 }

@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +30,14 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.ConstantYeaPao;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicPeopleEquityActivity;
 import com.yeapao.andorid.model.ActialOrderDetailModel;
 import com.yeapao.andorid.model.CallPaymentModel;
 import com.yeapao.andorid.model.CangDeviceNoData;
 import com.yeapao.andorid.util.GlobalDataYepao;
 
+import java.text.DecimalFormat;
 import java.util.Map;
-
-import javax.microedition.khronos.opengles.GL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,8 +55,6 @@ public class SportFinishActivity extends BaseActivity {
     private static final String TAG = "SportFinishActivity";
     @BindView(R.id.tv_pay)
     TextView tvPay;
-    @BindView(R.id.tv_fit_pay_price)
-    TextView tvFitPayPrice;
     @BindView(R.id.tv_fit_time)
     TextView tvFitTime;
     @BindView(R.id.tv_fit_order_code)
@@ -66,8 +65,16 @@ public class SportFinishActivity extends BaseActivity {
     CheckBox cbWechatPay;
     @BindView(R.id.cb_alipay)
     CheckBox cbAlipay;
+    @BindView(R.id.tv_need_pay_price)
+    TextView tvNeedPayPrice;
+    @BindView(R.id.iv_cang_cost)
+    ImageView ivCangCost;
+    @BindView(R.id.tv_cang_cost)
+    TextView tvCangCost;
+    @BindView(R.id.tv_real_price)
+    TextView tvRealPrice;
 
-
+    DecimalFormat decimalFormat = new DecimalFormat("0.00");
     private ActialOrderDetailModel actialOrderDetailModel = new ActialOrderDetailModel();
     private String payMentType;
     private String actualOrderId;
@@ -91,11 +98,10 @@ public class SportFinishActivity extends BaseActivity {
     }
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fit_pay);
+        setContentView(R.layout.activity_fit_pay_v2);
         ButterKnife.bind(this);
         initTopBar();
 
@@ -106,7 +112,7 @@ public class SportFinishActivity extends BaseActivity {
         CangDeviceNoData cangDevice = new CangDeviceNoData();
         cangDevice = GlobalDataYepao.getCangDeviceData(getContext());
 
-        getNetWork(actualOrderId,totalTime,cangDevice.getDeviceNo());
+        getNetWork(actualOrderId, totalTime, cangDevice.getDeviceNo());
 
         if (numberReceiver == null) {
             numberReceiver = new MessageSendReceiver();
@@ -128,10 +134,10 @@ public class SportFinishActivity extends BaseActivity {
         return this;
     }
 
-    private void getNetWork(String actualOrdersId, String totalTime,String deviceNo) {
+    private void getNetWork(String actualOrdersId, String totalTime, String deviceNo) {
         LogUtil.e(TAG, actualOrdersId + "___" + totalTime);
         subscription = Network.getYeapaoApi()
-                .requestActualOrderDetail(actualOrdersId, totalTime, GlobalDataYepao.getUser(getContext()).getId(),deviceNo)
+                .requestActualOrderDetail(actualOrdersId, totalTime, GlobalDataYepao.getUser(getContext()).getId(), deviceNo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelObserver);
@@ -160,10 +166,23 @@ public class SportFinishActivity extends BaseActivity {
     };
 
     private void initView() {
-        tvFitPayPrice.setText(getContext().getResources().getString(R.string.RMB)+getPrice());
-        tvFitTime.setText(actialOrderDetailModel.getData().getTime()+"min");
+
+        tvNeedPayPrice.setText(getContext().getResources().getString(R.string.RMB) +
+                decimalFormat.format(actialOrderDetailModel.getData().getPrice()));
+        tvFitTime.setText(actialOrderDetailModel.getData().getTime() + "min");
         tvFitOrderCode.setText(actialOrderDetailModel.getData().getActualOrdersCode());
         tvFitCangId.setText(actialOrderDetailModel.getData().getWarehouseName());
+        tvCangCost.setText(actialOrderDetailModel.getData().getDiscountName());
+        //构造方法的字符格式这里如果小数不足2位,会以0补足.
+        tvRealPrice.setText(getContext().getResources().getString(R.string.RMB) +
+                decimalFormat.format(actialOrderDetailModel.getData().getDiscountPrice()));
+        int price = (int) actialOrderDetailModel.getData().getPrice();
+        ivCangCost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DynamicPeopleEquityActivity.start(getContext());
+            }
+        });
     }
 
     @OnClick({R.id.tv_pay, R.id.cb_wechat_pay, R.id.cb_alipay})
@@ -171,9 +190,9 @@ public class SportFinishActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_pay:
                 if (cbWechatPay.isChecked() || cbAlipay.isChecked()) {
-                    getPayment(getPrice(), actialOrderDetailModel.getData().getActualOrdersCode(), payMentType);
+                    getPayment(decimalFormat.format(actialOrderDetailModel.getData().getDiscountPrice()), actialOrderDetailModel.getData().getActualOrdersCode(), payMentType);
                 } else {
-                    ToastManager.showToast(getContext(),"请选择支付方式");
+                    ToastManager.showToast(getContext(), "请选择支付方式");
                 }
 
                 break;
@@ -193,8 +212,6 @@ public class SportFinishActivity extends BaseActivity {
     }
 
 
-
-
     private String getPrice() {
         String price = "";
 
@@ -210,13 +227,11 @@ public class SportFinishActivity extends BaseActivity {
     }
 
 
-
-
     private void getPayment(String price, String orderCode, String paymentType) {
 
-        LogUtil.e(TAG, price+"==="+orderCode+"+++"+paymentType);
+        LogUtil.e(TAG, price + "===" + orderCode + "+++" + paymentType);
         subscription = Network.getYeapaoApi()
-                .requestPayment(price,orderCode,paymentType)
+                .requestPayment(price, orderCode, paymentType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelObserverPayment);
@@ -230,7 +245,7 @@ public class SportFinishActivity extends BaseActivity {
 
         @Override
         public void onError(Throwable e) {
-            LogUtil.e(TAG,e.toString());
+            LogUtil.e(TAG, e.toString());
 
         }
 
@@ -268,7 +283,7 @@ public class SportFinishActivity extends BaseActivity {
                         @Override
                         public void run() {
                             PayTask alipay = new PayTask(SportFinishActivity.this);
-                            Map<String, String> result = alipay.payV2(orderInfo,true);
+                            Map<String, String> result = alipay.payV2(orderInfo, true);
                             Log.e("msp", result.toString());
                             Message msg = new Message();
                             msg.what = SDK_PAY_FLAG;
@@ -279,7 +294,7 @@ public class SportFinishActivity extends BaseActivity {
                     // 必须异步调用
                     Thread payThread = new Thread(payRunnable);
                     payThread.start();
-                }else{
+                } else {
 
                     PayReq request = new PayReq();
                     request.appId = ConstantYeaPao.APP_ID;
@@ -294,11 +309,9 @@ public class SportFinishActivity extends BaseActivity {
                 }
 
 
-
             }
         }
     };
-
 
 
     @SuppressLint("HandlerLeak")
@@ -318,8 +331,8 @@ public class SportFinishActivity extends BaseActivity {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         Toast.makeText(getContext(), "支付成功", Toast.LENGTH_SHORT).show();
-                        ((Activity)getContext()).finish();
-                        PaySuccessActivity.start(getContext(),totalTime);
+                        ((Activity) getContext()).finish();
+                        PaySuccessActivity.start(getContext(), totalTime);
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         Toast.makeText(getContext(), "支付失败", Toast.LENGTH_SHORT).show();
@@ -350,14 +363,10 @@ public class SportFinishActivity extends BaseActivity {
                 default:
                     break;
             }
-        };
+        }
+
+        ;
     };
-
-
-
-
-
-
 
 
     class MessageSendReceiver extends BroadcastReceiver {
@@ -365,7 +374,7 @@ public class SportFinishActivity extends BaseActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("wxPay.action")) {
-                ((Activity)getContext()).finish();
+                ((Activity) getContext()).finish();
                 PaySuccessActivity.start(getContext(), totalTime);
             }
         }

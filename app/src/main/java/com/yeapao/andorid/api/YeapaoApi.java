@@ -1,5 +1,6 @@
 package com.yeapao.andorid.api;
 
+import com.lidroid.xutils.db.table.Id;
 import com.yeapao.andorid.model.ActialOrderDetailModel;
 import com.yeapao.andorid.model.ActualOrderDetailModel;
 import com.yeapao.andorid.model.ActualOrderListModel;
@@ -38,6 +39,7 @@ import com.yeapao.andorid.model.EmployeeListModel;
 import com.yeapao.andorid.model.FoodInfoModel;
 import com.yeapao.andorid.model.HealthDataModel;
 import com.yeapao.andorid.model.HighEmOrderModel;
+import com.yeapao.andorid.model.HighLessonModel;
 import com.yeapao.andorid.model.IAmCoachListModel;
 import com.yeapao.andorid.model.IsAmShopModel;
 import com.yeapao.andorid.model.LessonOrderModel;
@@ -53,6 +55,7 @@ import com.yeapao.andorid.model.OrderDetailModel;
 import com.yeapao.andorid.model.PrivateUseDetailModel;
 import com.yeapao.andorid.model.PunchTheClockModel;
 import com.yeapao.andorid.model.RecommendLessonModel;
+import com.yeapao.andorid.model.RecoveryDetailModel;
 import com.yeapao.andorid.model.RegisterModel;
 import com.yeapao.andorid.model.RollCallListModel;
 import com.yeapao.andorid.model.SaveReservation;
@@ -596,5 +599,11 @@ public interface YeapaoApi {
     Observable<CreateInclusiveModel> requestInclusiveModel(@Query("customerId") String id, @Query("fieldType") String fieldType,
                                                            @Query("fieldAddress") String fieldAddress, @Query("selectEmployee") String selectEmployee,
                                                            @Query("date") String date, @Query("time") String time);
+
+    @POST("RunningStationController/emHighOrderDetail")
+    Observable<HighLessonModel> requestHighLessonDetailActivity(@Query("emHighOrderId") String id);
+
+    @POST("RunningStationController/recoveryOrderDetail")
+    Observable<RecoveryDetailModel> requestRecoveryDetail(@Query("recoveryOrderId")String id);
 
 }

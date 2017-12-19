@@ -8,6 +8,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.map.Text;
@@ -18,6 +19,8 @@ import com.yeapao.andorid.base.BaseActivity;
 import com.yeapao.andorid.dialog.DialogUtils;
 import com.yeapao.andorid.model.ActualOrderDetailModel;
 import com.yeapao.andorid.model.NormalDataModel;
+
+import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +61,18 @@ public class CangOrderDetailActivity extends BaseActivity {
     TextView tvCangOrderTitle;
     @BindView(R.id.tv_cang_order_time)
     TextView tvCangOrderTime;
+    @BindView(R.id.rl_pay_way)
+    RelativeLayout rlPayWay;
+    @BindView(R.id.rl_discount_constraint)
+    RelativeLayout rlDiscountConstraint;
+    @BindView(R.id.rl_pay_price)
+    RelativeLayout rlPayPrice;
+    @BindView(R.id.tv_order_price)
+    TextView tvOrderPrice;
+    @BindView(R.id.tv_discount_title)
+    TextView tvDiscountTitle;
 
+    DecimalFormat decimalFormat=new DecimalFormat("0.00");
 
 
     private String mActualOrderId;
@@ -93,16 +107,30 @@ public class CangOrderDetailActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (type.equals(CangOrder)) {
+            getNetWork(mActualOrderId);
+        } else {
+            getNetWorkForCangReservationOrder(mActualOrderId);
+        }
+    }
+
     private void initView() {
+        rlDiscountConstraint.setVisibility(View.VISIBLE);
+        tvOrderPrice.setText(getContext().getResources().getString(R.string.RMB) + decimalFormat.format(mActualModel.getData().getPrice()));
         tvCangOrderTitle.setText("健身舱使用");
         tvCangOrderTime.setText(getContext().getResources().getString(R.string.cang_pay1));
         tvCangOrder1.setText(mActualModel.getData().getActualOrdersCode());
         tvCangOrder2.setText(mActualModel.getData().getStartDate());
         tvCangOrder3.setText(String.valueOf(mActualModel.getData().getDuration()) + "分钟");
         tvCangOrder4.setText(mActualModel.getData().getWarehouseName());
-        tvCangOrder5.setText(getContext().getResources().getString(R.string.RMB) + String.valueOf(mActualModel.getData().getPrice()));
+        tvCangOrder5.setText(getContext().getResources().getString(R.string.RMB) + decimalFormat.format(mActualModel.getData().getDiscountPrice()));
         if (mActualModel.getData().getTypes() == null) {
-            tvCangOrderPay.setVisibility(View.GONE);
+            rlPayWay.setVisibility(View.GONE);
+            tvCangOrderPay.setVisibility(View.VISIBLE);
             ivCangOrder6.setVisibility(View.GONE);
             tvCangOrderPay.setText("继续支付");
             tvCangOrderPay.setTextColor(getContext().getResources().getColor(R.color.yellow_text_color));
@@ -144,13 +172,14 @@ public class CangOrderDetailActivity extends BaseActivity {
 
 
     private void initViewV2() {
+        rlDiscountConstraint.setVisibility(View.GONE);
         tvCangOrderTitle.setText("健身舱预约");
         tvCangOrderTime.setText(getContext().getResources().getString(R.string.cang_reservation_pay1));
         tvCangOrder1.setText(mActualModel.getData().getReservaOrdersCode());
         tvCangOrder2.setText(mActualModel.getData().getStartDate());
         tvCangOrder3.setText(String.valueOf(mActualModel.getData().getDuration()) + "分钟");
         tvCangOrder4.setText(mActualModel.getData().getWarehouseName());
-        tvCangOrder5.setText(getContext().getResources().getString(R.string.RMB) + String.valueOf(mActualModel.getData().getPrice()));
+        tvCangOrder5.setText(getContext().getResources().getString(R.string.RMB) + decimalFormat.format(mActualModel.getData().getPrice()));
         if (mActualModel.getData().getTypes() == null) {
             tvCangOrderPay.setVisibility(View.GONE);
             ivCangOrder6.setVisibility(View.GONE);

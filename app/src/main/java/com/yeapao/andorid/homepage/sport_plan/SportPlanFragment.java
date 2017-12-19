@@ -67,6 +67,7 @@ public class SportPlanFragment extends BaseFragment {
 
     private void initView(View view) {
 
+        messageIcon.setVisibility(View.GONE);
         messageIcon = (ImageView) view.findViewById(R.id.iv_sport_message);
         messageIcon.setOnClickListener(new View.OnClickListener() {
             @Override

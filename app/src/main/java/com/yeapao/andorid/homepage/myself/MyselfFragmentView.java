@@ -178,6 +178,8 @@ public class MyselfFragmentView extends Fragment implements MyselfContract.View 
                         MyselfCertificationActivity.start(getContext());
                     } else if (name.equals("权益卡")) {
                         DynamicPeopleEquityActivity.start(getContext());
+                    } else if (name.equals("我的方案")) {
+                        MyselfSportPlanActivity.start(getContext());
                     }
                 }
             });

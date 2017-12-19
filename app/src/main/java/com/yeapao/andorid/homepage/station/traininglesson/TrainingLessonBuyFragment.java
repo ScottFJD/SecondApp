@@ -32,16 +32,18 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
     private TextView userProtocol;
     private TextView gotoPay;
 
+    private String type;
+
     private boolean mProtocolStatus = false;
 
     private EmployeeDetailModel employeeDetailModel;
 
 
-
-    public static TrainingLessonBuyFragment newInstance(EmployeeDetailModel employeeDetailModel) {
+    public static TrainingLessonBuyFragment newInstance(EmployeeDetailModel employeeDetailModel, String type) {
         TrainingLessonBuyFragment mTrainingLessonBuyFragment = new TrainingLessonBuyFragment();
         Bundle args = new Bundle();
-        args.putSerializable("employeeDetail",employeeDetailModel);
+        args.putSerializable("employeeDetail", employeeDetailModel);
+        args.putString("type",type);
         mTrainingLessonBuyFragment.setArguments(args);
         return mTrainingLessonBuyFragment;
     }
@@ -73,6 +75,7 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         employeeDetailModel = (EmployeeDetailModel) getArguments().getSerializable("employeeDetail");
+        type = getArguments().getString("type");
 
         Dialog dialog = new Dialog(getActivity(), R.style.CustomDatePickerDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -93,7 +96,7 @@ public class TrainingLessonBuyFragment extends DialogFragment implements View.On
         gotoPay = (TextView) dialog.findViewById(R.id.tv_pay);
 
         lessonpriceList.setLayoutManager(new LinearLayoutManager(getContext()));
-        trainingLessonPriceMessageAdapter = new TrainingLessonPriceMessageAdapter(getContext(),employeeDetailModel);
+        trainingLessonPriceMessageAdapter = new TrainingLessonPriceMessageAdapter(getContext(),employeeDetailModel,type);
         lessonpriceList.setAdapter(trainingLessonPriceMessageAdapter);
         trainingLessonPriceMessageAdapter.setChooseStatusListener(new TrainingLessonPriceMessageAdapter.ChooseStatusListener() {
             @Override

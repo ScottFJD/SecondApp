@@ -54,6 +54,33 @@ public class ActialOrderDetailModel {
         private String time;
         private String warehouseName;
         private String actualOrdersCode;
+        private double discountPrice;
+        private String isOpen;
+        private String discountName;
+
+        public double getDiscountPrice() {
+            return discountPrice;
+        }
+
+        public void setDiscountPrice(double discountPrice) {
+            this.discountPrice = discountPrice;
+        }
+
+        public String getIsOpen() {
+            return isOpen;
+        }
+
+        public void setIsOpen(String isOpen) {
+            this.isOpen = isOpen;
+        }
+
+        public String getDiscountName() {
+            return discountName;
+        }
+
+        public void setDiscountName(String discountName) {
+            this.discountName = discountName;
+        }
 
         public String getActualOrderId() {
             return actualOrderId;

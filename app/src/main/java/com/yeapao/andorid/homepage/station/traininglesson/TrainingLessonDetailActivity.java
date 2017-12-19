@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scottfu.sflibrary.customview.CircleImageView;
 import com.scottfu.sflibrary.util.GlideUtil;
 import com.scottfu.sflibrary.util.LogUtil;
+import com.scottfu.sflibrary.util.ScreenUtil;
 import com.yeapao.andorid.LoginActivity;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
@@ -132,8 +134,9 @@ public class TrainingLessonDetailActivity extends BaseActivity {
                     break;
             }
         }
+
         glideUtil.glideLoadingImage(getContext(), detailModel.getData().getEmployeeDetailOut().getUrl(), R.color.bg_white, ivLessonContent);
-        trainingLessonBuyFragment = TrainingLessonBuyFragment.newInstance(detailModel);
+        trainingLessonBuyFragment = TrainingLessonBuyFragment.newInstance(detailModel,type);
         trainingLessonBuyFragment.setTrainingLessonListener(new TrainingLessonBuyFragment.TrainingLessonBuyListener() {
             @Override
             public void cancelClick() {

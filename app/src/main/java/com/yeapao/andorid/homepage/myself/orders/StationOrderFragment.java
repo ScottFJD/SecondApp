@@ -16,6 +16,7 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseFragment;
 import com.yeapao.andorid.dialog.DialogUtils;
+import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonDetailActivity;
 import com.yeapao.andorid.model.CangReservationOrderListModel;
 import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.model.StationOrderList;
@@ -106,7 +107,13 @@ public class StationOrderFragment extends BaseFragment {
         mMessageAdapter.setOnItemClickListener(new OnRecyclerViewClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
-                StationOrderDetailActivity.start(getContext(),String.valueOf(stationOrderList.getData().get(position).getId()));
+                if (stationOrderList.getData().get(position).getTypes().equals("1")) {
+                    StationOrderDetailActivity.start(getContext(),String.valueOf(stationOrderList.getData().get(position).getId()));
+                } else if (stationOrderList.getData().get(position).getTypes().equals("2")||
+                        stationOrderList.getData().get(position).getTypes().equals("3")) {
+                    TrainLessonDetailActivity.start(getContext(),stationOrderList.getData().get(position).getTypes(),String.valueOf(stationOrderList.getData().get(position).getId()));
+                }
+
 //                CangOrderDetailActivity.start(getContext(),String.valueOf(cangReservationOrderListModel.getData().get(position).getReservaOrdersId()),CangOrderDetailActivity.CangReservation);
             }
         });

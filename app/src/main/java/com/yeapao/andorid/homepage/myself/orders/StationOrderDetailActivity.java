@@ -114,7 +114,7 @@ public class StationOrderDetailActivity extends BaseActivity {
         tvStationOrderPrice.setText(getResources().getString(R.string.RMB) + String.valueOf(stationDynamicOrderModel.getData().getActualPrice()));
         tvStationCoupon.setText("无");
         tvDiscount.setText(stationDynamicOrderModel.getData().getDiscountName());
-        DecimalFormat decimalFormat=new DecimalFormat(".00");
+        DecimalFormat decimalFormat=new DecimalFormat("0.00");
         tvRealPay.setText(getResources().getString(R.string.RMB)+decimalFormat.format(stationDynamicOrderModel.getData().getDiscountPrice()));
 
     }

@@ -22,10 +22,11 @@
         android:id="@+id/tv_lesson_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="XXXX"
         android:textColor="@color/text_hint_title_color"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_lesson_name"
-        app:layout_constraintStart_toEndOf="@+id/tv_training_price" />
+        app:layout_constraintStart_toEndOf="@+id/tv_lesson_name" />
 
     <CheckBox
         android:id="@+id/iv_choose_status"
@@ -51,11 +52,11 @@
         android:id="@+id/tv_training_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:text="@string/RMB"
         android:textColor="@color/text_red"
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_lesson_name"
-        app:layout_constraintStart_toEndOf="@+id/tv_lesson_name" />
+        app:layout_constraintStart_toEndOf="@+id/tv_lesson_num" />
 
 </android.support.constraint.ConstraintLayout>

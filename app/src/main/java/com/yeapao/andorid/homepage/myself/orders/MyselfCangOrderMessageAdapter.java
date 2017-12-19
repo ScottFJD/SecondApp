@@ -13,6 +13,8 @@ import com.yeapao.andorid.R;
 import com.yeapao.andorid.model.ActualOrderListModel;
 import com.yeapao.andorid.model.CangOrderModel;
 
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,6 +35,7 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
 
     private CangOrderModel actualOrderListModel = new CangOrderModel();
 
+    DecimalFormat decimalFormat=new DecimalFormat("0.00");
 
     public void setCangOrderStatusListener(CangOrderStatusListener listener) {
         cangOrderStatusListener = listener;
@@ -75,8 +78,16 @@ public class MyselfCangOrderMessageAdapter extends RecyclerView.Adapter<Recycler
         }
         ((ViewHolder) holder).tvTime.setText("使用时长  "+String.valueOf(actualOrderListModel.getData().get(position).getDuration())+"分钟");
 
-        ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB)+actualOrderListModel.getData()
-        .get(position).getPrice());
+        if (actualOrderListModel.getData().get(position).getIsOpen().equals("1")) {
+
+            ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB) + decimalFormat.format(actualOrderListModel.getData()
+                    .get(position).getDiscountPrice()));
+        } else {
+            ((ViewHolder) holder).tvSum.setText(mContext.getResources().getString(R.string.RMB)+decimalFormat.format(actualOrderListModel.getData()
+                    .get(position).getPrice()));
+        }
+
+
 
     }
 

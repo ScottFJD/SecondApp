@@ -23,19 +23,19 @@
        android:orientation="vertical">
 
        <include layout="@layout/normal_top_bar" />
-       <ScrollView
+       <com.scottfu.sflibrary.view.HeightScrollView
            android:layout_width="match_parent"
            android:layout_height="match_parent">
 
            <LinearLayout
                android:layout_width="match_parent"
-               android:layout_height="match_parent"
+               android:layout_height="wrap_content"
                android:orientation="vertical">
 
                <include layout="@layout/constraint_training_lesson_detail" />
            </LinearLayout>
 
-       </ScrollView>
+       </com.scottfu.sflibrary.view.HeightScrollView>
    </LinearLayout>
 
 

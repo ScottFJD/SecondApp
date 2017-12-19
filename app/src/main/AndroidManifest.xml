@@ -537,6 +537,13 @@
             android:name=".homepage.station.inclusive.InclusiveOrderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".homepage.myself.MyselfSportPlanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.myself.orders.TrainLessonDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <!--友盟-->
         <meta-data
             android:name="UMENG_APPKEY"

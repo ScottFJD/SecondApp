@@ -49,6 +49,9 @@ public class ActualOrderDetailModel {
          * warehouseName : 05120001
          * price : 12
          * types : null
+         * "isOpen": "1",
+         "discountName": "八折卡",
+         "discountPrice": 2.4
          */
 
         private int actualOrdersId;
@@ -58,6 +61,33 @@ public class ActualOrderDetailModel {
         private String warehouseName;
         private double price;
         private String types;
+        private String isOpen;
+        private String discountName;
+        private double discountPrice;
+
+        public String getIsOpen() {
+            return isOpen;
+        }
+
+        public void setIsOpen(String isOpen) {
+            this.isOpen = isOpen;
+        }
+
+        public String getDiscountName() {
+            return discountName;
+        }
+
+        public void setDiscountName(String discountName) {
+            this.discountName = discountName;
+        }
+
+        public double getDiscountPrice() {
+            return discountPrice;
+        }
+
+        public void setDiscountPrice(double discountPrice) {
+            this.discountPrice = discountPrice;
+        }
 
         public String getReservaOrdersId() {
             return reservaOrdersId;
