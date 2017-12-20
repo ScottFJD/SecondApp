@@ -62,6 +62,12 @@ public class StationOrderFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getNetWorkStationOrderList(GlobalDataYepao.getUser(getContext()).getId());
+    }
+
     private void getNetWork(String id) {
         LogUtil.e(TAG,id);
         subscription = Network.getYeapaoApi()
@@ -109,8 +115,7 @@ public class StationOrderFragment extends BaseFragment {
             public void OnItemClick(View v, int position) {
                 if (stationOrderList.getData().get(position).getTypes().equals("1")) {
                     StationOrderDetailActivity.start(getContext(),String.valueOf(stationOrderList.getData().get(position).getId()));
-                } else if (stationOrderList.getData().get(position).getTypes().equals("2")||
-                        stationOrderList.getData().get(position).getTypes().equals("3")) {
+                } else  {
                     TrainLessonDetailActivity.start(getContext(),stationOrderList.getData().get(position).getTypes(),String.valueOf(stationOrderList.getData().get(position).getId()));
                 }
 

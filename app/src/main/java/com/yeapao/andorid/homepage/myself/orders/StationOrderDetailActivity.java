@@ -10,9 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.scottfu.sflibrary.util.LogUtil;
+import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.model.NormalDataModel;
 import com.yeapao.andorid.model.StationDynamicOrderModel;
 
 import java.text.DecimalFormat;
@@ -122,7 +124,7 @@ public class StationOrderDetailActivity extends BaseActivity {
 
     @OnClick(R.id.tv_station_delete)
     void setStationDelete(View view) {
-
+            getNetWorkDelete(calOrderId);
     }
 
     @Override
@@ -157,6 +159,38 @@ public class StationOrderDetailActivity extends BaseActivity {
             if (model.getErrmsg().equals("ok")) {
                 stationDynamicOrderModel = model;
                 showView();
+            }
+        }
+    };
+
+
+
+    private void getNetWorkDelete(String id) {
+        LogUtil.e(TAG, id);
+        subscription = Network.getYeapaoApi()
+                .requestDeleteStationOrder(id, "1")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserverDelete);
+    }
+
+    Observer<NormalDataModel> modelObserverDelete = new Observer<NormalDataModel>() {
+        @Override
+        public void onCompleted() {
+            finish();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG, e.toString());
+            ToastManager.showToast(getContext(), "删除订单失败");
+        }
+
+        @Override
+        public void onNext(NormalDataModel model) {
+            LogUtil.e(TAG, model.getErrmsg());
+            if (model.getErrmsg().equals("ok")) {
+                finish();
             }
         }
     };

@@ -145,7 +145,7 @@
         app:srcCompat="@color/bg_grey" />
 
     <TextView
-        android:id="@+id/textView164"
+        android:id="@+id/tv_station_title_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -164,7 +164,7 @@
         android:text="000000"
         android:textColor="@color/text_color"
         android:textSize="16sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView164"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_station_title_2"
         app:layout_constraintRight_toRightOf="parent" />
 
     <ImageView

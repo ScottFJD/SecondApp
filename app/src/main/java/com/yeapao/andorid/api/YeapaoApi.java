@@ -41,6 +41,7 @@ import com.yeapao.andorid.model.HealthDataModel;
 import com.yeapao.andorid.model.HighEmOrderModel;
 import com.yeapao.andorid.model.HighLessonModel;
 import com.yeapao.andorid.model.IAmCoachListModel;
+import com.yeapao.andorid.model.InclusiveOrderDetailModel;
 import com.yeapao.andorid.model.IsAmShopModel;
 import com.yeapao.andorid.model.LessonOrderModel;
 import com.yeapao.andorid.model.MessageListModel;
@@ -605,5 +606,8 @@ public interface YeapaoApi {
 
     @POST("RunningStationController/recoveryOrderDetail")
     Observable<RecoveryDetailModel> requestRecoveryDetail(@Query("recoveryOrderId")String id);
+
+    @POST("RunningStationController/prUseOrderDetail")
+    Observable<InclusiveOrderDetailModel> requestInclusiveOrderDetail(@Query("prUseOrderId") String id);
 
 }
