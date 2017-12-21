@@ -28,6 +28,17 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private OnRecyclerViewClickListener mListener;
     private StationMainBannerModel stationMainBannerModel;
     private GlideUtil glideUtil = new GlideUtil();
+    private StationHeaderClickListener headerClickListener;
+
+    public interface StationHeaderClickListener {
+        void onHeaderClick(View view);
+    }
+
+    public void setStationHeaderClickListener(StationHeaderClickListener listener) {
+        if (listener != null) {
+            headerClickListener = listener;
+        }
+    }
 
     public void setOnRecyclerViewClickListener(OnRecyclerViewClickListener listener) {
         if (listener != null) {
@@ -45,23 +56,47 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new StationViewHolder(mInflater.inflate(R.layout.item_station, parent, false),mListener);
+        return new StationViewHolder(mInflater.inflate(R.layout.item_station, parent, false), mListener);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getUrl(),
                 R.drawable.lesson_placeholder, ((StationViewHolder) holder).ivItemBg);
         if (position == 0) {
             ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
         } else if (position == 1) {
-            ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
-//            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
-//                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
+
+            if (stationMainBannerModel.getData().get(position).getHeadImage() != null) {
+                ((StationViewHolder) holder).civUserHeader.setVisibility(View.VISIBLE);
+                glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
+                        R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
+                ((StationViewHolder) holder).civUserHeader.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        headerClickListener.onHeaderClick(((StationViewHolder) holder).civUserHeader);
+                    }
+                });
+            } else {
+                ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
+            }
+
         } else if (position == 2) {
-            ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
-//            glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
-//                    R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
+
+            if (stationMainBannerModel.getData().get(position).getHeadImage() != null) {
+                ((StationViewHolder) holder).civUserHeader.setVisibility(View.VISIBLE);
+                glideUtil.glideLoadingImage(mContext, stationMainBannerModel.getData().get(position).getHeadImage(),
+                        R.drawable.y_you, ((StationViewHolder) holder).civUserHeader);
+                ((StationViewHolder) holder).civUserHeader.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        headerClickListener.onHeaderClick(((StationViewHolder) holder).civUserHeader);
+                    }
+                });
+            } else {
+                ((StationViewHolder) holder).civUserHeader.setVisibility(View.GONE);
+            }
+
         }
     }
 
@@ -70,7 +105,7 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return stationMainBannerModel.getData().size();
     }
 
-    static class StationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class StationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private OnRecyclerViewClickListener listener;
 
         @BindView(R.id.iv_item_bg)
@@ -78,7 +113,7 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @BindView(R.id.civ_user_header)
         CircleImageView civUserHeader;
 
-        StationViewHolder(View view,OnRecyclerViewClickListener listener) {
+        StationViewHolder(View view, OnRecyclerViewClickListener listener) {
             super(view);
             ButterKnife.bind(this, view);
             this.listener = listener;
@@ -87,7 +122,7 @@ public class StationMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         @Override
         public void onClick(View v) {
-            listener.OnItemClick(v,getLayoutPosition());
+            listener.OnItemClick(v, getLayoutPosition());
         }
     }
 }

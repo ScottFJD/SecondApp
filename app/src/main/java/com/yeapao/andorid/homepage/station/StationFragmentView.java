@@ -5,9 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,8 @@ import com.yeapao.andorid.homepage.station.inclusive.InclusiveActivity;
 import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonActivity;
 import com.yeapao.andorid.homepage.station.traininglesson.TrainingLessonOrderActivity;
 import com.yeapao.andorid.model.StationMainBannerModel;
+import com.yeapao.andorid.popupwindow.PopupWindowChat;
+import com.yeapao.andorid.util.GlobalDataYepao;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +53,8 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     private StationMessageAdapter stationMessageAdapter;
     private StationMainBannerModel stationMainBannerModel;
 
+    private PopupWindowChat popupWindowChat;
+
     public static StationFragmentView newInstance() {
         return new StationFragmentView();
     }
@@ -64,7 +70,12 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_run_station, container, false);
         unbinder = ButterKnife.bind(this, view);
-        getNetWork();
+        if (GlobalDataYepao.isLogin()) {
+            getNetWorkId(GlobalDataYepao.getUser(getContext()).getId());
+        } else {
+            getNetWork();
+        }
+
         initViews(view);
         return view;
     }
@@ -78,6 +89,9 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
 
     @Override
     public void initViews(View view) {
+        popupWindowChat = new PopupWindowChat();
+        popupWindowChat.initPopChat(getContext());
+
         tvRightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +106,23 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     private void showResult() {
         stationMessageAdapter = new StationMessageAdapter(getContext(),stationMainBannerModel);
         rvStationList.setAdapter(stationMessageAdapter);
+        stationMessageAdapter.setStationHeaderClickListener(new StationMessageAdapter.StationHeaderClickListener() {
+            @Override
+            public void onHeaderClick(View view) {
+                popupWindowChat.showAtLocation(view, Gravity.LEFT,20,-200);
+                popupWindowChat.setChatClickListener(new PopupWindowChat.ChatClickListener() {
+                    @Override
+                    public void reservationLessonClick() {
+                        LogUtil.e(TAG,"reservationLessonClick");
+                    }
+
+                    @Override
+                    public void sendClick() {
+                        LogUtil.e(TAG,"sendClick");
+                    }
+                });
+            }
+        });
         stationMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
@@ -117,6 +148,13 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     private void getNetWork() {
         subscription = Network.getYeapaoApi()
                 .getStationMainModel()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver);
+    }
+    private void getNetWorkId(String id) {
+        subscription = Network.getYeapaoApi()
+                .getStationMainModelId(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(modelObserver);

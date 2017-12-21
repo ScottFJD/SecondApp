@@ -537,6 +537,9 @@ public interface YeapaoApi {
     //跑站首页
     @GET("RunningStationController/mainBannerList")
     Observable<StationMainBannerModel> getStationMainModel();
+    //跑站首页
+    @POST("RunningStationController/mainBannerList")
+    Observable<StationMainBannerModel> getStationMainModelId(@Query("customerId")String id);
 //动感课程列表
     @POST("RunningStationController/calendarListOutList")
     Observable<DynamicLessonListModel> requestDynamicLesson(@Query("customerId") String id, @Query("date") String date);

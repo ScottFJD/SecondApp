@@ -1,1 +1,1 @@
-include ':app', ':sflibrary'
+include ':app', ':sflibrary', ':easeui'
