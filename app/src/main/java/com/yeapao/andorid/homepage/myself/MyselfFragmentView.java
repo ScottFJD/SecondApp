@@ -1,6 +1,5 @@
 package com.yeapao.andorid.homepage.myself;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,26 +12,21 @@ import android.widget.ImageView;
 
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.LogUtil;
-import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.LoginActivity;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
+import com.yeapao.andorid.homepage.myself.iscoach.IsCoachActivity;
 import com.yeapao.andorid.homepage.myself.orders.MyselfOrdersActivity;
 import com.yeapao.andorid.homepage.myself.tab.MyselfHealthActivity;
-import com.yeapao.andorid.homepage.myself.tab.MyselfLessonActivity;
-import com.yeapao.andorid.homepage.myself.tab.MyselfOrderActivity;
 import com.yeapao.andorid.homepage.myself.tab.MyselfPostActivity;
 import com.yeapao.andorid.homepage.myself.tab.MyselfReservationActivity;
 import com.yeapao.andorid.homepage.myself.tab.MyselfSettingActivity;
 import com.yeapao.andorid.homepage.myself.tab.coach.MyselfCoachActivity;
-import com.yeapao.andorid.homepage.myself.tab.health.HealthRepositoryActivity;
-import com.yeapao.andorid.homepage.myself.tab.health.testCoordinatorLayoutActivity;
 import com.yeapao.andorid.homepage.myself.tab.setting.ChangeDataActivity;
 import com.yeapao.andorid.homepage.myself.tab.shopkeeper.MyselfShopOwnerActivity;
 import com.yeapao.andorid.homepage.station.dynamiclesson.DynamicPeopleEquityActivity;
 import com.yeapao.andorid.model.UserData;
 import com.yeapao.andorid.model.UserDetailsModel;
-import com.yeapao.andorid.userinfo.FillUserInfoActivity;
 import com.yeapao.andorid.util.GlobalDataYepao;
 
 import butterknife.BindView;
@@ -168,7 +162,8 @@ public class MyselfFragmentView extends Fragment implements MyselfContract.View 
                     } else if (name.equals("我是店长")) {
                         MyselfShopOwnerActivity.start(getContext());
                     } else if (name.equals("我是教练")) {
-                        MyselfCoachActivity.start(getContext());
+                        IsCoachActivity.start(getContext());
+//                        MyselfCoachActivity.start(getContext());
 //                        FillUserInfoActivity.start(getContext());
                     } else if (name.equals("健康数据库")) {
                         MyselfHealthActivity.start(getContext());

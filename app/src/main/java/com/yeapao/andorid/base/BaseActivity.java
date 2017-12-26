@@ -106,6 +106,14 @@ public abstract class BaseActivity extends AppCompatActivity{
         ivRightImage.setImageDrawable(drawable);
         ivRightImage.setVisibility(View.VISIBLE);
     }
+    protected void initRightIconWithClick(Drawable drawable,View.OnClickListener onClickListener) {
+        tvRightTextView = (TextView) findViewById(R.id.tv_right);
+        tvRightTextView.setVisibility(View.INVISIBLE);
+        ivRightImage = (ImageView) findViewById(R.id.iv_right);
+        ivRightImage.setImageDrawable(drawable);
+        ivRightImage.setVisibility(View.VISIBLE);
+        ivRightImage.setOnClickListener(onClickListener);
+    }
 
 
 

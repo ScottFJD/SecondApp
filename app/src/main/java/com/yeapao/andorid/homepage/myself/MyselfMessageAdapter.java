@@ -76,7 +76,7 @@ public class MyselfMessageAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             myselfTabModels.clear();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
 
             MyselfTabModel myselfTabModel = new MyselfTabModel();
             switch (i) {

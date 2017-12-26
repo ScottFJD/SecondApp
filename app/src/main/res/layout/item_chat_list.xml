@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/bg_white">
+
+    <com.scottfu.sflibrary.customview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/y_you"
+        app:border_color="@color/bg_white"
+        app:border_width="0dp"/>
+
+    <TextView
+        android:id="@+id/textView164"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="XXX"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView215"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
+        android:text="XXXXXXXXXXXXXXXXX"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView" />
+
+    <TextView
+        android:id="@+id/textView217"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="XXX"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView164"
+        app:layout_constraintStart_toEndOf="@+id/textView164" />
+
+    <TextView
+        android:id="@+id/textView219"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="XXXXXX"
+        android:textColor="@color/text_color"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView217"
+        app:layout_constraintStart_toEndOf="@+id/textView217" />
+
+    <TextView
+        android:id="@+id/textView221"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="XXXX"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView219"
+        app:layout_constraintEnd_toEndOf="parent" />
+</android.support.constraint.ConstraintLayout>

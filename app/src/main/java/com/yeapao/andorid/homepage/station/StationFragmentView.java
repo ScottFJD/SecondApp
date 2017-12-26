@@ -109,20 +109,21 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
         stationMessageAdapter.setStationHeaderClickListener(new StationMessageAdapter.StationHeaderClickListener() {
             @Override
             public void onHeaderClick(View view) {
-                popupWindowChat.showAtLocation(view, Gravity.LEFT,20,-200);
-                popupWindowChat.setChatClickListener(new PopupWindowChat.ChatClickListener() {
-                    @Override
-                    public void reservationLessonClick() {
-                        LogUtil.e(TAG,"reservationLessonClick");
-                    }
-
-                    @Override
-                    public void sendClick() {
-                        LogUtil.e(TAG,"sendClick");
-                    }
-                });
+//                popupWindowChat.showAtLocation(view, Gravity.LEFT,20,-200);
+//                popupWindowChat.setChatClickListener(new PopupWindowChat.ChatClickListener() {
+//                    @Override
+//                    public void reservationLessonClick() {
+//                        LogUtil.e(TAG,"reservationLessonClick");
+//                    }
+//
+//                    @Override
+//                    public void sendClick() {
+//                        LogUtil.e(TAG,"sendClick");
+//                    }
+//                });
             }
         });
+
         stationMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
