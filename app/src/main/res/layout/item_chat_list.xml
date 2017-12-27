@@ -7,7 +7,7 @@
     android:background="@color/bg_white">
 
     <com.scottfu.sflibrary.customview.CircleImageView
-        android:id="@+id/circleImageView"
+        android:id="@+id/cir_header"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
@@ -19,7 +19,7 @@
         app:border_width="0dp"/>
 
     <TextView
-        android:id="@+id/textView164"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,44 +27,44 @@
         android:text="XXX"
         android:textColor="@color/text_color"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/circleImageView"
+        app:layout_constraintStart_toEndOf="@+id/cir_header"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView215"
+        android:id="@+id/tv_chat_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginStart="8dp"
         android:text="XXXXXXXXXXXXXXXXX"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/circleImageView" />
+        app:layout_constraintStart_toEndOf="@+id/cir_header" />
 
     <TextView
-        android:id="@+id/textView217"
+        android:id="@+id/tv_people_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="XXX"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView164"
-        app:layout_constraintStart_toEndOf="@+id/textView164" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_name" />
 
     <TextView
-        android:id="@+id/textView219"
+        android:id="@+id/tv_people_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="XXXXXX"
         android:textColor="@color/text_color"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView217"
-        app:layout_constraintStart_toEndOf="@+id/textView217" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_people_title"
+        app:layout_constraintStart_toEndOf="@+id/tv_people_title" />
 
     <TextView
-        android:id="@+id/textView221"
+        android:id="@+id/tv_chat_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="XXXX"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView219"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_people_time"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

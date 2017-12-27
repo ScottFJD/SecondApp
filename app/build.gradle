@@ -76,29 +76,27 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-//    compile 'com.android.support:appcompat-v7:25.3.1'
-//    compile 'com.android.support:design:25.3.1'
-//    compile 'com.android.support:support-vector-drawable:25.3.1'
-
-
+    //    compile 'com.android.support:appcompat-v7:25.3.1'
+    //    compile 'com.android.support:design:25.3.1'
+    //    compile 'com.android.support:support-vector-drawable:25.3.1'
     //  jakewharton annotation plugin
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
-
-
-    compile 'cn.jiguang.sdk:jpush:3.0.8'  // 此处以JPush 3.0.8 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.6'  // 此处以JCore 1.1.6 版本为例。
-
-    compile 'com.jaeger.statusbarutil:library:1.4.0'//状态栏
-
-//    compile files('libs/alipaySdk-20170725.jar')
-        compile files('libs/xUtils-2.6.14.jar')
-//微信支付集成
+    compile 'cn.jiguang.sdk:jpush:3.0.8'
+    // 此处以JPush 3.0.8 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
+    // 此处以JCore 1.1.6 版本为例。
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
+    //状态栏
+    //    compile files('libs/alipaySdk-20170725.jar')
+    compile files('libs/xUtils-2.6.14.jar')
+    //微信支付集成
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-//蓝牙
-//    compile 'com.vise.xiaoyaoyou:baseble:2.0.0'
-//友盟数据采集
+    //蓝牙
+    //    compile 'com.vise.xiaoyaoyou:baseble:2.0.0'
+    //友盟数据采集
     compile 'com.umeng.analytics:analytics:latest.integration'
     testCompile 'junit:junit:4.12'
     compile project(':sflibrary')
+    implementation project(':easeui')
 }

@@ -40,7 +40,7 @@ public class StationLessonMessgeAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 5;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

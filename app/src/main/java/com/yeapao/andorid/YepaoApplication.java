@@ -7,6 +7,7 @@ import android.support.multidex.MultiDexApplication;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.hyphenate.easeui.EaseUI;
 import com.scottfu.sflibrary.cache.ACache;
 import com.scottfu.sflibrary.util.FileUtil;
 import com.scottfu.sflibrary.util.LogUtil;
@@ -68,6 +69,9 @@ public class YepaoApplication extends MultiDexApplication {
         // 然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
         MobclickAgent.openActivityDurationTrack(false);
         MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
+
+//        环信
+        EaseUI.getInstance().init(this, null);
     }
 
 

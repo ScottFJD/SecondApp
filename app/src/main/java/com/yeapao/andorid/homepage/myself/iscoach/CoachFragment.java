@@ -25,6 +25,7 @@ public class CoachFragment extends BaseFragment {
     RecyclerView rvVipAccountList;
     Unbinder unbinder;
     private String bgRes;
+    private StationLessonMessgeAdapter stationLessonMessgeAdapter;
 
 
     @Override

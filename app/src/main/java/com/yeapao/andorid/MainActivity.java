@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +31,10 @@ import android.databinding.DataBindingUtil;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.jaeger.library.StatusBarUtil;
 import com.scottfu.sflibrary.net.CloudClient;
 import com.scottfu.sflibrary.net.JSONResultHandler;
@@ -553,6 +558,70 @@ public class MainActivity extends PermissionActivity {
         } else {
             UserData userData = GlobalDataYepao.getUser(getContext());
             GlobalDataYepao.setIsLogin(true);
+
+            //login
+            EMClient.getInstance().login(userData.getId(), "123456", new EMCallBack() {
+
+                @Override
+                public void onSuccess() {
+                    LogUtil.e(TAG,"登陆成功");
+//                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+//                    finish();
+                }
+
+                @Override
+                public void onProgress(int progress, String status) {
+                    LogUtil.e(TAG,status);
+                }
+
+                @Override
+                public void onError(int code, String error) {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "login failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            });
+
+
+
+
+            EMMessageListener msgListener = new EMMessageListener() {
+
+                @Override
+                public void onMessageReceived(List<EMMessage> messages) {
+                    //收到消息
+                    LogUtil.e(TAG,"收到消息");
+                }
+
+                @Override
+                public void onCmdMessageReceived(List<EMMessage> messages) {
+                    //收到透传消息
+                }
+
+                @Override
+                public void onMessageRead(List<EMMessage> messages) {
+                    //收到已读回执
+                }
+
+                @Override
+                public void onMessageDelivered(List<EMMessage> message) {
+                    //收到已送达回执
+                }
+                @Override
+                public void onMessageRecalled(List<EMMessage> messages) {
+                    //消息被撤回
+                }
+
+                @Override
+                public void onMessageChanged(EMMessage message, Object change) {
+                    //消息状态变动
+                }
+            };
+            EMClient.getInstance().chatManager().addMessageListener(msgListener);
+
+
             LogUtil.e(TAG, String.valueOf(GlobalDataYepao.getUser(getContext()).getStatus()));
             if (GlobalDataYepao.getUser(getContext()).getStatus() == 0) {
                 FillUserInfoActivity.start(getContext());
