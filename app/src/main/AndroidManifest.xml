@@ -546,6 +546,9 @@
         <activity
             android:name=".homepage.myself.iscoach.IsCoachActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".homepage.myself.iscoach.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--友盟-->
         <meta-data

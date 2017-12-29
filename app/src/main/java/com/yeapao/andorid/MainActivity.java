@@ -559,7 +559,7 @@ public class MainActivity extends PermissionActivity {
             UserData userData = GlobalDataYepao.getUser(getContext());
             GlobalDataYepao.setIsLogin(true);
 
-            //login
+            //login 环信登陆
             EMClient.getInstance().login(userData.getId(), "123456", new EMCallBack() {
 
                 @Override
@@ -585,41 +585,6 @@ public class MainActivity extends PermissionActivity {
             });
 
 
-
-
-            EMMessageListener msgListener = new EMMessageListener() {
-
-                @Override
-                public void onMessageReceived(List<EMMessage> messages) {
-                    //收到消息
-                    LogUtil.e(TAG,"收到消息");
-                }
-
-                @Override
-                public void onCmdMessageReceived(List<EMMessage> messages) {
-                    //收到透传消息
-                }
-
-                @Override
-                public void onMessageRead(List<EMMessage> messages) {
-                    //收到已读回执
-                }
-
-                @Override
-                public void onMessageDelivered(List<EMMessage> message) {
-                    //收到已送达回执
-                }
-                @Override
-                public void onMessageRecalled(List<EMMessage> messages) {
-                    //消息被撤回
-                }
-
-                @Override
-                public void onMessageChanged(EMMessage message, Object change) {
-                    //消息状态变动
-                }
-            };
-            EMClient.getInstance().chatManager().addMessageListener(msgListener);
 
 
             LogUtil.e(TAG, String.valueOf(GlobalDataYepao.getUser(getContext()).getStatus()));

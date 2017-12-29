@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="59dp"
-     android:id="@+id/list_itease_layout"
-     android:background="#fff"
-    android:gravity="center_vertical" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_itease_layout"
+    android:background="#fff"
+    android:gravity="center_vertical">
 
     <RelativeLayout
         android:id="@+id/avatar_container"
@@ -19,20 +20,35 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
+            app:ease_shape_type="round"
             android:src="@drawable/ease_default_avatar" />
 
-        <TextView
-            android:id="@+id/unread_msg_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/ease_unread_count_bg"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/unread_msg_number"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="2dp"-->
+            <!--android:layout_marginTop="3dp"-->
+            <!--android:background="@drawable/ease_unread_count_bg"-->
+            <!--android:gravity="center"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="12sp" />-->
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/unread_msg_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+        android:background="@drawable/ease_unread_count_bg"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"/>
 
     <TextView
         android:id="@+id/name"

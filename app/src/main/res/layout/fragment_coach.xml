@@ -61,6 +61,7 @@
                 android:scrollbarFadeDuration="1"
                 android:scrollbars="vertical"/>
         </LinearLayout>
+
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -93,14 +94,22 @@
                     android:background="@color/bg_grey"
                     android:layout_marginLeft="15dp"/>
             </RelativeLayout>
-            <android.support.v7.widget.RecyclerView
+            <LinearLayout
+                android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/rv_vip_account_list"
-                android:background="@color/bg_white"
-                android:fadeScrollbars="true"
-                android:scrollbarFadeDuration="1"
-                android:scrollbars="vertical"/>
+                android:orientation="vertical">
+
+            </LinearLayout>
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/rv_vip_account_list"-->
+                <!--android:background="@color/bg_white"-->
+                <!--android:fadeScrollbars="true"-->
+                <!--android:scrollbarFadeDuration="1"-->
+                <!--android:scrollbars="vertical"/>-->
+
         </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
