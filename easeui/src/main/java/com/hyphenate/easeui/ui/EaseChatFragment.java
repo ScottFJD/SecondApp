@@ -55,6 +55,9 @@ import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
+import com.scottfu.sflibrary.dialogFragment.CoachLessonPlanTimeListener;
+import com.scottfu.sflibrary.dialogFragment.LessonPlanTimePickerDialogFragment;
+import com.scottfu.sflibrary.util.LogUtil;
 
 import java.io.File;
 import java.util.List;
@@ -115,6 +118,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected boolean isRoaming = false;
     private ExecutorService fetchQueue;
 
+    private AddLessonDialogFragment addLessonDialogFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_chat, container, false);
@@ -141,6 +146,21 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
      * init view
      */
     protected void initView() {
+        //时间选择初始化
+        addLessonDialogFragment = new AddLessonDialogFragment();
+        addLessonDialogFragment.setLessonPlanListener(new AddLessonDialogFragment.LessonPlanListener() {
+            @Override
+            public void cancel() {
+                addLessonDialogFragment.dismiss();
+            }
+
+            @Override
+            public void accept(String time) {
+                addLessonDialogFragment.dismiss();
+            }
+        });
+
+
         // hold to record voice
         //noinspection ConstantConditions
         voiceRecorderView = (EaseVoiceRecorderView) getView().findViewById(R.id.voice_recorder);
@@ -204,7 +224,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                     titleBar.setTitle(user.getNick());
                 }
             }
-            titleBar.setRightImageResource(R.drawable.ease_mm_title_remove);
+            titleBar.setLeftImageResource(R.drawable.left);
+//            titleBar.setRightImageResource(R.drawable.ease_mm_title_remove);
+            titleBar.setRightTextResource("新增排课");
         } else {
         	titleBar.setRightImageResource(R.drawable.ease_to_group_details_normal);
             if (chatType == EaseConstant.CHATTYPE_GROUP) {
@@ -238,10 +260,18 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
             @Override
             public void onClick(View v) {
-                if (chatType == EaseConstant.CHATTYPE_SINGLE) {
-                    emptyHistory();
+//                清空历史不再使用
+//                if (chatType == EaseConstant.CHATTYPE_SINGLE) {
+//                    emptyHistory();
+//                } else {
+//                    toGroupDetails();
+//                }
+//                TODO 新增排课时间选择
+                LogUtil.e(TAG,"新增排课");
+                if (addLessonDialogFragment.isVisible()) {
+                    addLessonDialogFragment.dismiss();
                 } else {
-                    toGroupDetails();
+                    addLessonDialogFragment.show(getChildFragmentManager(),"time1");
                 }
             }
         });

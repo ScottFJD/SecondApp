@@ -161,9 +161,16 @@ public class TrainingLessonOrderActivity extends BaseActivity {
 
     @OnClick(R.id.tv_imm_pay)
     void setTvImmPay(View view) {
+        String orderCode = "";
+        if (type.equals(TrainingLessonActivity.HIGH)) {
+            orderCode = highEmOrderModel.getData().getEmpHighOrderCode();
+        } else {
+            orderCode = highEmOrderModel.getData().getRecoveryOrderCode();
+        }
+
         if (!payMentType.equals("0")) {
             DecimalFormat decimalFormat=new DecimalFormat(".00");
-            getPayment(decimalFormat.format(highEmOrderModel.getData().getPrice()),highEmOrderModel.getData().getEmpHighOrderCode(),payMentType);
+            getPayment(decimalFormat.format(highEmOrderModel.getData().getPrice()),orderCode,payMentType);
         } else {
             ToastManager.showToast(getContext(),"请选择支付方式");
         }

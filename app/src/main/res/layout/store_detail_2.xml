@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="电       话"
-        app:layout_constraintLeft_toLeftOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintLeft_toLeftOf="@+id/tv_lesson_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lesson_time" />
 
     <TextView
         android:id="@+id/textView10"
@@ -48,8 +48,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginStart="5dp"
         android:text="9:00-12:00"
-        app:layout_constraintLeft_toRightOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintLeft_toRightOf="@+id/tv_lesson_time"
+        app:layout_constraintTop_toTopOf="@+id/tv_lesson_time" />
 
     <TextView
         android:id="@+id/tv_tell"

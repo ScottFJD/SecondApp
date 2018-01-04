@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aigestudio="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#fece00">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="15dp"
+            android:text="取消"
+            android:textColor="#37343e"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_determine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="15dp"
+            android:text="确定"
+            android:textColor="#37343e"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_age_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="选择健身时间"
+            android:textColor="#37343e"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_today_time"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#ececec"
+        android:gravity="center"
+        android:text="XXXXXXXXX"
+        android:textColor="#726d7c"
+        android:textSize="15sp" />
+
+
+
+    <RelativeLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.aigestudio.wheelpicker.WheelPicker
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/pain_wheel_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            aigestudio:wheel_atmospheric="true"
+            aigestudio:wheel_cyclic="true"
+            aigestudio:wheel_visible_item_count="5"
+            aigestudio:wheel_item_text_color="#37343e"
+            aigestudio:wheel_item_text_size="15sp"
+            aigestudio:wheel_selected_item_text_color="#fece00" />
+
+        <com.aigestudio.wheelpicker.WheelPicker
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:id="@+id/pain_wheel_center_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            aigestudio:wheel_atmospheric="true"
+            aigestudio:wheel_cyclic="true"
+            aigestudio:wheel_visible_item_count="5"
+            aigestudio:wheel_item_text_color="#37343e"
+            aigestudio:wheel_item_text_size="15sp"
+            aigestudio:wheel_selected_item_text_color="#fece00" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="2dip"
-    android:paddingTop="2dip" >
+    android:background="#ffffff">
 
     <View
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/gray_normal" />
@@ -15,10 +15,8 @@
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#aaffffff"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingTop="4dp" >
+        android:minHeight="50dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_set_mode_voice"
@@ -26,7 +24,7 @@
             android:layout_height="32dp"
             android:layout_marginLeft="6dp"
             android:background="@drawable/ease_chatting_setmode_voice_btn"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_set_mode_keyboard"
@@ -61,29 +59,31 @@
         <RelativeLayout
             android:id="@+id/edittext_layout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp"
-            android:layout_weight="1"
-            android:gravity="bottom" >
+            android:layout_height="match_parent"
+            android:layout_weight="7">
 
             <EditText
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5dp"
+                android:layout_centerVertical="true"
                 android:id="@+id/et_sendmessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dip"
-                android:background="@null"
+                android:minHeight="30dp"
+                android:hint=""
+                android:layout_marginRight="5dp"
+                android:background="@drawable/easeui_chat_shape"
                 android:maxLines="3"
-                android:minHeight="40dp"
                 android:paddingBottom="3dp"
-                android:paddingLeft="1dp"
-                android:paddingRight="1dp"
                 android:paddingTop="3dp"
-                android:textSize="18sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="14sp"
                 android:imeOptions="actionSend"/>
 
-            <RelativeLayout 
+            <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_face"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,6 +112,7 @@
         </RelativeLayout>
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_more"
             android:layout_width="32dip"
             android:layout_height="32dip"
@@ -121,14 +122,16 @@
 
         <Button
             android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginRight="4dp"
-            android:background="@drawable/ease_chat_send_btn_selector"
-            android:text="@string/button_send"
-            android:textColor="#666666"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/message_send_shape"
+            android:text="发送"
+            android:textColor="#37343e"
+            android:textSize="14sp"
+            android:visibility="visible" />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

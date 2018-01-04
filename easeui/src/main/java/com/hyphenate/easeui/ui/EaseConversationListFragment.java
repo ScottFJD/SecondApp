@@ -27,6 +27,8 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.widget.EaseConversationList;
+import com.scottfu.sflibrary.util.LogUtil;
+import com.scottfu.sflibrary.util.ToastManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,6 +84,7 @@ public class EaseConversationListFragment extends EaseBaseFragment{
     
     @Override
     protected void setUpView() {
+        conversationList.clear();
         conversationList.addAll(loadConversationList());
         conversationListView.init(conversationList);
         

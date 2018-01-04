@@ -56,7 +56,7 @@ public class CoachFragment extends BaseFragment {
                 startActivity(new Intent(getActivity(),ChatActivity.class).putExtra(EaseConstant.EXTRA_USER_ID,conversation.conversationId()));
             }
         });
-        getChildFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.fragment_container, conversationListFragment).commit();
     }
 
     @Override
