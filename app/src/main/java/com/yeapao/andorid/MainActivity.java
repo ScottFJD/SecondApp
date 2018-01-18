@@ -32,9 +32,12 @@ import android.databinding.DataBindingUtil;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMError;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.util.NetUtils;
 import com.jaeger.library.StatusBarUtil;
 import com.scottfu.sflibrary.net.CloudClient;
 import com.scottfu.sflibrary.net.JSONResultHandler;
@@ -192,14 +195,11 @@ public class MainActivity extends PermissionActivity {
         setContentView(R.layout.activity_main);
         mainActivity = this;
         isForeground = true;
-
-
         ActivityCollector.addActivity(this);
-        loginAccount();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);//初始隐藏键盘
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-
+        loginAccount();
 
 
         initView();
@@ -559,31 +559,7 @@ public class MainActivity extends PermissionActivity {
             UserData userData = GlobalDataYepao.getUser(getContext());
             GlobalDataYepao.setIsLogin(true);
 
-            //login 环信登陆
-            EMClient.getInstance().login(userData.getId(), "123456", new EMCallBack() {
-
-                @Override
-                public void onSuccess() {
-                    LogUtil.e(TAG,"登陆成功");
-//                    startActivity(new Intent(MainActivity.this, MainActivity.class));
-//                    finish();
-                }
-
-                @Override
-                public void onProgress(int progress, String status) {
-                    LogUtil.e(TAG,status);
-                }
-
-                @Override
-                public void onError(int code, String error) {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "login failed", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            });
-
+            emClientInit(userData.getId());
 
 
 
@@ -595,32 +571,81 @@ public class MainActivity extends PermissionActivity {
             }
             JPushInterface.setAlias(this, 22, GlobalDataYepao.getUser(getContext()).getId());
             MobclickAgent.onProfileSignIn(GlobalDataYepao.getUser(getContext()).getId());
-//            getNetWork(GlobalDataYepao.getUser(getContext()).getPhone(),GlobalDataYepao.getUser(getContext()).getPassword());
-//            CloudClient.doHttpRequest(getContext(), ConstantYeaPao.LOGIN,
-//                    NetImpl.getInstance().loginRequest(GlobalDataYepao.getUser(getContext()).getPhone(),
-//                            GlobalDataYepao.getUser(getContext()).getPassword()), null, new JSONResultHandler() {
-//                        @Override
-//                        public void onSuccess(String jsonString) {
-//                            LogUtil.e(TAG+"+++++++++++++++++++", jsonString);
-//                            LoginModel loginData = gson.fromJson(jsonString, LoginModel.class);
-//                            if (loginData.getErrmsg().equals("ok")) {
-//                                GlobalDataYepao.setIsLogin(true);
-//                            } else {
-//                                ToastManager.showToast(getContext(),loginData.getErrmsg());
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onError(VolleyError errorMessage) {
-//                            ToastManager.showToast(getContext(), errorMessage.toString());
-//                        }
-//                    });
 
-//            getNetWork(GlobalDataYepao.getUser(getContext()).getPhone(),GlobalDataYepao.getUser(getContext()).getPassword());
 
         }
 
     }
+
+
+    private void emClientInit(String userId) {
+        LogUtil.e(TAG,"EmClient  "+userId);
+        //login 环信登陆
+        EMClient.getInstance().login(userId, "123456", new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                LogUtil.e(TAG,"登陆成功");
+//                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+//                    finish();
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                LogUtil.e(TAG,"ONPROGRESS   "+status);
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                LogUtil.e(TAG,"error    "+error);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "login failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        //注册一个监听连接状态的listener
+        EMClient.getInstance().addConnectionListener(new MyConnectionListener());
+
+    }
+
+
+
+
+    //实现ConnectionListener接口
+    private class MyConnectionListener implements EMConnectionListener {
+        @Override
+        public void onConnected() {
+            LogUtil.e(TAG,"EMClient connected");
+        }
+        @Override
+        public void onDisconnected(final int error) {
+            runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() {
+                    if(error == EMError.USER_REMOVED){
+                        // 显示帐号已经被移除
+                        LogUtil.e(TAG,"EMClient user removed");
+                    }else if (error == EMError.USER_LOGIN_ANOTHER_DEVICE) {
+                        // 显示帐号在其他设备登录
+                        LogUtil.e(TAG,"EMClient user login another device");
+                    } else {
+
+                        if (NetUtils.hasNetwork(MainActivity.this)){
+                            //连接不到聊天服务器
+                        } else{
+                            //当前网络不可用，请检查网络设置
+                        }
+
+                    }
+                }
+            });
+        }
+    }
+
 
 
     private void getNetWork(String phone, String password) {

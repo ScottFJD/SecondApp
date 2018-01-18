@@ -13,6 +13,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
@@ -47,6 +49,8 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
 //    @BindView(R.id.srl_station)
 //    SwipeRefreshLayout srlStation;
     Unbinder unbinder;
+
+    private String userId = "28";
 
     private StationConstract.Presenter mPresenter;
     private LinearLayoutManager linearLayoutManager;
@@ -103,6 +107,8 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
         rvStationList.setLayoutManager(linearLayoutManager);
     }
 
+
+
     private void showResult() {
         stationMessageAdapter = new StationMessageAdapter(getContext(),stationMainBannerModel);
         rvStationList.setAdapter(stationMessageAdapter);
@@ -117,8 +123,13 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
                     }
 
                     @Override
-                    public void sendClick() {
+                    public void sendClick(String content) {
                         LogUtil.e(TAG,"sendClick");
+                        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
+                        EMMessage message = EMMessage.createTxtSendMessage(content, userId);
+                        //如果是群聊，设置chattype，默认是单聊
+                        //发送消息
+                        EMClient.getInstance().chatManager().sendMessage(message);
                     }
                 });
             }

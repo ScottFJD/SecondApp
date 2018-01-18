@@ -138,7 +138,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
-
+        LogUtil.e("EaseChatFragment",toChatUsername);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -247,6 +247,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if (chatType != EaseConstant.CHATTYPE_CHATROOM) {
             onConversationInit();
             onMessageListInit();
+            LogUtil.e("EaseChatFragment","CHATTYPE_CHATROOM");
         }
 
         titleBar.setLeftLayoutClickListener(new OnClickListener() {
@@ -576,6 +577,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                         }
                         onConversationInit();
                         onMessageListInit();
+                        LogUtil.e("EaseChatFragment","ONSUCCESS");
                     }
                 });
             }

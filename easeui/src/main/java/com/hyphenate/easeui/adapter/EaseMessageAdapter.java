@@ -38,6 +38,7 @@ import com.hyphenate.easeui.widget.presenter.EaseChatRowPresenter;
 import com.hyphenate.easeui.widget.presenter.EaseChatTextPresenter;
 import com.hyphenate.easeui.widget.presenter.EaseChatVideoPresenter;
 import com.hyphenate.easeui.widget.presenter.EaseChatVoicePresenter;
+import com.scottfu.sflibrary.util.LogUtil;
 
 public class EaseMessageAdapter extends BaseAdapter{
 
@@ -88,8 +89,11 @@ public class EaseMessageAdapter extends BaseAdapter{
 		this.context = context;
 		this.listView = listView;
 		toChatUsername = username;
+		LogUtil.e("EaseMessageAdapter",username+"-"+String.valueOf(chatType));
 		this.conversation = EMClient.getInstance().chatManager().getConversation(username, EaseCommonUtils.getConversationType(chatType), true);
 	}
+
+
 
 	Handler handler = new Handler() {
 		private void refreshList() {
