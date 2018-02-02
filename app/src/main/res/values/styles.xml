@@ -92,7 +92,9 @@
     <style name="DepositCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_deposit_style</item>
     </style>
-
+    <style name="YellowWhiteCheckBox" parent="Base.Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_yellow_white_style</item>
+    </style>
 
     <!--扫码自定义的一些-->
     <style name="MatchWrap">
