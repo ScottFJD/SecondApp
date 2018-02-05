@@ -50,6 +50,8 @@ public class MyFitLessonActivity extends BaseActivity {
     ImageView ivFitStep2;
     @BindView(R.id.iv_fit_step_3)
     ImageView ivFitStep3;
+    @BindView(R.id.tv_lesson_start)
+    TextView tvLessonStart;
 
 
     private FitLessonMessageAdapter firstStepMessageAdapter;
@@ -112,6 +114,14 @@ public class MyFitLessonActivity extends BaseActivity {
         return this;
     }
 
+
+
+    @OnClick(R.id.tv_lesson_start)
+    public void lessonStart(View view) {
+        FitLessonPlayActivity.start(getContext());
+    }
+
+
     @OnClick({R.id.rl_fit_step_1, R.id.rl_fit_step_2, R.id.rl_fit_step_3})
     public void onClickImageView(View view) {
         switch (view.getId()) {
@@ -152,5 +162,6 @@ public class MyFitLessonActivity extends BaseActivity {
                     break;
         }
     }
+
 
 }
