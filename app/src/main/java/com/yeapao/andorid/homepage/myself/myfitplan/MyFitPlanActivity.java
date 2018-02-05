@@ -13,6 +13,10 @@ import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.base.BaseActivity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by fujindong on 02/02/2018.
  */
@@ -35,6 +39,8 @@ public class MyFitPlanActivity extends BaseActivity implements View.OnClickListe
 
     private TextView generateLesson;
 
+    private ArrayList<String> titles = new ArrayList<>();
+
 
     public static void start(Context context) {
         Intent intent = new Intent();
@@ -47,7 +53,7 @@ public class MyFitPlanActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fit_plan);
         initView();
-        initBack();
+        initTopBar();
     }
 
     private void initView() {
@@ -159,6 +165,14 @@ public class MyFitPlanActivity extends BaseActivity implements View.OnClickListe
             LogUtil.e(TAG,customizeLevel+"   "+customizeParts);
         }
 
-        MyFitLessonActivity.start(getContext());
+        String[] titles = customizeParts.split(",");
+
+        this.titles.clear();
+
+        for (int i = 0; i < titles.length; i++) {
+            this.titles.add(titles[i]);
+        }
+
+        MyFitLessonActivity.start(getContext(), this.titles);
     }
 }
