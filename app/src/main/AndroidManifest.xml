@@ -552,6 +552,9 @@
         <activity android:name=".homepage.myself.myfitplan.MyFitPlanActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+        <activity android:name=".homepage.myself.myfitplan.MyFitLessonActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <!--友盟-->
         <meta-data
