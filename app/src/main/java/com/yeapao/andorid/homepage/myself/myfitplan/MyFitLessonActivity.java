@@ -11,14 +11,29 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.scottfu.sflibrary.net.CloudClient;
+import com.scottfu.sflibrary.net.JSONResultHandler;
+import com.scottfu.sflibrary.recyclerview.OnRecyclerViewClickListener;
+import com.scottfu.sflibrary.util.LogUtil;
+import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.ConstantYeaPao;
+import com.yeapao.andorid.api.NetImpl;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.model.FitPlanDetailModel;
+import com.yeapao.andorid.model.ReservationLessonModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 02/02/2018.
@@ -64,10 +79,14 @@ public class MyFitLessonActivity extends BaseActivity {
     private boolean fitStep3 = true;
 
     private ArrayList<String> fitTitles = new ArrayList<>();
+    private String customizeLevel, customizeParts;
+    private FitPlanDetailModel detailModel;
 
-    public static void start(Context context,ArrayList<String> fitTitles) {
+    public static void start(Context context,String customizeLevel,String customizeParts ,ArrayList<String> fitTitles) {
         Intent intent = new Intent();
         intent.setClass(context, MyFitLessonActivity.class);
+        intent.putExtra("level", customizeLevel);
+        intent.putExtra("parts", customizeParts);
         intent.putStringArrayListExtra("titles", fitTitles);
         context.startActivity(intent);
 
@@ -79,6 +98,9 @@ public class MyFitLessonActivity extends BaseActivity {
         setContentView(R.layout.activity_my_fit_lesson);
         ButterKnife.bind(this);
         fitTitles = getIntent().getStringArrayListExtra("titles");
+        this.customizeLevel = getIntent().getStringExtra("level");
+        this.customizeParts = getIntent().getStringExtra("parts");
+        getNetWork(customizeLevel, customizeParts);
         initTopBar();
         initView();
 
@@ -86,21 +108,49 @@ public class MyFitLessonActivity extends BaseActivity {
     }
 
     private void initView() {
-        firstStepMessageAdapter = new FitLessonMessageAdapter(getContext());
-        rvFitStep1.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvFitStep1.setAdapter(firstStepMessageAdapter);
-        secondStepMessageAdapter = new FitLessonMessageAdapter(getContext());
-        rvFitStep2.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvFitStep2.setAdapter(secondStepMessageAdapter);
-        thirdStepMessageAdapter = new FitLessonMessageAdapter(getContext());
-        rvFitStep3.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvFitStep3.setAdapter(thirdStepMessageAdapter);
+        tvFitLevel.setText(customizeLevel);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvFitTitles.setLayoutManager(linearLayoutManager);
         fitTitlePartsMessageAdapter = new FitTitlePartsMessageAdapter(getContext(), fitTitles);
         rvFitTitles.setAdapter(fitTitlePartsMessageAdapter);
+    }
+
+
+    private void showResult() {
+        final int warmnlistSize = detailModel.getResultMap().getWarmUpMediaList().size();
+        final int officialListSize = detailModel.getResultMap().getOfficialMediaList().size();
+        int stretchListSize = detailModel.getResultMap().getStretchMediaList().size();
+        firstStepMessageAdapter = new FitLessonMessageAdapter(getContext(),detailModel.getResultMap().getWarmUpMediaList());
+        firstStepMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
+            @Override
+            public void OnItemClick(View v, int position) {
+
+                FitLessonPlayActivity.start(getContext(),position,detailModel,"1");
+            }
+        });
+        rvFitStep1.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFitStep1.setAdapter(firstStepMessageAdapter);
+        secondStepMessageAdapter = new FitLessonMessageAdapter(getContext(),detailModel.getResultMap().getOfficialMediaList());
+        secondStepMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
+            @Override
+            public void OnItemClick(View v, int position) {
+                FitLessonPlayActivity.start(getContext(), warmnlistSize - 1 + position, detailModel, "1");
+            }
+        });
+        rvFitStep2.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFitStep2.setAdapter(secondStepMessageAdapter);
+        thirdStepMessageAdapter = new FitLessonMessageAdapter(getContext(),detailModel.getResultMap().getStretchMediaList());
+        thirdStepMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
+            @Override
+            public void OnItemClick(View v, int position) {
+                FitLessonPlayActivity.start(getContext(),warmnlistSize+officialListSize-1+position,detailModel,"1");
+            }
+        });
+        rvFitStep3.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvFitStep3.setAdapter(thirdStepMessageAdapter);
+
     }
 
     @Override
@@ -118,7 +168,12 @@ public class MyFitLessonActivity extends BaseActivity {
 
     @OnClick(R.id.tv_lesson_start)
     public void lessonStart(View view) {
-        FitLessonPlayActivity.start(getContext());
+//        FitLessonPlayActivity.start(getContext());
+        if (detailModel.getResultMap() != null) {
+            FitLessonPlayActivity.start(getContext(),detailModel,"2");
+        }
+
+
     }
 
 
@@ -162,6 +217,44 @@ public class MyFitLessonActivity extends BaseActivity {
                     break;
         }
     }
+
+    private void getNetWork(String customizeLevel,String customizeParts) {
+        LogUtil.e(TAG,customizeLevel+customizeParts);
+        subscription = Network.getYeapaoFitPlanApi()
+                .getFitPlan(customizeLevel,customizeParts)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(modelObserver );
+    }
+
+    Observer<FitPlanDetailModel> modelObserver = new Observer<FitPlanDetailModel>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.e(TAG,e.toString());
+
+        }
+
+        @Override
+        public void onNext(FitPlanDetailModel model) {
+            LogUtil.e(TAG,"+++++++++"+String.valueOf(model.getResultMap().getWarmUpMediaList().get(0).getImg()));
+            try {
+                if (model.getResultMap() != null) {
+                    detailModel = model;
+                    showResult();
+                }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+
+        }
+    };
+
+
 
 
 }

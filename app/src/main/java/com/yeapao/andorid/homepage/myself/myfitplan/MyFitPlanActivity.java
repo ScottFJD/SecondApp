@@ -8,14 +8,25 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.scottfu.sflibrary.net.CloudClient;
+import com.scottfu.sflibrary.net.JSONResultHandler;
 import com.scottfu.sflibrary.util.LogUtil;
 import com.scottfu.sflibrary.util.ToastManager;
 import com.yeapao.andorid.R;
+import com.yeapao.andorid.api.ConstantYeaPao;
+import com.yeapao.andorid.api.NetImpl;
+import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.base.BaseActivity;
+import com.yeapao.andorid.model.FitPlanDetailModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by fujindong on 02/02/2018.
@@ -173,6 +184,12 @@ public class MyFitPlanActivity extends BaseActivity implements View.OnClickListe
             this.titles.add(titles[i]);
         }
 
-        MyFitLessonActivity.start(getContext(), this.titles);
+
+        MyFitLessonActivity.start(getContext(), customizeLevel,customizeParts,this.titles);
     }
+
+
+
+
+
 }

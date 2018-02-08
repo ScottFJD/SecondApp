@@ -36,6 +36,7 @@ import com.yeapao.andorid.model.DynamicLessonOrderModel;
 import com.yeapao.andorid.model.DynamiclessonDetailModel;
 import com.yeapao.andorid.model.EmployeeDetailModel;
 import com.yeapao.andorid.model.EmployeeListModel;
+import com.yeapao.andorid.model.FitPlanDetailModel;
 import com.yeapao.andorid.model.FoodInfoModel;
 import com.yeapao.andorid.model.HealthDataModel;
 import com.yeapao.andorid.model.HighEmOrderModel;
@@ -612,5 +613,6 @@ public interface YeapaoApi {
 
     @POST("RunningStationController/prUseOrderDetail")
     Observable<InclusiveOrderDetailModel> requestInclusiveOrderDetail(@Query("prUseOrderId") String id);
+
 
 }

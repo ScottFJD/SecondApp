@@ -30,6 +30,14 @@ public class NetImpl {
         return params;
     }
 
+    //获取方案
+    public HashMap<String, String> getFitPlan(String levels,String parts) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put("customizeLevel", levels);
+        params.put("customizeParts", parts);
+        return params;
+    }
+
     //用户注册
     public HashMap<String, String> registerRequest(String username, String password, String name, String verificationCode) {
         HashMap<String, String> params = new HashMap<>();

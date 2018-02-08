@@ -24,6 +24,7 @@ public class Network {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
 
+    private static YeapaoFitPlanApi yeapaoFitPlanApi;
 
     public static YeapaoApi getYeapaoApi() {
         if (!NetworkState.networkConnected(YepaoApplication.getContextObject())) {
@@ -39,6 +40,21 @@ public class Network {
             yeapaoApi = retrofit.create(YeapaoApi.class);
         }
         return yeapaoApi;
+    }
+    public static YeapaoFitPlanApi getYeapaoFitPlanApi() {
+        if (!NetworkState.networkConnected(YepaoApplication.getContextObject())) {
+            ToastManager.repeatToast(YepaoApplication.getContextObject(),"无法连接到网络，请检查网络连接");
+        }
+        if ( yeapaoFitPlanApi == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("http://192.168.1.38:8080/Saas/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            yeapaoFitPlanApi = retrofit.create(YeapaoFitPlanApi.class);
+        }
+        return yeapaoFitPlanApi;
     }
 
 }
