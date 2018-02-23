@@ -172,6 +172,7 @@ public class MyFitPlanActivity extends BaseActivity implements View.OnClickListe
         }
         if (customizeLevel.equals("")) {
             ToastManager.showToast(getContext(), "请选择课程等级");
+            return;
         } else {
             LogUtil.e(TAG,customizeLevel+"   "+customizeParts);
         }

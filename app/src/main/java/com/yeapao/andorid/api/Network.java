@@ -33,7 +33,7 @@ public class Network {
         if ( yeapaoApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://47.92.113.97:8008/yepao/")
+                    .baseUrl("http://47.92.113.97:8080/yepao/")
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
@@ -48,7 +48,7 @@ public class Network {
         if ( yeapaoFitPlanApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://192.168.1.38:8080/Saas/")
+                    .baseUrl("https://91yesrun.com/Saas/")
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
