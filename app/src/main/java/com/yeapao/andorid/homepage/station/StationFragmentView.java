@@ -112,28 +112,28 @@ public class StationFragmentView extends BaseFragment implements StationConstrac
     private void showResult() {
         stationMessageAdapter = new StationMessageAdapter(getContext(),stationMainBannerModel);
         rvStationList.setAdapter(stationMessageAdapter);
-        stationMessageAdapter.setStationHeaderClickListener(new StationMessageAdapter.StationHeaderClickListener() {
-            @Override
-            public void onHeaderClick(View view) {
-                popupWindowChat.showAtLocation(view, Gravity.LEFT,20,-200);
-                popupWindowChat.setChatClickListener(new PopupWindowChat.ChatClickListener() {
-                    @Override
-                    public void reservationLessonClick() {
-                        LogUtil.e(TAG,"reservationLessonClick");
-                    }
-
-                    @Override
-                    public void sendClick(String content) {
-                        LogUtil.e(TAG,"sendClick");
-                        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
-                        EMMessage message = EMMessage.createTxtSendMessage(content, userId);
-                        //如果是群聊，设置chattype，默认是单聊
-                        //发送消息
-                        EMClient.getInstance().chatManager().sendMessage(message);
-                    }
-                });
-            }
-        });
+//        stationMessageAdapter.setStationHeaderClickListener(new StationMessageAdapter.StationHeaderClickListener() {
+//            @Override
+//            public void onHeaderClick(View view) {
+//                popupWindowChat.showAtLocation(view, Gravity.LEFT,20,-200);
+//                popupWindowChat.setChatClickListener(new PopupWindowChat.ChatClickListener() {
+//                    @Override
+//                    public void reservationLessonClick() {
+//                        LogUtil.e(TAG,"reservationLessonClick");
+//                    }
+//
+//                    @Override
+//                    public void sendClick(String content) {
+//                        LogUtil.e(TAG,"sendClick");
+//                        //创建一条文本消息，content为消息文字内容，toChatUsername为对方用户或者群聊的id，后文皆是如此
+//                        EMMessage message = EMMessage.createTxtSendMessage(content, userId);
+//                        //如果是群聊，设置chattype，默认是单聊
+//                        //发送消息
+//                        EMClient.getInstance().chatManager().sendMessage(message);
+//                    }
+//                });
+//            }
+//        });
 
         stationMessageAdapter.setOnRecyclerViewClickListener(new OnRecyclerViewClickListener() {
             @Override

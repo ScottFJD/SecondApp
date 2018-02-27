@@ -16,6 +16,7 @@ import com.yeapao.andorid.LoginActivity;
 import com.yeapao.andorid.R;
 import com.yeapao.andorid.api.Network;
 import com.yeapao.andorid.homepage.myself.iscoach.IsCoachActivity;
+import com.yeapao.andorid.homepage.myself.myfitplan.MyFitPlanActivity;
 import com.yeapao.andorid.homepage.myself.orders.MyselfOrdersActivity;
 import com.yeapao.andorid.homepage.myself.tab.MyselfHealthActivity;
 import com.yeapao.andorid.homepage.myself.tab.MyselfPostActivity;
@@ -174,7 +175,8 @@ public class MyselfFragmentView extends Fragment implements MyselfContract.View 
                     } else if (name.equals("权益卡")) {
                         DynamicPeopleEquityActivity.start(getContext());
                     } else if (name.equals("我的方案")) {
-                        MyselfSportPlanActivity.start(getContext());
+//                        MyselfSportPlanActivity.start(getContext());
+                        MyFitPlanActivity.start(getContext());
                     }
                 }
             });

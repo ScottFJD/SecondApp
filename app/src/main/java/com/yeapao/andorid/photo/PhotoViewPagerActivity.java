@@ -3,21 +3,17 @@ package com.yeapao.andorid.photo;
 import android.support.v7.app.AppCompatActivity;
 
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Toast;
 
 
 import com.scottfu.sflibrary.util.AsyncLoaderImage;
@@ -27,7 +23,7 @@ import com.yeapao.andorid.dialog.DialogUtils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
+
 import uk.co.senab.photoview.PhotoView;
 /**
  * Created by fujindong on 2017/9/29.
@@ -92,7 +88,7 @@ public class PhotoViewPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo_preview);
+        setContentView(R.layout.activity_photo_preview_2);
         mViewPager = (HackyViewPager) findViewById(R.id.view_pager);
         Intent intent = getIntent();
         type = intent.getStringExtra(TYPE);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -88,32 +89,50 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.scottfu.sflibrary.springindicator.ScrollerViewPager
-            android:id="@+id/view_pager"
+        <!--Calendar-->
+        <sun.bob.mcalendarview.views.ExpCalendarView
+            android:id="@+id/calendar_exp"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <FrameLayout
+            android:layout_below="@id/calendar_exp"
+            android:id="@+id/fl_coach_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="22dp"
-            android:layout_gravity="center" />
-
-        <com.scottfu.sflibrary.springindicator.SpringIndicator
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:siTextSize="15sp"
-            app:siIndicatorColors="@array/indicator_colors"
-            app:siTextColor="@color/text_color"
-            app:siSelectedTextColor="@android:color/white"
-            app:siIndicatorColor="@color/text_color"
-            android:id="@+id/indicator"
             android:background="@color/bg_white"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:paddingLeft="18dp"
-            android:paddingRight="18dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp" />
-    </FrameLayout>
+            ></FrameLayout>
+
+        <!--<com.scottfu.sflibrary.springindicator.ScrollerViewPager-->
+            <!--android:id="@+id/view_pager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="22dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:visibility="gone"/>-->
+
+        <!--<com.scottfu.sflibrary.springindicator.SpringIndicator-->
+            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--app:siTextSize="15sp"-->
+            <!--app:siIndicatorColors="@array/indicator_colors"-->
+            <!--app:siTextColor="@color/text_color"-->
+            <!--app:siSelectedTextColor="@android:color/white"-->
+            <!--app:siIndicatorColor="@color/text_color"-->
+            <!--android:id="@+id/indicator"-->
+            <!--android:background="@color/bg_white"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:paddingLeft="18dp"-->
+            <!--android:paddingRight="18dp"-->
+            <!--android:layout_marginLeft="0dp"-->
+            <!--android:layout_marginRight="0dp"-->
+            <!--android:visibility="gone"/>-->
+    </RelativeLayout>
 
 </LinearLayout>

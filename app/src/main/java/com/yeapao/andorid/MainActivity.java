@@ -271,6 +271,7 @@ public class MainActivity extends PermissionActivity {
 
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), fragments);
         bind.vp.setAdapter(mainPagerAdapter);
+        bind.vp.setOffscreenPageLimit(4);
 
 
         initEvent();

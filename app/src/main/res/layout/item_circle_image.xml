@@ -12,7 +12,7 @@
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardCornerRadius="4dp"
-    app:cardElevation="4dp"
+    app:cardElevation="0dp"
     app:cardPreventCornerOverlap="true"
     >
 
@@ -20,6 +20,7 @@
         android:id="@+id/iv_circle_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:src="@drawable/home_banner_take_place"
         />
 

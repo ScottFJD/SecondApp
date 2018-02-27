@@ -126,7 +126,7 @@ public class PopupWindowChat extends PopupWindow {
         this.setWidth(FrameLayout.LayoutParams.WRAP_CONTENT);
         this.setHeight(FrameLayout.LayoutParams.WRAP_CONTENT);
         this.setFocusable(true);
-        this.setOutsideTouchable(false);
+        this.setOutsideTouchable(true);
 //        软键盘不会挡着popupwindow
         this.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 

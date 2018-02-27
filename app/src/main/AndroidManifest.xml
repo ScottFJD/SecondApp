@@ -549,6 +549,15 @@
         <activity
             android:name=".homepage.myself.iscoach.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".homepage.myself.myfitplan.MyFitPlanActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".homepage.myself.myfitplan.MyFitLessonActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".homepage.myself.myfitplan.FitLessonPlayActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
         <!--友盟-->
         <meta-data

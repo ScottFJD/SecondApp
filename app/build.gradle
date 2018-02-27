@@ -7,8 +7,8 @@ android {
         applicationId "com.yeapao.andorid"
         minSdkVersion 22
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.9.0"
+        versionCode 8
+        versionName "2.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -96,6 +96,11 @@ dependencies {
     //    compile 'com.vise.xiaoyaoyou:baseble:2.0.0'
     //友盟数据采集
     compile 'com.umeng.analytics:analytics:latest.integration'
+    //Compile(name: ‘android-jsc-r174650’,ext:’aar')
+
+    //calendar
+    compile 'sun.bob:mcalendarview:1.0.0'
+
     testCompile 'junit:junit:4.12'
     compile project(':sflibrary')
     implementation project(':easeui')

@@ -11,8 +11,11 @@ public class ConstantYeaPao {
 
     public static String APP_ID = "wx6e86b10e6860b2be";//微信支付
 
-    public static final String HOST = "http://47.92.113.97:8008/yepao";
+    public static final String HOST = "http://47.92.113.97:8080/yepao";
 //    public static final String HOST = "http://192.168.2.128:8080";
+
+    public static final String HOST_FIT_PLAN = "http://192.168.1.38:8080/Saas/userGenerateCourseCustomization";
+
 
     public static final String GET_HOME_LIST = HOST+"/home/homeList";
     public static final String GET_HOME_SELECT = HOST+"/home/selectHomeList";

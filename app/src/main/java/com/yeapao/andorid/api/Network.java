@@ -24,6 +24,7 @@ public class Network {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
 
+    private static YeapaoFitPlanApi yeapaoFitPlanApi;
 
     public static YeapaoApi getYeapaoApi() {
         if (!NetworkState.networkConnected(YepaoApplication.getContextObject())) {
@@ -32,13 +33,28 @@ public class Network {
         if ( yeapaoApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
-                    .baseUrl("http://47.92.113.97:8008/yepao/")
+                    .baseUrl("http://47.92.113.97:8080/yepao/")
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
             yeapaoApi = retrofit.create(YeapaoApi.class);
         }
         return yeapaoApi;
+    }
+    public static YeapaoFitPlanApi getYeapaoFitPlanApi() {
+        if (!NetworkState.networkConnected(YepaoApplication.getContextObject())) {
+            ToastManager.repeatToast(YepaoApplication.getContextObject(),"无法连接到网络，请检查网络连接");
+        }
+        if ( yeapaoFitPlanApi == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(okHttpClient)
+                    .baseUrl("https://91yesrun.com/Saas/")
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
+                    .build();
+            yeapaoFitPlanApi = retrofit.create(YeapaoFitPlanApi.class);
+        }
+        return yeapaoFitPlanApi;
     }
 
 }
