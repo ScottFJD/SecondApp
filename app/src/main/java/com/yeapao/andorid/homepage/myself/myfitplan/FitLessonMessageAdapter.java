@@ -52,8 +52,10 @@ public class FitLessonMessageAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        glideUtil.glideLoadingImage(mContext,detailList.get(position).getImgString(),R.drawable.placeholder,
-                ((ViewHolder)holder).ivVideo);
+
+//        glideUtil.glideLoadingImage(mContext,detailList.get(position).getImgString(),R.drawable.placeholder,
+//                ((ViewHolder)holder).ivVideo);
+
         ((ViewHolder)holder).tvFitLessonName.setText(detailList.get(position).getName());
     }
 
