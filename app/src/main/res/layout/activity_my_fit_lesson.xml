@@ -90,13 +90,13 @@
                            android:layout_marginRight="15dp"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:src="@drawable/right"
+                           android:src="@drawable/down"
                            android:layout_centerVertical="true"
                            android:layout_alignParentRight="true"/>
                    </RelativeLayout>
                    <android.support.v7.widget.RecyclerView
                        android:id="@+id/rv_fit_step_1"
-                       android:visibility="gone"
+                       android:visibility="visible"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:background="#ffffff"
@@ -130,12 +130,12 @@
                            android:layout_marginRight="15dp"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:src="@drawable/right"
+                           android:src="@drawable/down"
                            android:layout_centerVertical="true"
                            android:layout_alignParentRight="true"/>
                    </RelativeLayout>
                    <android.support.v7.widget.RecyclerView
-                       android:visibility="gone"
+                       android:visibility="visible"
                        android:id="@+id/rv_fit_step_2"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
@@ -170,12 +170,12 @@
                            android:layout_marginRight="15dp"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:src="@drawable/right"
+                           android:src="@drawable/down"
                            android:layout_centerVertical="true"
                            android:layout_alignParentRight="true"/>
                    </RelativeLayout>
                    <android.support.v7.widget.RecyclerView
-                       android:visibility="gone"
+                       android:visibility="visible"
                        android:id="@+id/rv_fit_step_3"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"

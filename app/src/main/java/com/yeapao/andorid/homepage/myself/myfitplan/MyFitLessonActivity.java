@@ -74,9 +74,9 @@ public class MyFitLessonActivity extends BaseActivity {
     private FitLessonMessageAdapter thirdStepMessageAdapter;
     private FitTitlePartsMessageAdapter fitTitlePartsMessageAdapter;
 
-    private boolean fitStep1 = true;
-    private boolean fitStep2 = true;
-    private boolean fitStep3 = true;
+    private boolean fitStep1 = false;
+    private boolean fitStep2 = false;
+    private boolean fitStep3 = false;
 
     private ArrayList<String> fitTitles = new ArrayList<>();
     private String customizeLevel, customizeParts;
